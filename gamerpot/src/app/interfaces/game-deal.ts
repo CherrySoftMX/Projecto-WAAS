@@ -7,5 +7,7 @@ export interface GameDealInterface {
   "normalPrice": number,
   "savings": number,
   "metacriticScore": number,
-  "thumb": string
+  "thumb": string,
+  "storeName": string,
+  "storeIcon": string
 }

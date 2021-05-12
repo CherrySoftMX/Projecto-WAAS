@@ -8,7 +8,7 @@
     'hide': displayType == 'row-minimal'
   }">
     <img
-      src="https://cdn.cloudflare.steamstatic.com/steam/apps/524220/capsule_sm_120.jpg?t=1601026299"
+      [src]="game.thumb"
       alt="game-image"
       class="deals-row__image-container__image"
     />
@@ -19,7 +19,7 @@
       'deals-row__col--condensed': displayType == 'row-condensed',
       'deals-row__col--minimal': displayType == 'row-minimal'
     }">
-      <span>NieR:Automata</span>
+      <span>{{ game.title }}</span>
     </div>
     <div [ngClass]="{
       'deals-row__col': true,
@@ -28,38 +28,38 @@
       'deals-row__col--discount--minimal': displayType == 'row-minimal'
     }">
       <div class="deals-row__col__discount-label">
-        -50%
+        {{ "-" + game.savings + "%" }}
       </div>
       <div class="deals-row__col__original-price-label">
-        $39.99
+        {{ "$" + game.normalPrice }}
       </div>
       <div class="deals-row__col__deal-price">
-        $19.99
+        {{ "$" + game.salePrice }}
       </div>
     </div>
     <div [ngClass]="{
       'deals-row__col': true,
       'hide': displayType != 'row'
     }">
-      <span>-50%</span>
+      <span>{{ "-" + game.savings + "%" }}</span>
     </div>
     <div [ngClass]="{
       'deals-row__col': true,
       'hide': displayType != 'row'
     }">
-      <span>$19.99</span>
+      <span>{{ "$" + game.salePrice }}</span>
     </div>
     <div [ngClass]="{
       'deals-row__col': true,
       'hide': displayType != 'row'
     }">
-      <span>$39.99</span>
+      {{ "$" + game.normalPrice }}
     </div>
     <div [ngClass]="{
       'deals-row__col': true,
       'hide': displayType != 'row'
     }">
-      <span>88</span>
+      <span>{{ game.metacriticScore }}</span>
     </div>
     <div [ngClass]="{
       'deals-row__col': true,
@@ -67,10 +67,10 @@
       'hide': displayType != 'row'
     }">
       <img
-        src="https://www.cheapshark.com/img/stores/icons/0.png"
+        [src]="game.storeIcon"
         alt="store-logo"
       />
-      <span>Steam</span>
+      <span>{{ game.storeName }}</span>
     </div>
   </div>
 </div>

@@ -7,13 +7,14 @@ import { GameDealInterface } from '../../interfaces/game-deal';
   styleUrls: ['./deals-row.component.css']
 })
 export class DealsRowComponent {
+  // row, row-condensed, row-minimal
   @Input() displayType: string;
   @Input() game: GameDealInterface;
 
   constructor() {
     this.displayType = 'row';
     this.game = {
-      title: 'prueba',
+      title: '',
       dealID: '',
       storeID: '',
       gameID: '',
@@ -21,11 +22,14 @@ export class DealsRowComponent {
       normalPrice: 0,
       savings: 0,
       metacriticScore: 0,
-      thumb: ''
+      thumb: '',
+      storeName: '',
+      storeIcon: ''
     };
   }
 
   ngOnInit(): void {
+
   }
 
 }
