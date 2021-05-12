@@ -1,0 +1,99 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+.deals-row {
+  width: 100%;
+  background-color: #161618;
+  display: flex;
+  box-sizing: border-box;
+  align-items: center;
+  font-family: 'Montserrat', Arial;
+  font-size: 16px;
+}
+
+.deals-row--condensed {
+  padding-left: 1.25em;
+  padding-right: 1.25em;
+}
+
+.deals_row__image-container {
+  width: 13%;
+  margin: 0;
+}
+
+.deals_row__image-container img {
+  width: 100%;
+  object-fit: cover;
+}
+
+.deal-data {
+  display: flex;
+  width: 100%;
+}
+
+.deals-row__col {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  text-align: center;
+  font-size: 1em;
+  color: white;
+}
+
+.deals-row__col--store img {
+  width: 1em;
+}
+
+.deals_row__image-container--condensed {
+  width: 35%;
+}
+
+.deals-row__col--condensed {
+  width: 41%;
+  flex: 2;
+  justify-content: left;
+  padding-left: 1em;
+  padding-top: 1.1em;
+  padding-bottom: 1.1em;
+}
+
+.deals-row__col--minimal {
+  width: 76%;
+  flex: 2;
+  justify-content: left;
+  padding-left: 1.25em;
+}
+
+.deals-row__col--discount {
+  width: 13%;
+  font-size: .8em;
+  justify-content: flex-end;
+  flex-direction: column;
+  text-align: right;
+  padding-top: .3em;
+  padding-bottom: .3em;
+}
+
+.deals-row__col--discount--minimal {
+  padding-right: 1.25em;
+}
+
+.deals-row__col__discount-label {
+  color: #329C30;
+  margin: 0 0 0 auto;
+}
+
+.deals-row__col__original-price-label {
+  color: #A9A7A7;
+  text-decoration: line-through;
+  margin: 0 0 0 auto;
+}
+
+.deals-row__col__deal-price {
+  margin: 0 0 0 auto;
+}
+
+.hide {
+  display: none;
+}

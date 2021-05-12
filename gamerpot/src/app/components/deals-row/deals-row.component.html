@@ -1,0 +1,76 @@
+<div [ngClass]="{
+  'deals-row': true,
+  'deals-row--condensed': displayType == 'row-condensed'
+}">
+  <div [ngClass]="{
+    'deals_row__image-container': true,
+    'deals_row__image-container--condensed': displayType == 'row-condensed',
+    'hide': displayType == 'row-minimal'
+  }">
+    <img
+      src="https://cdn.cloudflare.steamstatic.com/steam/apps/524220/capsule_sm_120.jpg?t=1601026299"
+      alt="game-image"
+      class="deals-row__image-container__image"
+    />
+  </div>
+  <div class="deal-data">
+    <div [ngClass]="{
+      'deals-row__col': true,
+      'deals-row__col--condensed': displayType == 'row-condensed',
+      'deals-row__col--minimal': displayType == 'row-minimal'
+    }">
+      <span>NieR:Automata</span>
+    </div>
+    <div [ngClass]="{
+      'deals-row__col': true,
+      'deals-row__col--discount': true,
+      'hide': displayType == 'row',
+      'deals-row__col--discount--minimal': displayType == 'row-minimal'
+    }">
+      <div class="deals-row__col__discount-label">
+        -50%
+      </div>
+      <div class="deals-row__col__original-price-label">
+        $39.99
+      </div>
+      <div class="deals-row__col__deal-price">
+        $19.99
+      </div>
+    </div>
+    <div [ngClass]="{
+      'deals-row__col': true,
+      'hide': displayType != 'row'
+    }">
+      <span>-50%</span>
+    </div>
+    <div [ngClass]="{
+      'deals-row__col': true,
+      'hide': displayType != 'row'
+    }">
+      <span>$19.99</span>
+    </div>
+    <div [ngClass]="{
+      'deals-row__col': true,
+      'hide': displayType != 'row'
+    }">
+      <span>$39.99</span>
+    </div>
+    <div [ngClass]="{
+      'deals-row__col': true,
+      'hide': displayType != 'row'
+    }">
+      <span>88</span>
+    </div>
+    <div [ngClass]="{
+      'deals-row__col': true,
+      'deals-row__col--store': true,
+      'hide': displayType != 'row'
+    }">
+      <img
+        src="https://www.cheapshark.com/img/stores/icons/0.png"
+        alt="store-logo"
+      />
+      <span>Steam</span>
+    </div>
+  </div>
+</div>

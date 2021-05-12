@@ -3,10 +3,14 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { DealsPageComponent } from './pages/deals-page/deals-page.component';
+import { DealsRowComponent } from './components/deals-row/deals-row.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    DealsPageComponent,
+    DealsRowComponent
   ],
   imports: [
     BrowserModule,
