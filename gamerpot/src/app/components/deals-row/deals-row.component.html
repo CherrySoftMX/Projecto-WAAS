@@ -25,7 +25,8 @@
       'deals-row__col': true,
       'deals-row__col--discount': true,
       'hide': displayType == 'row',
-      'deals-row__col--discount--minimal': displayType == 'row-minimal'
+      'deals-row__col--discount--minimal': displayType == 'row-minimal',
+      'condensed-data': true
     }">
       <div class="deals-row__col__discount-label">
         {{ "-" + game.savings + "%" }}
@@ -39,32 +40,37 @@
     </div>
     <div [ngClass]="{
       'deals-row__col': true,
-      'hide': displayType != 'row'
+      'hide': displayType != 'row',
+      'normal-data': true
     }">
       <span>{{ "-" + game.savings + "%" }}</span>
     </div>
     <div [ngClass]="{
       'deals-row__col': true,
-      'hide': displayType != 'row'
+      'hide': displayType != 'row',
+      'normal-data': true
     }">
       <span>{{ "$" + game.salePrice }}</span>
     </div>
     <div [ngClass]="{
       'deals-row__col': true,
-      'hide': displayType != 'row'
+      'hide': displayType != 'row',
+      'normal-data': true
     }">
       {{ "$" + game.normalPrice }}
     </div>
     <div [ngClass]="{
       'deals-row__col': true,
-      'hide': displayType != 'row'
+      'hide': displayType != 'row',
+      'normal-data': true
     }">
       <span>{{ game.metacriticScore }}</span>
     </div>
     <div [ngClass]="{
       'deals-row__col': true,
       'deals-row__col--store': true,
-      'hide': displayType != 'row'
+      'hide': displayType != 'row',
+      'normal-data': true
     }">
       <img
         [src]="game.storeIcon"

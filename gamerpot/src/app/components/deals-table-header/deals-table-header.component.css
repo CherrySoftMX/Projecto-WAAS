@@ -1,4 +1,5 @@
 @import url('../deals-row/deals-row.component.css');
+@import url('../../../styles.css');
 
 .deals-row {
   background: #27282E;
@@ -13,4 +14,23 @@
   color: white;
   width: 35%;
   text-align: center;
+}
+
+.deals_header__title:before {
+  content: 'Game title';
+}
+
+@media screen and (max-width: 555px) {
+  .deals_header__title {
+    text-align: center;
+    width: 100%;
+  }
+
+  .deals_header__title:before {
+    content: 'List of deals';
+  }
+
+  .deal-data {
+    display: none;
+  }
 }

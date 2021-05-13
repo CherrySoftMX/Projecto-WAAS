@@ -8,6 +8,7 @@
   align-items: center;
   font-family: 'Montserrat', Arial;
   font-size: 16px;
+  margin-bottom: 1.4em;
 }
 
 .deals-row--condensed {
@@ -96,4 +97,45 @@
 
 .hide {
   display: none;
+}
+
+@media screen and (max-width: 555px) {
+  .deals-row {
+    font-size: 14px;
+    padding-left: 1.25em;
+    padding-right: 1.25em;
+  }
+
+  .deals_row__image-container {
+    width: 70%;
+  }
+
+  .deals-row__col {
+    flex: 1;
+    justify-content: left;
+    padding-left: 1em;
+  }
+
+  .normal-data {
+    display: none;
+  }
+
+  .condensed-data {
+    display: flex;
+  }
+
+  .deals-row__col--discount {
+    font-size: .8em;
+    justify-content: flex-end;
+    flex-direction: column;
+    text-align: right;
+    padding-top: .3em;
+    padding-bottom: .3em;
+  }
+
+  .deals_row__image-container img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
 }
