@@ -1,0 +1,16 @@
+@import url('../deals-row/deals-row.component.css');
+
+.deals-row {
+  background: #27282E;
+  border-top: 1px solid #494A4F;
+  border-bottom: 1px solid #494A4F;
+  margin-bottom: 1.4em;
+  padding-top: 1.1em;
+  padding-bottom: 1.1em;
+}
+
+.deals_header__title {
+  color: white;
+  width: 35%;
+  text-align: center;
+}
