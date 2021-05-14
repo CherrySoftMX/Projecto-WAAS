@@ -8,6 +8,7 @@ i {
   width: 100%;
   font-size: 18px;
   position: relative;
+  font-family: 'Montserrat', Arial;
 }
 
 .search-box__input  {

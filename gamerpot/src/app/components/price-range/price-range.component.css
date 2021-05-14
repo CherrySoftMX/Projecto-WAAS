@@ -1,0 +1,46 @@
+@import url('../../../styles.css');
+
+.price-range {
+  width: 100%;
+  font-family: 'Montserrat', Arial;
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 1em;
+  box-sizing: border-box;
+}
+
+.price-range__title {
+  margin-bottom: 17px;
+}
+
+.price-range__inputs {
+  display: flex;
+  font-size: 0.9em;
+}
+
+.price-range__inputs__col {
+  display: flex;
+  width: 100%;
+}
+
+.price-range__inputs__col__label {
+  margin-right: .5em;
+  width: 15%;
+}
+
+.price-range__inputs__col_input {
+  width: 85%;
+}
+
+.price-range__inputs__col_input input, .price-range__inputs__col_input select  {
+  width: 95%;
+  background-color: #27282E;
+  color: white;
+  border: 1px solid white;
+  border-radius: 5px;
+  padding-left: .6em;
+}
+
+.price-range__inputs__col_input select {
+  height: 100%;
+}

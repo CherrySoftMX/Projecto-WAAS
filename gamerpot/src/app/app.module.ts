@@ -7,6 +7,7 @@ import { DealsPageComponent } from './pages/deals-page/deals-page.component';
 import { DealsRowComponent } from './components/deals-row/deals-row.component';
 import { DealsTableHeaderComponent } from './components/deals-table-header/deals-table-header.component';
 import { SearchBoxComponent } from './components/search-box/search-box.component';
+import { PriceRangeComponent } from './components/price-range/price-range.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { SearchBoxComponent } from './components/search-box/search-box.component
     DealsPageComponent,
     DealsRowComponent,
     DealsTableHeaderComponent,
-    SearchBoxComponent
+    SearchBoxComponent,
+    PriceRangeComponent
   ],
   imports: [
     BrowserModule,
