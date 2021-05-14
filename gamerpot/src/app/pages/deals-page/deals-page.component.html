@@ -1,4 +1,10 @@
 <div class="wrapper">
+  {{ search }}
+  <app-search-box
+    placeholder="Search games"
+    (searchEvent)="buscar($event)"
+  >
+  </app-search-box>
   <app-deals-table-header></app-deals-table-header>
   <app-deals-row
     [game]="gameDeal"

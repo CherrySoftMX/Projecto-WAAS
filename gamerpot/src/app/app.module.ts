@@ -6,13 +6,15 @@ import { AppComponent } from './app.component';
 import { DealsPageComponent } from './pages/deals-page/deals-page.component';
 import { DealsRowComponent } from './components/deals-row/deals-row.component';
 import { DealsTableHeaderComponent } from './components/deals-table-header/deals-table-header.component';
+import { SearchBoxComponent } from './components/search-box/search-box.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DealsPageComponent,
     DealsRowComponent,
-    DealsTableHeaderComponent
+    DealsTableHeaderComponent,
+    SearchBoxComponent
   ],
   imports: [
     BrowserModule,

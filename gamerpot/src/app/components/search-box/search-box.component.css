@@ -1,0 +1,35 @@
+@import url('../../../styles.css');
+
+i {
+  color: white;
+}
+
+.search-box {
+  width: 100%;
+  font-size: 18px;
+  position: relative;
+}
+
+.search-box__input  {
+  width: 100%;
+  background-color: #3B3B3B;
+  border: none;
+  color: white;
+  padding: .3em 1em;
+  border-radius: 1em;
+  margin-bottom: 1em;
+}
+
+.search-box__input:focus {
+  outline: none;
+}
+
+.search-box__icon {
+  position: absolute;
+  right: 1em;
+  top: .3em;
+}
+
+.search-box__icon:hover {
+  cursor: pointer;
+}

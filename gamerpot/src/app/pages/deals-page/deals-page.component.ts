@@ -8,6 +8,7 @@ import { GameDealInterface } from '../../interfaces/game-deal';
 })
 export class DealsPageComponent implements OnInit {
   gameDeal: GameDealInterface;
+  search:string;
 
   constructor() {
     this.gameDeal = {
@@ -23,9 +24,14 @@ export class DealsPageComponent implements OnInit {
       storeName: 'Steam',
       storeIcon: 'https://www.cheapshark.com/img/stores/icons/0.png'
     };
+    this.search = "busqueda";
   }
 
   ngOnInit(): void {
+  }
+
+  buscar(query:string) {
+    this.search = query;
   }
 
 }
