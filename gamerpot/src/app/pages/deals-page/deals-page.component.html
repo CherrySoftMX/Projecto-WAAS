@@ -1,20 +1,27 @@
 <div class="wrapper">
-  {{ search }}
-  <app-search-box
-    placeholder="Search games"
-    (searchEvent)="buscar($event)"
-  >
-  </app-search-box>
+  {{ search }} <br />
   {{ minPrice}}<br />
   {{ maxPrice }} <br />
   {{ currency }} <br />
-  <app-price-range
-    (minPriceEvent)="setMinPrice($event)"
-    (maxPriceEvent)="setMaxPrice($event)"
-    (currencyEvent)="setCurrency($event)"
+  <app-title-with-content
+    title="Search by title"
   >
+    <app-search-box
+      placeholder="Search games"
+      (searchEvent)="buscar($event)"
+    >
+    </app-search-box>
+  </app-title-with-content>
 
-  </app-price-range>
+  <app-title-with-content title="Price range">
+    <app-price-range
+      (minPriceEvent)="setMinPrice($event)"
+      (maxPriceEvent)="setMaxPrice($event)"
+      (currencyEvent)="setCurrency($event)"
+    >
+    </app-price-range>
+  </app-title-with-content>
+
   <app-deals-table-header></app-deals-table-header>
   <app-deals-row
     [game]="gameDeal"

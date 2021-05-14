@@ -1,12 +1,11 @@
 <div class="price-range">
-  <div class="price-range__title">Price range</div>
   <div class="price-range__inputs">
     <div class="price-range__inputs__col">
       <div class="price-range__inputs__col__label">
         Min
       </div>
       <div class="price-range__inputs__col_input">
-        <input type="text" placeholder="$0" class="text-box" #minPrice (change)="setMinPrice(minPrice.value)" />
+        <input type="number" placeholder="$0" class="text-box" #minPrice (change)="setMinPrice(minPrice.value)" />
       </div>
     </div>
 
@@ -15,7 +14,7 @@
         Max
       </div>
       <div class="price-range__inputs__col_input">
-        <input type="text" placeholder="$500" class="text-box" #maxPrice (change)="setMaxPrice(maxPrice.value)" />
+        <input type="number" placeholder="$500" class="text-box" #maxPrice (change)="setMaxPrice(maxPrice.value)" />
       </div>
     </div>
 

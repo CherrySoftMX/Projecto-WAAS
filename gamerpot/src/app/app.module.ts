@@ -8,6 +8,7 @@ import { DealsRowComponent } from './components/deals-row/deals-row.component';
 import { DealsTableHeaderComponent } from './components/deals-table-header/deals-table-header.component';
 import { SearchBoxComponent } from './components/search-box/search-box.component';
 import { PriceRangeComponent } from './components/price-range/price-range.component';
+import { TitleWithContentComponent } from './components/title-with-content/title-with-content.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { PriceRangeComponent } from './components/price-range/price-range.compon
     DealsRowComponent,
     DealsTableHeaderComponent,
     SearchBoxComponent,
-    PriceRangeComponent
+    PriceRangeComponent,
+    TitleWithContentComponent
   ],
   imports: [
     BrowserModule,
