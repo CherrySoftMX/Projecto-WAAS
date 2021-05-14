@@ -9,6 +9,9 @@ import { GameDealInterface } from '../../interfaces/game-deal';
 export class DealsPageComponent implements OnInit {
   gameDeal: GameDealInterface;
   search:string;
+  minPrice:string;
+  maxPrice:string;
+  currency:string;
 
   constructor() {
     this.gameDeal = {
@@ -24,7 +27,10 @@ export class DealsPageComponent implements OnInit {
       storeName: 'Steam',
       storeIcon: 'https://www.cheapshark.com/img/stores/icons/0.png'
     };
-    this.search = "busqueda";
+    this.search = 'busqueda';
+    this.minPrice = '0';
+    this.maxPrice = '500';
+    this.currency = 'USD';
   }
 
   ngOnInit(): void {
@@ -32,6 +38,18 @@ export class DealsPageComponent implements OnInit {
 
   buscar(query:string) {
     this.search = query;
+  }
+
+  setMinPrice(price:string) {
+    this.minPrice = price;
+  }
+
+  setMaxPrice(price:string) {
+    this.maxPrice = price;
+  }
+
+  setCurrency(cur:string) {
+    this.currency = cur;
   }
 
 }

@@ -6,7 +6,7 @@
         Min
       </div>
       <div class="price-range__inputs__col_input">
-        <input type="text" placeholder="$0" class="text-box" />
+        <input type="text" placeholder="$0" class="text-box" #minPrice (change)="setMinPrice(minPrice.value)" />
       </div>
     </div>
 
@@ -15,7 +15,7 @@
         Max
       </div>
       <div class="price-range__inputs__col_input">
-        <input type="text" placeholder="$500" class="text-box" />
+        <input type="text" placeholder="$500" class="text-box" #maxPrice (change)="setMaxPrice(maxPrice.value)" />
       </div>
     </div>
 
@@ -24,9 +24,9 @@
         Cur
       </div>
       <div class="price-range__inputs__col_input">
-        <select class="select-box">
-          <option value="usd">USD</option>
-          <option value="mxn">MXN</option>
+        <select class="select-box" #currency (change)="setCurrency(currency.value)">
+          <option value="USD">USD</option>
+          <option value="MXN">MXN</option>
         </select>
       </div>
     </div>

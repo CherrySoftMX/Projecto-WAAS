@@ -5,7 +5,16 @@
     (searchEvent)="buscar($event)"
   >
   </app-search-box>
-  <app-price-range></app-price-range>
+  {{ minPrice}}<br />
+  {{ maxPrice }} <br />
+  {{ currency }} <br />
+  <app-price-range
+    (minPriceEvent)="setMinPrice($event)"
+    (maxPriceEvent)="setMaxPrice($event)"
+    (currencyEvent)="setCurrency($event)"
+  >
+
+  </app-price-range>
   <app-deals-table-header></app-deals-table-header>
   <app-deals-row
     [game]="gameDeal"
