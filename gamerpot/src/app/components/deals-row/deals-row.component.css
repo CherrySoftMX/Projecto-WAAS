@@ -117,6 +117,10 @@
   display: none;
 }
 
+.store-icon {
+  margin-right: .5em;
+}
+
 @media screen and (max-width: 555px) {
   .deals-row {
     font-size: 14px;

@@ -24,7 +24,9 @@ export class DealsRowComponent {
       metacriticScore: 0,
       thumb: '',
       storeName: '',
-      storeIcon: ''
+      images: {
+        icon: ''
+      }
     };
   }
 

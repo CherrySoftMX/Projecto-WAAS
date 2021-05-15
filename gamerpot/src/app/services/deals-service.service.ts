@@ -16,7 +16,6 @@ export class DealsService {
   getDeals = async (maxResults:number = 10, page:number = 0) => {
     const params = `pageSize=${maxResults}&pageNumber=${page}`
     const url = `${this.apiUrl}?${params}`;
-    const result = await this.http.get(url);
     let promise = new Promise<GameDealInterface>((resolve, reject) => {
       this.http
         .get(url)

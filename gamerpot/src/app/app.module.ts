@@ -10,6 +10,7 @@ import { SearchBoxComponent } from './components/search-box/search-box.component
 import { PriceRangeComponent } from './components/price-range/price-range.component';
 import { TitleWithContentComponent } from './components/title-with-content/title-with-content.component';
 import { DealsService } from './services/deals-service.service';
+import { StoresService } from './services/stores-service.service';
 import { HttpClientModule} from '@angular/common/http';
 
 @NgModule({
@@ -27,7 +28,7 @@ import { HttpClientModule} from '@angular/common/http';
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [DealsService],
+  providers: [DealsService, StoresService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
