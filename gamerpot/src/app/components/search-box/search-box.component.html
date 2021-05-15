@@ -1,4 +1,12 @@
 <div class="search-box">
-  <input type="text" [placeholder]="placeholder" class="search-box__input" #searchBox />
-  <i class="bi bi-search search-box__icon" (click)="search(searchBox.value)"></i>
+  <input
+    #searchBox
+    type="text"
+    [placeholder]="placeholder"
+    class="search-box__input rounded-pill"
+  />
+  <i
+    class="bi bi-search search-box__icon"
+    (click)="search(searchBox.value)"
+  ></i>
 </div>

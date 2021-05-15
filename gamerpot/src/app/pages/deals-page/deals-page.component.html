@@ -1,49 +1,31 @@
-<div class="temporal-header">Header</div>
-<div class="wrapper">
-  <div class="deals-page__inputs">
-    <app-title-with-content
-      title="Search by title"
-    >
-      <app-search-box
-        placeholder="Search games"
-        (searchEvent)="buscar($event)"
-      >
-      </app-search-box>
-    </app-title-with-content>
-
-    <app-title-with-content title="Price range">
-      <app-price-range
-        (minPriceEvent)="setMinPrice($event)"
-        (maxPriceEvent)="setMaxPrice($event)"
-        (currencyEvent)="setCurrency($event)"
-      >
-      </app-price-range>
-    </app-title-with-content>
+<div class="container-fluid px-3 px-md-5 mt-3">
+  <div class="row">
+    <div class="col-xl">
+      <app-title-with-content title="Search by title">
+        <app-search-box
+          placeholder="Search games"
+          (searchEvent)="buscar($event)"
+        >
+        </app-search-box>
+      </app-title-with-content>
+    </div>
+    <div class="col-xl">
+      <app-title-with-content title="Price range">
+        <app-price-range
+          (minPriceEvent)="setMinPrice($event)"
+          (maxPriceEvent)="setMaxPrice($event)"
+          (currencyEvent)="setCurrency($event)"
+        >
+        </app-price-range>
+      </app-title-with-content>
+    </div>
   </div>
 
   <app-deals-table-header></app-deals-table-header>
-  <app-deals-row
-    [game]="gameDeal"
-  >
-  </app-deals-row>
-  <app-deals-row
-    [game]="gameDeal"
-  >
-  </app-deals-row>
-  <app-deals-row
-    [game]="gameDeal"
-  >
-  </app-deals-row>
-  <app-deals-row
-    [game]="gameDeal"
-  >
-  </app-deals-row>
-  <app-deals-row
-    [game]="gameDeal"
-  >
-  </app-deals-row>
-  <app-deals-row
-    [game]="gameDeal"
-  >
-  </app-deals-row>
+  <app-deals-row [game]="gameDeal"> </app-deals-row>
+  <app-deals-row [game]="gameDeal"> </app-deals-row>
+  <app-deals-row [game]="gameDeal"> </app-deals-row>
+  <app-deals-row [game]="gameDeal"> </app-deals-row>
+  <app-deals-row [game]="gameDeal"> </app-deals-row>
+  <app-deals-row [game]="gameDeal"> </app-deals-row>
 </div>

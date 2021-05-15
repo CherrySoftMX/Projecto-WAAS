@@ -1,4 +1,4 @@
-@import url('../../../styles.css');
+@import url("../../../styles.css");
 
 .title-with-content {
   width: 100%;
@@ -6,7 +6,7 @@
 }
 
 .title-with-content__title {
-  font-family: 'Montserrat', Arial;
+  font-family: "Montserrat", Arial;
   font-size: 20px;
   margin-bottom: 17px;
   font-weight: bold;

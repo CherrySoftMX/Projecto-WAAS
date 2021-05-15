@@ -4,14 +4,14 @@ import { GameDealInterface } from '../../interfaces/game-deal';
 @Component({
   selector: 'app-deals-page',
   templateUrl: './deals-page.component.html',
-  styleUrls: ['./deals-page.component.css']
+  styleUrls: ['./deals-page.component.css'],
 })
 export class DealsPageComponent implements OnInit {
   gameDeal: GameDealInterface;
-  search:string;
-  minPrice:string;
-  maxPrice:string;
-  currency:string;
+  search: string;
+  minPrice: string;
+  maxPrice: string;
+  currency: string;
 
   constructor() {
     this.gameDeal = {
@@ -23,9 +23,10 @@ export class DealsPageComponent implements OnInit {
       normalPrice: 39.99,
       savings: 50,
       metacriticScore: 88,
-      thumb: 'https://cdn.cloudflare.steamstatic.com/steam/apps/524220/capsule_sm_120.jpg?t=1601026299',
+      thumb:
+        'https://cdn.cloudflare.steamstatic.com/steam/apps/524220/capsule_sm_120.jpg?t=1601026299',
       storeName: 'Steam',
-      storeIcon: 'https://www.cheapshark.com/img/stores/icons/0.png'
+      storeIcon: 'https://www.cheapshark.com/img/stores/icons/0.png',
     };
     this.search = 'busqueda';
     this.minPrice = '0';
@@ -33,23 +34,21 @@ export class DealsPageComponent implements OnInit {
     this.currency = 'USD';
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
-  buscar(query:string) {
+  buscar(query: string) {
     this.search = query;
   }
 
-  setMinPrice(price:string) {
+  setMinPrice(price: string) {
     this.minPrice = price;
   }
 
-  setMaxPrice(price:string) {
+  setMaxPrice(price: string) {
     this.maxPrice = price;
   }
 
-  setCurrency(cur:string) {
+  setCurrency(cur: string) {
     this.currency = cur;
   }
-
 }

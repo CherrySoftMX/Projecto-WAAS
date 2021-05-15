@@ -1,10 +1,10 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { GameDealInterface } from '../../interfaces/game-deal';
 
 @Component({
   selector: 'app-deals-row',
   templateUrl: './deals-row.component.html',
-  styleUrls: ['./deals-row.component.css']
+  styleUrls: ['./deals-row.component.css'],
 })
 export class DealsRowComponent {
   // row, row-condensed, row-minimal
@@ -24,12 +24,9 @@ export class DealsRowComponent {
       metacriticScore: 0,
       thumb: '',
       storeName: '',
-      storeIcon: ''
+      storeIcon: '',
     };
   }
 
-  ngOnInit(): void {
-
-  }
-
+  ngOnInit(): void {}
 }
