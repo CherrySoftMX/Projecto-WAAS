@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { GameDealInterface } from '../../interfaces/game-deal';
+import { DealsService } from '../../services/deals-service.service';
 
 @Component({
   selector: 'app-deals-page',
@@ -12,8 +13,9 @@ export class DealsPageComponent implements OnInit {
   minPrice:string;
   maxPrice:string;
   currency:string;
+  service:DealsService;
 
-  constructor() {
+  constructor(service:DealsService) {
     this.gameDeal = {
       title: 'NieR:Automata',
       dealID: '123132',
@@ -31,9 +33,16 @@ export class DealsPageComponent implements OnInit {
     this.minPrice = '0';
     this.maxPrice = '500';
     this.currency = 'USD';
+    this.service = service;
   }
 
   ngOnInit(): void {
+    this.getDeals();
+  }
+
+  getDeals = async () => {
+    const deals = await this.service.getDeals();
+    console.log(deals);
   }
 
   buscar(query:string) {

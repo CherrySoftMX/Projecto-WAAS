@@ -9,6 +9,8 @@ import { DealsTableHeaderComponent } from './components/deals-table-header/deals
 import { SearchBoxComponent } from './components/search-box/search-box.component';
 import { PriceRangeComponent } from './components/price-range/price-range.component';
 import { TitleWithContentComponent } from './components/title-with-content/title-with-content.component';
+import { DealsService } from './services/deals-service.service';
+import { HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -22,9 +24,10 @@ import { TitleWithContentComponent } from './components/title-with-content/title
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [DealsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
