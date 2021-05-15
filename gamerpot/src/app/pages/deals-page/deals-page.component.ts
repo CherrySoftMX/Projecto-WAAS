@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { GameDealInterface } from '../../interfaces/game-deal';
+import { DealsService } from '../../services/deals-service.service';
+import { StoresService } from '../../services/stores-service.service';
 
 @Component({
   selector: 'app-deals-page',
@@ -7,36 +8,37 @@ import { GameDealInterface } from '../../interfaces/game-deal';
   styleUrls: ['./deals-page.component.css'],
 })
 export class DealsPageComponent implements OnInit {
-  gameDeal: GameDealInterface;
-  search: string;
-  minPrice: string;
-  maxPrice: string;
-  currency: string;
+  search:string;
+  minPrice:string;
+  maxPrice:string;
+  currency:string;
+  dealsService:DealsService;
+  storesService:StoresService;
+  deals: any;
+  stores:any;
 
-  constructor() {
-    this.gameDeal = {
-      title: 'NieR:Automata',
-      dealID: '123132',
-      storeID: '1',
-      gameID: '12',
-      salePrice: 19.99,
-      normalPrice: 39.99,
-      savings: 50,
-      metacriticScore: 88,
-      thumb:
-        'https://cdn.cloudflare.steamstatic.com/steam/apps/524220/capsule_sm_120.jpg?t=1601026299',
-      storeName: 'Steam',
-      storeIcon: 'https://www.cheapshark.com/img/stores/icons/0.png',
-    };
+  constructor(dealsService:DealsService, storesService:StoresService) {
     this.search = 'busqueda';
     this.minPrice = '0';
     this.maxPrice = '500';
     this.currency = 'USD';
+    this.dealsService = dealsService;
+    this.storesService = storesService;
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.getDeals();
+  }
 
-  buscar(query: string) {
+  getDeals = async () => {
+    this.deals = await this.dealsService.getDeals();
+    this.stores = await this.storesService.getStores();
+    this.deals = this.deals.map((deal:any) => (
+      deal = {...this.stores[deal.storeID], ...deal}
+    ));
+  }
+
+  buscar(query:string) {
     this.search = query;
   }
 

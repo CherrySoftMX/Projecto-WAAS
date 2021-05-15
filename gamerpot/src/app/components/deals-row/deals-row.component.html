@@ -15,9 +15,10 @@
       class="deals-row__image-container__image"
     />
   </div>
+
   <div class="d-flex w-100">
     <div
-      class="deals-row__col"
+      class="deals-row__col deals-row__col--title"
       [ngClass]="{
         'deals-row__col--condensed': displayType == 'row-condensed',
         'deals-row__col--minimal': displayType == 'row-minimal'
@@ -33,7 +34,7 @@
       }"
     >
       <div class="deals-row__col__discount-label">
-        {{ "-" + game.savings + "%" }}
+        -{{ game.savings | number: '1.0-0' }}%
       </div>
       <div class="deals-row__col__original-price-label">
         {{ "$" + game.normalPrice }}
@@ -42,13 +43,14 @@
         {{ "$" + game.salePrice }}
       </div>
     </div>
+
     <div
       class="deals-row__col normal-data"
       [ngClass]="{
         hide: displayType != 'row'
       }"
     >
-      <span>{{ "-" + game.savings + "%" }}</span>
+      <span>-{{ game.savings | number: '1.0-0' }}%</span>
     </div>
     <div
       class="deals-row__col normal-data"
@@ -66,21 +68,35 @@
     >
       {{ "$" + game.normalPrice }}
     </div>
-    <div
-      class="deals-row__col normal-data"
-      [ngClass]="{
-        hide: displayType != 'row'
-      }"
-    >
-      <span>{{ game.metacriticScore }}</span>
+    
+    <div 
+    class="deals-row__col normal-data"
+    [ngClass]="{
+      'hide': displayType != 'row'
+    }">
+      
+      <ng-container *ngIf="game.metacriticScore != 0">
+        <span>{{ game.metacriticScore }}</span>
+      </ng-container>
+
+      <ng-container *ngIf="game.metacriticScore == 0">
+        <span>Not available</span>
+      </ng-container>
+      
     </div>
+
     <div
       class="deals-row__col normal-data deals-row__col--store"
       [ngClass]="{
         hide: displayType != 'row'
       }"
     >
-      <img [src]="game.storeIcon" alt="store-logo" />
+      <img
+        [src]="'https://www.cheapshark.com/' + game.images.icon"
+        alt="store-logo"
+        class="store-icon"
+      />
+      
       <span>{{ game.storeName }}</span>
     </div>
   </div>

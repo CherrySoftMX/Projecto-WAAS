@@ -22,10 +22,12 @@
   </div>
 
   <app-deals-table-header></app-deals-table-header>
-  <app-deals-row [game]="gameDeal"> </app-deals-row>
-  <app-deals-row [game]="gameDeal"> </app-deals-row>
-  <app-deals-row [game]="gameDeal"> </app-deals-row>
-  <app-deals-row [game]="gameDeal"> </app-deals-row>
-  <app-deals-row [game]="gameDeal"> </app-deals-row>
-  <app-deals-row [game]="gameDeal"> </app-deals-row>
+  
+  <ng-container *ngFor="let game of deals">
+    <app-deals-row
+      [game]="game"
+    >
+    </app-deals-row>
+  </ng-container>
+  
 </div>

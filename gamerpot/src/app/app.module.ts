@@ -9,6 +9,9 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { PriceRangeComponent } from './components/price-range/price-range.component';
 import { SearchBoxComponent } from './components/search-box/search-box.component';
 import { TitleWithContentComponent } from './components/title-with-content/title-with-content.component';
+import { DealsService } from './services/deals-service.service';
+import { StoresService } from './services/stores-service.service';
+import { HttpClientModule} from '@angular/common/http';
 import { DealsPageComponent } from './pages/deals-page/deals-page.component';
 
 @NgModule({
@@ -22,8 +25,12 @@ import { DealsPageComponent } from './pages/deals-page/deals-page.component';
     TitleWithContentComponent,
     NavbarComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, NgbModule],
-  providers: [],
-  bootstrap: [AppComponent],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule
+  ],
+  providers: [DealsService, StoresService],
+  bootstrap: [AppComponent]
 })
 export class AppModule {}
