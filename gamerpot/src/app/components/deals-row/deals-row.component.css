@@ -1,12 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
-
 .deals-row {
   width: 100%;
-  background-color: #161618;
+  background-color: var(--background-primary);
   display: flex;
   box-sizing: border-box;
   align-items: center;
-  font-family: 'Montserrat', Arial;
+  font-family: var(--font-primary);
   font-size: 16px;
   margin-bottom: 1.4em;
   max-height: 4em;
@@ -26,11 +24,6 @@
 .deals_row__image-container img {
   width: 100%;
   object-fit: cover;
-}
-
-.deal-data {
-  display: flex;
-  width: 100%;
 }
 
 .deals-row__col {
@@ -86,12 +79,12 @@
 
 .deals-row__col--discount {
   width: 13%;
-  font-size: .8em;
+  font-size: 0.8em;
   justify-content: flex-end;
   flex-direction: column;
   text-align: right;
-  padding-top: .3em;
-  padding-bottom: .3em;
+  padding-top: 0.3em;
+  padding-bottom: 0.3em;
 }
 
 .deals-row__col--discount--minimal {
@@ -99,12 +92,12 @@
 }
 
 .deals-row__col__discount-label {
-  color: #329C30;
+  color: #329c30;
   margin: 0 0 0 auto;
 }
 
 .deals-row__col__original-price-label {
-  color: #A9A7A7;
+  color: #a9a7a7;
   text-decoration: line-through;
   margin: 0 0 0 auto;
 }
@@ -121,7 +114,7 @@
   margin-right: .5em;
 }
 
-@media screen and (max-width: 555px) {
+@media screen and (max-width: 768px) 
   .deals-row {
     font-size: 14px;
     padding-left: 1.25em;
@@ -135,7 +128,7 @@
   }
 
   .deal-data {
-    width: 65%;
+    width: 55%;
   }
 
   .deals-row__col {
@@ -152,13 +145,13 @@
   }
 
   .deals-row__col--discount {
-    font-size: .8em;
+    font-size: 0.8em;
     justify-content: flex-end;
     flex-direction: column;
     text-align: right;
-    padding-top: .3em;
-    padding-bottom: .3em;
     justify-self: flex-end;
+    padding-top: 0.3em;
+    padding-bottom: 0.3em;
   }
 
   .deals_row__image-container img {

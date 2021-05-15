@@ -1,17 +1,18 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { DealsPageComponent } from './pages/deals-page/deals-page.component';
 import { DealsRowComponent } from './components/deals-row/deals-row.component';
 import { DealsTableHeaderComponent } from './components/deals-table-header/deals-table-header.component';
-import { SearchBoxComponent } from './components/search-box/search-box.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
 import { PriceRangeComponent } from './components/price-range/price-range.component';
+import { SearchBoxComponent } from './components/search-box/search-box.component';
 import { TitleWithContentComponent } from './components/title-with-content/title-with-content.component';
 import { DealsService } from './services/deals-service.service';
 import { StoresService } from './services/stores-service.service';
 import { HttpClientModule} from '@angular/common/http';
+import { DealsPageComponent } from './pages/deals-page/deals-page.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { HttpClientModule} from '@angular/common/http';
     DealsTableHeaderComponent,
     SearchBoxComponent,
     PriceRangeComponent,
-    TitleWithContentComponent
+    TitleWithContentComponent,
+    NavbarComponent,
   ],
   imports: [
     BrowserModule,
@@ -31,4 +33,4 @@ import { HttpClientModule} from '@angular/common/http';
   providers: [DealsService, StoresService],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

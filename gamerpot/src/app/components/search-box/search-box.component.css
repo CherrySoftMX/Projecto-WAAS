@@ -1,23 +1,19 @@
-@import url('../../../styles.css');
-
 i {
   color: white;
 }
 
 .search-box {
   width: 100%;
-  font-size: 18px;
   position: relative;
-  font-family: 'Montserrat', Arial;
+  font-family: var(--font-primary);
 }
 
-.search-box__input  {
-  width: 100%;
-  background-color: #3B3B3B;
+.search-box__input {
+  background-color: #3b3b3b;
   border: none;
   color: white;
-  padding: .3em 1em;
-  border-radius: 1em;
+  padding: 0.3em 1em;
+  width: 100%;
 }
 
 .search-box__input:focus {
@@ -27,7 +23,7 @@ i {
 .search-box__icon {
   position: absolute;
   right: 1em;
-  top: .3em;
+  top: 0.3em;
 }
 
 .search-box__icon:hover {

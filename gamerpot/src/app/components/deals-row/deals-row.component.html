@@ -1,34 +1,38 @@
-<div [ngClass]="{
-  'deals-row': true,
-  'deals-row--condensed': displayType == 'row-condensed'
-}">
-  <div [ngClass]="{
-    'deals_row__image-container': true,
-    'deals_row__image-container--condensed': displayType == 'row-condensed',
-    'hide': displayType == 'row-minimal'
-  }">
+<div
+  class="deals-row"
+  [ngClass]="{ 'deals-row--condensed': displayType == 'row-condensed' }"
+>
+  <div
+    class="deals_row__image-container"
+    [ngClass]="{
+      'deals_row__image-container--condensed': displayType == 'row-condensed',
+      hide: displayType == 'row-minimal'
+    }"
+  >
     <img
       [src]="game.thumb"
       alt="game-image"
       class="deals-row__image-container__image"
     />
   </div>
-  <div class="deal-data">
-    <div [ngClass]="{
-      'deals-row__col': true,
-      'deals-row__col--title': true,
-      'deals-row__col--condensed': displayType == 'row-condensed',
-      'deals-row__col--minimal': displayType == 'row-minimal'
-    }">
+
+  <div class="d-flex w-100">
+    <div
+      class="deals-row__col deals-row__col--title"
+      [ngClass]="{
+        'deals-row__col--condensed': displayType == 'row-condensed',
+        'deals-row__col--minimal': displayType == 'row-minimal'
+      }"
+    >
       <span>{{ game.title }}</span>
     </div>
-    <div [ngClass]="{
-      'deals-row__col': true,
-      'deals-row__col--discount': true,
-      'hide': displayType == 'row',
-      'deals-row__col--discount--minimal': displayType == 'row-minimal',
-      'condensed-data': true
-    }">
+    <div
+      class="condensed-data deals-row__col deals_row__col--discount"
+      [ngClass]="{
+        hide: displayType == 'row',
+        'deals-row__col--discount--minimal': displayType == 'row-minimal'
+      }"
+    >
       <div class="deals-row__col__discount-label">
         -{{ game.savings | number: '1.0-0' }}%
       </div>
@@ -39,50 +43,60 @@
         {{ "$" + game.salePrice }}
       </div>
     </div>
-    <div [ngClass]="{
-      'deals-row__col': true,
-      'hide': displayType != 'row',
-      'normal-data': true
-    }">
+
+    <div
+      class="deals-row__col normal-data"
+      [ngClass]="{
+        hide: displayType != 'row'
+      }"
+    >
       <span>-{{ game.savings | number: '1.0-0' }}%</span>
     </div>
-    <div [ngClass]="{
-      'deals-row__col': true,
-      'hide': displayType != 'row',
-      'normal-data': true
-    }">
+    <div
+      class="deals-row__col normal-data"
+      [ngClass]="{
+        hide: displayType != 'row'
+      }"
+    >
       <span>{{ "$" + game.salePrice }}</span>
     </div>
-    <div [ngClass]="{
-      'deals-row__col': true,
-      'hide': displayType != 'row',
-      'normal-data': true
-    }">
+    <div
+      class="deals-row__col normal-data"
+      [ngClass]="{
+        hide: displayType != 'row'
+      }"
+    >
       {{ "$" + game.normalPrice }}
     </div>
-    <div [ngClass]="{
-      'deals-row__col': true,
-      'hide': displayType != 'row',
-      'normal-data': true
+    
+    <div 
+    class="deals-row__col normal-data"
+    [ngClass]="{
+      'hide': displayType != 'row'
     }">
-    <ng-container *ngIf="game.metacriticScore != 0">
-      <span>{{ game.metacriticScore }}</span>
-    </ng-container>
-    <ng-container *ngIf="game.metacriticScore == 0">
-      <span>Not available</span>
-    </ng-container>
+      
+      <ng-container *ngIf="game.metacriticScore != 0">
+        <span>{{ game.metacriticScore }}</span>
+      </ng-container>
+
+      <ng-container *ngIf="game.metacriticScore == 0">
+        <span>Not available</span>
+      </ng-container>
+      
     </div>
-    <div [ngClass]="{
-      'deals-row__col': true,
-      'deals-row__col--store': true,
-      'hide': displayType != 'row',
-      'normal-data': true
-    }">
+
+    <div
+      class="deals-row__col normal-data deals-row__col--store"
+      [ngClass]="{
+        hide: displayType != 'row'
+      }"
+    >
       <img
         [src]="'https://www.cheapshark.com/' + game.images.icon"
         alt="store-logo"
         class="store-icon"
       />
+      
       <span>{{ game.storeName }}</span>
     </div>
   </div>

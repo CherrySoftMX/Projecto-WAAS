@@ -5,7 +5,7 @@ import { StoresService } from '../../services/stores-service.service';
 @Component({
   selector: 'app-deals-page',
   templateUrl: './deals-page.component.html',
-  styleUrls: ['./deals-page.component.css']
+  styleUrls: ['./deals-page.component.css'],
 })
 export class DealsPageComponent implements OnInit {
   search:string;
@@ -38,21 +38,19 @@ export class DealsPageComponent implements OnInit {
     ));
   }
 
-
   buscar(query:string) {
     this.search = query;
   }
 
-  setMinPrice(price:string) {
+  setMinPrice(price: string) {
     this.minPrice = price;
   }
 
-  setMaxPrice(price:string) {
+  setMaxPrice(price: string) {
     this.maxPrice = price;
   }
 
-  setCurrency(cur:string) {
+  setCurrency(cur: string) {
     this.currency = cur;
   }
-
 }

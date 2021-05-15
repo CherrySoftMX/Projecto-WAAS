@@ -1,8 +1,25 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~bootstrap/dist/css/bootstrap.min.css";
 @import "~bootstrap-icons/font/bootstrap-icons.css";
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,700;1,400&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Rubik+Mono+One&display=swap");
+
+:root {
+  --background-primary: #27282e;
+  --background-secondary: #161618;
+  --font-primary: "Montserrat", "Arial";
+  --font-secondary: "Rubik Mono One", sans-serif;
+}
 
 body {
-  background: #27282E;
+  font-family: var(--font-primary);
+  font-size: 18px;
+  background: var(--background-primary);
+  color: white;
+}
+
+.brand {
+  font-family: var(--font-secondary);
+  font-size: 24px;
+  font-weight: 300;
 }

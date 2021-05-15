@@ -1,36 +1,21 @@
-<div [ngClass]="{
-  'deals-row': true
-}">
-  <div [ngClass]="{
-    'deals_header__title': true
-  }">
+<div class="deals-row border-top border-bottom border-secondary my-3 py-3">
+  <div class="text-center deals_header__title">
     <!-- Game title | List of deals -->
   </div>
-  <div class="deal-data">
-    <div [ngClass]="{
-      'deals-row__col': true
-    }">
+  <div class="d-none d-md-flex w-100">
+    <div class="deals-row__col">
       <span>Discount</span>
     </div>
-    <div [ngClass]="{
-      'deals-row__col': true
-    }">
+    <div class="deals-row__col">
       <span>Deal price</span>
     </div>
-    <div [ngClass]="{
-      'deals-row__col': true
-    }">
-      Regular price
+    <div class="deals-row__col">
+      <span>Regular price</span>
     </div>
-    <div [ngClass]="{
-      'deals-row__col': true
-    }">
+    <div class="deals-row__col">
       <span>Metacritic</span>
     </div>
-    <div [ngClass]="{
-      'deals-row__col': true,
-      'deals-row__col--store': true
-    }">
+    <div class="deals-row__col deals-row__col--store">
       <span>Store</span>
     </div>
   </div>

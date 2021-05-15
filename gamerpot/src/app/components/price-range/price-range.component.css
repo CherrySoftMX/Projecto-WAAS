@@ -1,64 +1,9 @@
-@import url('../../../styles.css');
-
-.price-range {
-  width: 100%;
-  font-family: 'Montserrat', Arial;
-  font-size: 18px;
-  font-weight: bold;
-  margin-bottom: 1em;
-  box-sizing: border-box;
-}
-
-.price-range__inputs {
-  display: flex;
-  font-size: 1em;
-}
-
-.price-range__inputs__col {
-  display: flex;
-  width: 100%;
-}
-
-.price-range__inputs__col__label {
-  margin-right: 1em;
-  width: 15%;
-}
-
-.price-range__inputs__col_input {
-  width: 85%;
-}
-
-.price-range__inputs__col_input input, .price-range__inputs__col_input select  {
-  width: 90%;
-  background-color: #27282E;
+.price-range__inputs__col_input input,
+.price-range__inputs__col_input select {
+  background-color: var(--background-primary);
   color: white;
-  border: 1px solid white;
-  border-radius: 5px;
-  padding-left: .6em;
 }
 
 .price-range__inputs__col_input select {
-  height: 100%;
-}
-
-@media screen and (max-width: 555px) {
-  .price-range {
-    font-size: 16px;
-  }
-
-  .price-range__inputs {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-gap: .8em;
-  }
-
-  .price-range__inputs__col__label {
-    width: 30%;
-    margin-right: .2em;
-  }
-
-  .price-range__inputs__col_input {
-    width: 70%;
-    text-align: right;
-  }
+  height: 30px;
 }

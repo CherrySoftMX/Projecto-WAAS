@@ -1,29 +1,37 @@
-<div class="price-range">
-  <div class="price-range__inputs">
-    <div class="price-range__inputs__col">
-      <div class="price-range__inputs__col__label">
-        Min
-      </div>
-      <div class="price-range__inputs__col_input">
-        <input type="number" placeholder="$0" class="text-box" #minPrice (change)="setMinPrice(minPrice.value)" />
-      </div>
-    </div>
-
-    <div class="price-range__inputs__col">
-      <div class="price-range__inputs__col__label">
-        Max
-      </div>
-      <div class="price-range__inputs__col_input">
-        <input type="number" placeholder="$500" class="text-box" #maxPrice (change)="setMaxPrice(maxPrice.value)" />
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm my-2 d-flex align-items-center justify-content-between">
+      <div class="w-25 mr-2">Min</div>
+      <div class="price-range__inputs__col_input w-100">
+        <input
+          #minPrice
+          type="number"
+          placeholder="$0"
+          class="border border-light rounded w-100"
+          (change)="setMinPrice(minPrice.value)"
+        />
       </div>
     </div>
-
-    <div class="price-range__inputs__col">
-      <div class="price-range__inputs__col__label">
-        Cur
+    <div class="col-sm my-2 d-flex align-items-center">
+      <div class="w-25 mr-2">Max</div>
+      <div class="price-range__inputs__col_input w-100">
+        <input
+          #maxPrice
+          type="number"
+          placeholder="$500"
+          class="border border-light rounded w-100"
+          (change)="setMaxPrice(maxPrice.value)"
+        />
       </div>
-      <div class="price-range__inputs__col_input">
-        <select class="select-box" #currency (change)="setCurrency(currency.value)">
+    </div>
+    <div class="col-sm mt-2 mt-md-0 d-flex align-items-center">
+      <div class="w-25 mr-2">Cur</div>
+      <div class="price-range__inputs__col_input w-100">
+        <select
+          #currency
+          class="border border-light rounded w-100"
+          (change)="setCurrency(currency.value)"
+        >
           <option value="USD">USD</option>
           <option value="MXN">MXN</option>
         </select>
