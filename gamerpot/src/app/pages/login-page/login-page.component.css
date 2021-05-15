@@ -1,0 +1,48 @@
+.page{
+    position:fixed;
+    padding:0;
+    margin:0;
+
+    top:0;
+    left:0;
+
+    width: 100%;
+    height: 100%;
+    background:black;
+}
+
+
+.banner img{
+    width: 100%;
+    height: 100%;
+}
+
+.login{
+ height: 100%;
+ padding-top: 10%;
+}
+
+.banner{
+    height: 100%;
+   
+}
+
+.label-reg{
+    position: absolute;
+    left: 60%;
+    top: 90%;
+}
+
+@media (max-width: 800px) {
+
+  .banner img{
+    display: none;
+  }
+
+  .label-reg {
+    right: auto;
+    left: auto;
+    top: 95%;
+    margin: auto;
+  }
+}

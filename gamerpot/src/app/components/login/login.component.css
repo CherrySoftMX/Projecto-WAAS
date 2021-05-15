@@ -1,0 +1,23 @@
+#btn-sub{
+    width: 100%;
+    margin-top: 1rem;
+}
+
+.tittle{
+    font-size: 4rem;
+    color: #EA7F7F;
+    padding-bottom: 4rem;
+}
+
+.rt{
+    display: flex;
+    justify-content: space-between;
+}
+
+.r1{
+   order: 0;
+}
+
+.r2{
+    order: 1;
+}

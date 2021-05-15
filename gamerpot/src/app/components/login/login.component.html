@@ -1,0 +1,29 @@
+<form class="border bg-dark p-5 text-white" #LoginForm="ngForm" [formGroup]="profileLogin" (ngSubmit)="submit()">
+
+    <h1 class="h4 mb-4 tittle">Sign in</h1>
+    <p>Hi! nice to see you again</p>
+    <br>
+    <!-- Email -->
+    <label class="text-secondary">E-mail</label>
+    <input type="email" class="form-control mb-4" placeholder="your email" formControlName="email">
+
+    <!-- Password -->
+    <label class="text-secondary">Password</label>
+    <input type="password" class="form-control mb-4" formControlName="password" placeholder="your password">
+
+    <div class="d-flex justify-content-between rt">
+        <div>
+            <!-- Remember me -->
+            <input type="checkbox"> Remember me
+
+        </div>
+        <div>
+            <!-- Forgot password -->
+            <a href="">Forgot password?</a>
+        </div>
+    </div>
+
+    <!-- Sign in button -->
+    <button class="btn-primary btn-lg bg-dark text-white" type="submit" id="btn-sub">Sign in</button>
+
+</form>
