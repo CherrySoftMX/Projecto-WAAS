@@ -16,6 +16,7 @@
   <div class="deal-data">
     <div [ngClass]="{
       'deals-row__col': true,
+      'deals-row__col--title': true,
       'deals-row__col--condensed': displayType == 'row-condensed',
       'deals-row__col--minimal': displayType == 'row-minimal'
     }">
@@ -29,7 +30,7 @@
       'condensed-data': true
     }">
       <div class="deals-row__col__discount-label">
-        {{ "-" + game.savings + "%" }}
+        -{{ game.savings | number: '1.0-0' }}%
       </div>
       <div class="deals-row__col__original-price-label">
         {{ "$" + game.normalPrice }}
@@ -43,7 +44,7 @@
       'hide': displayType != 'row',
       'normal-data': true
     }">
-      <span>{{ "-" + game.savings + "%" }}</span>
+      <span>-{{ game.savings | number: '1.0-0' }}%</span>
     </div>
     <div [ngClass]="{
       'deals-row__col': true,
@@ -64,7 +65,12 @@
       'hide': displayType != 'row',
       'normal-data': true
     }">
+    <ng-container *ngIf="game.metacriticScore != 0">
       <span>{{ game.metacriticScore }}</span>
+    </ng-container>
+    <ng-container *ngIf="game.metacriticScore == 0">
+      <span>Not available</span>
+    </ng-container>
     </div>
     <div [ngClass]="{
       'deals-row__col': true,

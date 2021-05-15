@@ -14,6 +14,7 @@ export class DealsPageComponent implements OnInit {
   maxPrice:string;
   currency:string;
   service:DealsService;
+  deals: any;
 
   constructor(service:DealsService) {
     this.gameDeal = {
@@ -41,8 +42,8 @@ export class DealsPageComponent implements OnInit {
   }
 
   getDeals = async () => {
-    const deals = await this.service.getDeals();
-    console.log(deals);
+    this.deals = await this.service.getDeals();
+    console.log(this.deals);
   }
 
   buscar(query:string) {
