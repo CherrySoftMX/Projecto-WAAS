@@ -1,5 +1,6 @@
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app-routing.module';
@@ -9,6 +10,8 @@ import { DealsTableComponent } from './components/deals/deals-table/deals-table.
 import { PriceRangeComponent } from './components/deals/price-range/price-range.component';
 import { WriteCommentComponent } from './components/game-review/comments/leave-comment/leave-comment.component';
 import { ReviewCommentComponent } from './components/game-review/comments/review-comment/review-comment.component';
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
 import { ComboBoxComponent } from './components/shared/combo-box/combo-box.component';
 import { InputFieldComponent } from './components/shared/input-field/input-field.component';
 import { NavbarComponent } from './components/shared/navbar/navbar.component';
@@ -17,12 +20,16 @@ import { SearchBoxComponent } from './components/shared/search-box/search-box.co
 import { TitleUnderlineComponent } from './components/shared/title-underline/title-underline.component';
 import { TitleWithContentComponent } from './components/shared/title-with-content/title-with-content.component';
 import { DealsPageComponent } from './pages/deals-page/deals-page.component';
+import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { DealsService } from './services/deals-service.service';
 import { StoresService } from './services/stores-service.service';
 
 @NgModule({
   declarations: [
     AppComponent,
+    LoginComponent,
+    RegisterComponent,
+    LoginPageComponent,
     DealsPageComponent,
     SearchBoxComponent,
     PriceRangeComponent,
@@ -37,7 +44,14 @@ import { StoresService } from './services/stores-service.service';
     ReviewCommentComponent,
     ProfileImgComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule, NgbModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    NgbModule,
+    ReactiveFormsModule,
+    FormsModule,
+  ],
   providers: [DealsService, StoresService],
   bootstrap: [AppComponent],
 })
