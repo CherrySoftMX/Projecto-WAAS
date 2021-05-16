@@ -24,11 +24,9 @@ export class DealsRowComponent {
       metacriticScore: 0,
       thumb: '',
       storeName: '',
-      images: {
-        icon: ''
-      }
+      storeIcon: ''
     };
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }
