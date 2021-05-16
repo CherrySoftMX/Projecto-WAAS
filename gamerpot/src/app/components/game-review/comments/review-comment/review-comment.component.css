@@ -1,0 +1,7 @@
+.wrapper {
+  background-color: var(--background-secondary);
+}
+
+.comment-content {
+  font-size: 16px;
+}
