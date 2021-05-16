@@ -1,3 +1,4 @@
+
 .page-wrapper{
     position:fixed;
     padding:0;
@@ -20,6 +21,21 @@ img{
     height: 100%;
 }
 
+.title{
+  text-align: center;
+  margin-bottom: 1.5rem;
+  position: absolute;
+  width: 100%;
+  color: white;
+}
+
+.title h1{
+
+    font-family: var(--font-secondary);
+}
+
+
+
 .no-pad-rght-lft{
 padding-right:0;
   padding-left:0;
@@ -41,15 +57,8 @@ padding-right:0;
   display: none;
 }
 
-@media (max-width: 800px) {
+@media (max-width: 700px) {
   
-  
-  img{
-    display: none;
-  }
-.login{
-  display: block;
-}
   .desk-label{
     display: none;
   }
@@ -60,8 +69,7 @@ padding-right:0;
     bottom: 4%;
     display: block;
     text-align: center;
-    background-color: aqua;
+    
     
   }
-  
 }

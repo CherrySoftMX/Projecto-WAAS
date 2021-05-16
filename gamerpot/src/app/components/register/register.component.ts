@@ -18,7 +18,6 @@ export class RegisterComponent implements OnInit {
   constructor(public activeModal: NgbActiveModal) { }
 
   ngOnInit(): void {
-
   }
 
   register() {
@@ -26,10 +25,7 @@ export class RegisterComponent implements OnInit {
     //register user
 
     //if ok
-    this.close();
+    this.activeModal.close();
   }
 
-  close() {
-    this.activeModal.dismiss();
-  }
 }

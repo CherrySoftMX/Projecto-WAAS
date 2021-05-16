@@ -7,6 +7,7 @@
 :root {
   --background-primary: #27282e;
   --background-secondary: #161618;
+  --background-tertiary: #ea7f7f;
   --font-primary: "Montserrat", "Arial";
   --font-secondary: "Rubik Mono One", sans-serif;
 }

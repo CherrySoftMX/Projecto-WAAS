@@ -1,17 +1,11 @@
 .login-wrapper{
     width: 100%;
-    padding: 2rem;
+    padding: 5rem;
     height: 100%;
-    font-family: 'Montserrat', sans-serif;
 }
 
-.title{
-   text-align: center;
-}
-
-.title h1{
-    color: white;
-    font-family: 'Rubik Mono One', sans-serif;
+h1{
+    color: var(--background-tertiary);
 }
 
 .btn-sub{
@@ -24,24 +18,20 @@ input{
     background: transparent;
     border-bottom: 1px solid black;
     color: white;
+    z-index: 1;
 }
 
 input:focus{
     background: transparent;
     border: 1px solid green;
     color: white;
-    
 }
-
-
-label{
-   color: white;
-}
-
 
 @media (max-width: 800px) {
-  *{
-      margin: 0;
-      padding: 0;
-  }
+    .login-wrapper{
+        margin: 0;
+        padding: 0 2rem 2rem 2rem;
+
+    }
+
 }

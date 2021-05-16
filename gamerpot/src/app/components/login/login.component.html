@@ -1,20 +1,18 @@
 <div class="bg-dark text-white login-wrapper">
-    <div class="title mb-5">
-        <h1 class="display-1">GAMERPOT</h1>
-        <small class="text-secondary">We help you find your ideal game</small>
-    </div>
+
+    <h1 class="display-2 mb-5">Login</h1>
+
     <p class="lead">Hi! nice to see you again</p>
 
     <form class="pt-4" #LoginForm="ngForm" [formGroup]="profileLogin" (ngSubmit)="submit()">
 
         <!-- Email -->
-        <label clas="" for="email">Email</label>
         <input name="email" type="email" class="form-control mb-5" formControlName="email" placeholder="Email">
 
         <!-- Password -->
-        <label clas="" for="password">Password</label>
         <input name="password" type="password" class="form-control mb-5" formControlName="password"
             placeholder="Password">
+
 
         <div class="d-flex justify-content-between pt-2">
             <div>
