@@ -1,0 +1,50 @@
+<div class="row table-row text-center align-items-center mb-3">
+  <div class="col-10 col-md-3">
+    <div class="row align-items-center">
+      <div
+        class="col-5 p-0"
+        [ngClass]="displayType == 'row-minimal' ? 'hide' : ''"
+      >
+        <img
+          class="w-100"
+          style="height: var(--deal-row-height); object-fit: cover"
+          [src]="deal.thumb"
+          alt="..."
+        />
+      </div>
+      <div class="col text-truncate text-left" style="font-size: 15px">
+        {{ deal.title }}
+      </div>
+    </div>
+  </div>
+  <div
+    *ngIf="screenTooSmall || displayType == 'row-minimal'; else normalRow"
+    class="col-1 ml-auto mr-3 mr-sm-2"
+  >
+    <div class="row flex-column align-items-center">
+      <div class="col row-minimal-item discount">
+        -{{ deal.savings | number: "1.0-0" }}%
+      </div>
+      <div class="col row-minimal-item original-price">
+        {{ deal.normalPrice | currency }}
+      </div>
+      <div class="col row-minimal-item">{{ deal.salePrice | currency }}</div>
+    </div>
+  </div>
+  <ng-template #normalRow>
+    <div class="col">-{{ deal.savings | number: "1.0-0" }}%</div>
+    <div class="col">{{ deal.salePrice | currency }}</div>
+    <div class="col">{{ deal.normalPrice | currency }}</div>
+    <div class="col">
+      {{ deal.metacriticScore != 0 ? deal.metacriticScore : "Not available" }}
+    </div>
+    <div class="col text-truncate">
+      <img
+        [src]="'https://www.cheapshark.com/' + deal.images.icon"
+        alt="store-logo"
+        class="store-icon"
+      />
+      <div class="text-truncate">{{ deal.storeName }}</div>
+    </div>
+  </ng-template>
+</div>

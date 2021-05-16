@@ -10,6 +10,6 @@ export interface GameDealInterface {
   thumb: string;
   storeName: string;
   images: {
-    icon:string;
-  }
+    icon: string;
+  };
 }

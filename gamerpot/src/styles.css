@@ -7,8 +7,10 @@
 :root {
   --background-primary: #27282e;
   --background-secondary: #161618;
+  --custom-green: #66cc33;
   --font-primary: "Montserrat", "Arial";
   --font-secondary: "Rubik Mono One", sans-serif;
+  --deal-row-height: 60px;
 }
 
 body {

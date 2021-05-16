@@ -1,0 +1,21 @@
+.table-row {
+  height: var(--deal-row-height);
+  background-color: var(--background-secondary);
+}
+
+.hide {
+  display: none;
+}
+
+.row-minimal-item {
+  font-size: 14px;
+}
+
+.discount {
+  color: var(--custom-green);
+}
+
+.original-price {
+  text-decoration: line-through;
+  opacity: 0.5;
+}

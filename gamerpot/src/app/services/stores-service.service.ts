@@ -1,32 +1,28 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class StoresService {
   private apiUrl = 'https://www.cheapshark.com/api/1.0/stores';
-  private http: HttpClient;
 
-  constructor(http: HttpClient) {
-    this.http = http;
-   }
+  constructor(private http: HttpClient) {}
 
-   getStores = async () => {
+  getStores = async () => {
     let promise = new Promise((resolve, reject) => {
       this.http
         .get(this.apiUrl)
         .toPromise()
         .then(
-          response => {
+          (response) => {
             resolve(response);
           },
-          error => {
+          (error) => {
             reject(error);
           }
         );
-      });
+    });
     return promise;
-  }
-
+  };
 }

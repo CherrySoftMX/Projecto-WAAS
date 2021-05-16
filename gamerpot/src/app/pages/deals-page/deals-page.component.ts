@@ -8,16 +8,17 @@ import { StoresService } from '../../services/stores-service.service';
   styleUrls: ['./deals-page.component.css'],
 })
 export class DealsPageComponent implements OnInit {
-  search:string;
-  minPrice:string;
-  maxPrice:string;
-  currency:string;
-  dealsService:DealsService;
-  storesService:StoresService;
+  search: string;
+  minPrice: string;
+  maxPrice: string;
+  currency: string;
   deals: any;
-  stores:any;
+  stores: any;
 
-  constructor(dealsService:DealsService, storesService:StoresService) {
+  constructor(
+    private dealsService: DealsService,
+    private storesService: StoresService
+  ) {
     this.search = 'busqueda';
     this.minPrice = '0';
     this.maxPrice = '500';
@@ -33,12 +34,12 @@ export class DealsPageComponent implements OnInit {
   getDeals = async () => {
     this.deals = await this.dealsService.getDeals();
     this.stores = await this.storesService.getStores();
-    this.deals = this.deals.map((deal:any) => (
-      deal = {...this.stores[deal.storeID], ...deal}
-    ));
-  }
+    this.deals = this.deals.map(
+      (deal: any) => (deal = { ...this.stores[deal.storeID], ...deal })
+    );
+  };
 
-  buscar(query:string) {
+  buscar(query: string) {
     this.search = query;
   }
 
