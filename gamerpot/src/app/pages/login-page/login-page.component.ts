@@ -18,7 +18,6 @@ export class LoginPageComponent implements OnInit {
 
   open() {
     const modalRef = this.modalService.open(RegisterComponent)
-    modalRef.componentInstance.name = 'Register';
   }
 
 }

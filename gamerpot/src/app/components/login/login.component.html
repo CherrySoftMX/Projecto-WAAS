@@ -7,12 +7,22 @@
     <form class="pt-4" #LoginForm="ngForm" [formGroup]="profileLogin" (ngSubmit)="submit()">
 
         <!-- Email -->
-        <input name="email" type="email" class="form-control mb-5" formControlName="email" placeholder="Email">
+        <div class="mb-5">
+            <input name="email" type="email" class="form-control" formControlName="email" placeholder="Email"
+                [ngClass]="validate('email')">
+            <div class="invalid-feedback">
+                Email invalid
+            </div>
+        </div>
 
         <!-- Password -->
-        <input name="password" type="password" class="form-control mb-5" formControlName="password"
-            placeholder="Password">
-
+        <div class="mb-5">
+            <input name="password" type="password" class="form-control" formControlName="password"
+                placeholder="Password" [ngClass]="validate('password')">
+            <div class="invalid-feedback">
+                Password invalid
+            </div>
+        </div>
 
         <div class="d-flex justify-content-between pt-2">
             <div>
