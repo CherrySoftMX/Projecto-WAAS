@@ -1,0 +1,12 @@
+<div class="col my-1 p-0">
+  <div class="row align-items-center input-form-control">
+    <div class="input-label col-3 text-center p-0">{{ label }}</div>
+    <input
+      #input
+      class="col p-1"
+      type="number"
+      (change)="onValueChanged(input.value)"
+      [placeholder]="placeholder"
+    />
+  </div>
+</div>

@@ -4,13 +4,12 @@
 }
 
 .title-with-content__title {
-  font-family: "Montserrat", Arial;
+  font-family: var(--font-primary);
   font-size: 20px;
-  margin-bottom: 17px;
   font-weight: bold;
 }
 
-@media screen and (max-width: 555px) {
+@media screen and (max-width: 576px) {
   .title-with-content__title {
     font-size: 18px;
   }

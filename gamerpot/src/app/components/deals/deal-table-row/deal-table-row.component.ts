@@ -1,6 +1,6 @@
 import { Component, HostListener, Input, OnInit } from '@angular/core';
-import { breakpoints } from 'src/app/constants/breakpoints';
 import { GameDealInterface } from 'src/app/interfaces/game-deal';
+import { breakpoints } from 'src/app/shared/breakpoints';
 
 @Component({
   selector: 'app-deal-table-row',
@@ -38,7 +38,6 @@ export class DealTableRowComponent implements OnInit {
   @HostListener('window:resize', ['$event'])
   onResize(event: Event) {
     this.screenTooSmall = this.isScreenTooSmall();
-    console.log(this.screenTooSmall);
   }
 
   isScreenTooSmall() {

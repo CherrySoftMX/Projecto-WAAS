@@ -13,6 +13,9 @@ import { TitleWithContentComponent } from './components/shared/title-with-conten
 import { DealsPageComponent } from './pages/deals-page/deals-page.component';
 import { DealsService } from './services/deals-service.service';
 import { StoresService } from './services/stores-service.service';
+import { ComboBoxComponent } from './components/shared/combo-box/combo-box.component';
+import { InputFieldComponent } from './components/shared/input-field/input-field.component';
+import { TitleUnderlineComponent } from './components/shared/title-underline/title-underline.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +27,9 @@ import { StoresService } from './services/stores-service.service';
     NavbarComponent,
     DealsTableComponent,
     DealTableRowComponent,
+    ComboBoxComponent,
+    InputFieldComponent,
+    TitleUnderlineComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, NgbModule],
   providers: [DealsService, StoresService],
