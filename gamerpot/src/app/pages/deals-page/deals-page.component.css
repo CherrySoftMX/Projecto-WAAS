@@ -1,0 +1,22 @@
+.wrapper {
+  margin-top: 2em;
+  padding: 0 100px;
+  color: white;
+}
+
+.deals-page__inputs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 4em;
+}
+
+@media screen and (max-width: 555px) {
+  .wrapper {
+    padding: 0 20px;
+  }
+
+  .deals-page__inputs {
+    grid-template-columns: 1fr;
+    grid-gap: 1em;
+  }
+}
