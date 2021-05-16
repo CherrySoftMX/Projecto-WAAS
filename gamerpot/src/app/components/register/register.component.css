@@ -2,8 +2,15 @@
     width: 100%;
 }
 
-.tittle{
+.title{
     font-size: 4rem;
-    margin-bottom: 2rem;
+   
+}
+
+.modal-wrapper{
+    padding: 2rem;
+    border-radius: 10%;
+    border: 5px solid black;
+    
 }
 

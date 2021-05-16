@@ -13,6 +13,7 @@ export class LoginPageComponent implements OnInit {
   constructor(public modalService: NgbModal) { }
 
   ngOnInit(): void {
+
   }
 
   open() {

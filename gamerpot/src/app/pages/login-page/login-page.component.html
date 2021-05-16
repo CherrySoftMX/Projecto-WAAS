@@ -1,14 +1,22 @@
-<div class="modal-body row page">
-    <div class="col-md-6 login">
-        <app-login></app-login>
-    </div>
-    <div class="col-md-6 banner">
-        <img src="https://www.gamesindustrynetwork.com/public/files/6uu9msiojnh1kjsmgt8i/FortNite-Mobile-video-screenshot-Apps-Weekly-920x470.jpg"
-            alt="">
+<div class="page-wrapper">
 
-        <div class="label-reg">
-            <label>Do you dont have acount? <a href="#register" (click)="open()">register here</a></label>
+
+    <div class="row all-h">
+        <div class="col-md-6 no-pad-rght-lft all-h login">
+            <app-login></app-login>
+        </div>
+        <div class="col-md-6 no-pad-rght-lft all-h">
+            <img src="https://wallpapercave.com/wp/wc1765288.jpg" alt="banner">
         </div>
     </div>
+
+
+    <div class="desk-label">
+        <label>Don't have an account? <a href="#register" (click)="open()">Sign up.</a></label>
+    </div>
+    <div class="mob-label">
+        <label>Don't have an account? <a href="#register" (click)="open()">Sign up.</a></label>
+    </div>
+
 
 </div>

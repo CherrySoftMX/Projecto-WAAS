@@ -13,6 +13,11 @@ export class RegisterComponent implements OnInit {
   constructor(public activeModal: NgbActiveModal) { }
 
   ngOnInit(): void {
+
   }
 
+
+  close() {
+    this.activeModal.dismiss();
+  }
 }

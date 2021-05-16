@@ -1,24 +1,32 @@
-<form class="border bg-dark p-5 text-white">
+<div class="bg-light">
+    <div class="modal-header">
+        <h4 class="modal-title title" id="modal-basic-title">Sing up</h4>
+        <button type="button" class="close" aria-label="Close" (click)="close()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
 
-    <h1 class="h4 mb-4 tittle">Sign up</h1>
+    <div class="modal-body ">
+        <form class="">
+            <!-- FullName -->
+            <label class="text-secondary">Full name</label>
+            <input type="email" class="form-control mb-4" placeholder="Enter your name">
 
-    <!-- FullName -->
-    <label class="text-secondary">Full name</label>
-    <input type="email" class="form-control mb-4" placeholder="Enter your name">
+            <!-- Email -->
+            <label class="text-secondary">E-mail</label>
+            <input type="email" class="form-control mb-4" placeholder="Enter your email">
 
-    <!-- Email -->
-    <label class="text-secondary">E-mail</label>
-    <input type="email" class="form-control mb-4" placeholder="Enter your email">
+            <!-- Password -->
+            <label class="text-secondary">Password</label>
+            <input type="password" class="form-control mb-4" placeholder="Enter your password">
 
-    <!-- Password -->
-    <label class="text-secondary">Password</label>
-    <input type="password" class="form-control mb-4" placeholder="Enter your password">
+            <!-- Password -->
+            <label class="text-secondary">Repeat your password</label>
+            <input type="password" class="form-control mb-4" placeholder="Enter your password">
 
-    <!-- Password -->
-    <label class="text-secondary">Repeat your password</label>
-    <input type="password" class="form-control mb-4" placeholder="Enter your password">
+            <!-- Sing up in button -->
+            <button class="btn-primary btn-lg bg-dark text-white" type="submit" id="btn-sub">Sign in</button>
+        </form>
 
-    <!-- Sing up in button -->
-    <button class="btn-primary btn-lg bg-dark text-white" type="submit" id="btn-sub">Sign in</button>
-
-</form>
+    </div>
+</div>
