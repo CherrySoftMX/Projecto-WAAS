@@ -1,16 +1,38 @@
-#btn-sub{
+.sub-btn{
     width: 100%;
 }
 
 .title{
     font-size: 4rem;
-   
-}
-
-.modal-wrapper{
-    padding: 2rem;
-    border-radius: 10%;
-    border: 5px solid black;
     
 }
 
+.register-wrapper{
+    padding: 2rem;
+
+}
+
+
+
+.close-btn{
+    background-color: transparent;
+    border: 1px solid gray;
+    border-radius: 20%;
+    position: absolute;
+    top: 1%;
+    right: 1%;    
+}
+
+input{
+    border: none;
+    background: transparent;
+    border-bottom: 1px solid black;
+
+}
+
+input:focus{
+    background: transparent;
+    border: 1px solid green;
+
+    
+}

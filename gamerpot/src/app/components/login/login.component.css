@@ -30,25 +30,12 @@ input:focus{
     background: transparent;
     border: 1px solid green;
     color: white;
-}
-
-.label-email{
-    position: absolute;
-     
     
-  display: block;
-  transition: 0.2s;
-  font-size: 1rem;
 }
-
 
 
 label{
    color: white;
-}
-
-form{
-    margin-top: 15%;
 }
 
 

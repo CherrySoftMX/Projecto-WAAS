@@ -5,23 +5,21 @@
     </div>
     <p class="lead">Hi! nice to see you again</p>
 
-    <form #LoginForm="ngForm" [formGroup]="profileLogin" (ngSubmit)="submit()">
+    <form class="pt-4" #LoginForm="ngForm" [formGroup]="profileLogin" (ngSubmit)="submit()">
 
         <!-- Email -->
-
+        <label clas="" for="email">Email</label>
         <input name="email" type="email" class="form-control mb-5" formControlName="email" placeholder="Email">
-        <label clas="label-email" for="email">Email</label>
-
 
         <!-- Password -->
-        <input type="password" class="form-control mb-5" formControlName="password" placeholder="Password">
-        <span class="material-icons-outlined">
-            check
-        </span>
-        <div class="d-flex justify-content-between pt-5">
+        <label clas="" for="password">Password</label>
+        <input name="password" type="password" class="form-control mb-5" formControlName="password"
+            placeholder="Password">
+
+        <div class="d-flex justify-content-between pt-2">
             <div>
                 <!-- Remember me -->
-                <input type="checkbox"> Remember me
+                <input formControlName="remember" type="checkbox"> Remember me
 
             </div>
             <div>

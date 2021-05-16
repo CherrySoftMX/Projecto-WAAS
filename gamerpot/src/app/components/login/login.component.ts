@@ -10,7 +10,8 @@ export class LoginComponent implements OnInit {
 
   profileLogin = new FormGroup({
     email: new FormControl(''),
-    password: new FormControl('')
+    password: new FormControl(''),
+    remember: new FormControl(false),
   });
   constructor() { }
 
@@ -19,7 +20,9 @@ export class LoginComponent implements OnInit {
 
 
   submit(): void {
-    //check login
+    alert(' email: ' + this.profileLogin.get('email')?.value +
+      ' password: ' + this.profileLogin.get('password')?.value +
+      ' remember?: ' + this.profileLogin.get("remember")?.value)
   }
 
 }

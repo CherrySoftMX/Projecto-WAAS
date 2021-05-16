@@ -9,13 +9,25 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class RegisterComponent implements OnInit {
 
-
+  registerData = new FormGroup({
+    name: new FormControl(''),
+    email: new FormControl(''),
+    password: new FormControl(''),
+    rptPassword: new FormControl('')
+  });
   constructor(public activeModal: NgbActiveModal) { }
 
   ngOnInit(): void {
 
   }
 
+  register() {
+    alert(this.registerData.get("name")?.value);
+    //register user
+
+    //if ok
+    this.close();
+  }
 
   close() {
     this.activeModal.dismiss();
