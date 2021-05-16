@@ -1,5 +1,5 @@
 <div class="container-fluid px-3 px-md-5 mt-3">
-  <div class="row">
+  <div class="row inputs-row">
     <div class="col-xl">
       <app-title-with-content title="Search by title">
         <app-search-box
@@ -22,12 +22,12 @@
   </div>
 
   <app-deals-table-header></app-deals-table-header>
-  
+
   <ng-container *ngFor="let game of deals">
     <app-deals-row
       [game]="game"
     >
     </app-deals-row>
   </ng-container>
-  
+
 </div>

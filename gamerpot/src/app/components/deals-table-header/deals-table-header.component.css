@@ -2,6 +2,7 @@
 
 .deals-row {
   background: var(--background-primary);
+  margin-bottom: 1.8em;
 }
 
 .deals_header__title {

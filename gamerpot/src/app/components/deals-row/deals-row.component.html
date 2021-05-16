@@ -16,7 +16,7 @@
     />
   </div>
 
-  <div class="d-flex w-100">
+  <div class="deal-data">
     <div
       class="deals-row__col deals-row__col--title"
       [ngClass]="{
@@ -68,13 +68,13 @@
     >
       {{ "$" + game.normalPrice }}
     </div>
-    
-    <div 
+
+    <div
     class="deals-row__col normal-data"
     [ngClass]="{
       'hide': displayType != 'row'
     }">
-      
+
       <ng-container *ngIf="game.metacriticScore != 0">
         <span>{{ game.metacriticScore }}</span>
       </ng-container>
@@ -82,7 +82,7 @@
       <ng-container *ngIf="game.metacriticScore == 0">
         <span>Not available</span>
       </ng-container>
-      
+
     </div>
 
     <div
@@ -96,7 +96,7 @@
         alt="store-logo"
         class="store-icon"
       />
-      
+
       <span>{{ game.storeName }}</span>
     </div>
   </div>

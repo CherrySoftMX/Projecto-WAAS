@@ -9,5 +9,7 @@ export interface GameDealInterface {
   metacriticScore: number;
   thumb: string;
   storeName: string;
-  storeIcon: string;
+  images: {
+    icon:string;
+  }
 }
