@@ -14,11 +14,13 @@
   --deal-row-height: 60px;
 }
 
+html,
 body {
   font-family: var(--font-primary);
   font-size: 18px;
   background: var(--background-primary);
   color: white;
+  height: 100%;
 }
 
 .brand {

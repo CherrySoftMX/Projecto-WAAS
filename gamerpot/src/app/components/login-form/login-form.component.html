@@ -1,0 +1,69 @@
+<div class="text-white h-100 p-5 login-form-wrapper">
+  <div class="text-center mb-5">
+    <h1 class="display-1 brand">GAMERPOT</h1>
+    <footer class="blockquote-footer text-light">
+      We help you to find your ideal game
+    </footer>
+  </div>
+
+  <p class="lead">Hi! nice to see you again</p>
+
+  <form
+    #LoginForm="ngForm"
+    class="pt-4"
+    [formGroup]="profileLogin"
+    (ngSubmit)="submit()"
+  >
+    <!-- Email -->
+    <div class="mb-5">
+      <input
+        name="email"
+        type="email"
+        class="form-control"
+        formControlName="email"
+        placeholder="Email"
+        [ngClass]="validate('email')"
+      />
+      <div class="invalid-feedback">Invalid email</div>
+    </div>
+
+    <!-- Password -->
+    <div class="mb-5">
+      <input
+        name="password"
+        type="password"
+        class="form-control"
+        formControlName="password"
+        placeholder="Password"
+        [ngClass]="validate('password')"
+      />
+      <div class="invalid-feedback">Invalid password</div>
+    </div>
+
+    <div class="d-flex justify-content-between pt-2">
+      <div>
+        <!-- Remember me -->
+        <input formControlName="remember" id="rememberMe" type="checkbox" />
+        <label class="ml-2" for="rememberMe">Remenber me</label>
+      </div>
+      <div>
+        <!-- Forgot password -->
+        <a class="" href="">Forgot password?</a>
+      </div>
+    </div>
+
+    <!-- Sign in button -->
+    <div class="text-center">
+      <button class="btn btn-lg btn-sub my-5 w-100" type="submit">
+        Sign in
+      </button>
+    </div>
+  </form>
+
+  <div class="d-flex justify-content-end mt-3">
+    <label
+      >Don't have an account?
+      <a class="ml-2" href="#register" (click)="signUp()">Sign up.</a></label
+    >
+  </div>
+</div>

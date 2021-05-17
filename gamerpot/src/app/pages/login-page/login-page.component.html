@@ -1,27 +1,10 @@
-<div class="page-wrapper">
-
-
-    <div class="row all-h">
-        <div class="col-md-6 no-pad-rght-lft all-h login">
-            <app-login></app-login>
-        </div>
-        <div class="col-md-6 no-pad-rght-lft all-h">
-            <div class="title">
-                <h1 class="display-1">GAMERPOT</h1>
-                <footer class="blockquote-footer">We help you find your ideal game</footer>
-            </div>
-            <img src="https://wallpapercave.com/wp/wc1765288.jpg" alt="banner">
-
-        </div>
+<div class="container-fluid h-100 position-relative">
+  <div class="row h-100">
+    <div class="col-md p-0">
+      <app-login-form (onSignUp)="open()"></app-login-form>
     </div>
-
-
-    <div class="desk-label">
-        <label>Don't have an account? <a href="#register" (click)="open()">Sign up.</a></label>
+    <div class="col-md d-none d-xl-block p-0" style="overflow: hidden">
+      <img src="https://wallpapercave.com/wp/wc1765288.jpg" alt="banner" />
     </div>
-    <div class="mob-label">
-        <label>Don't have an account? <a href="#register" (click)="open()">Sign up.</a></label>
-    </div>
-
-
+  </div>
 </div>

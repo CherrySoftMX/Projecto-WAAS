@@ -1,0 +1,43 @@
+.login-form-wrapper {
+  margin: auto;
+  max-width: 800px;
+}
+
+.brand {
+  font-size: 85px;
+}
+
+.btn-sub {
+  background-color: var(--background-tertiary);
+  border: none;
+  max-width: 800px;
+  color: var(--background-secondary);
+  font-weight: bold;
+  font-size: 35px;
+}
+
+input {
+  border: none;
+  background: transparent;
+  border-bottom: 1px solid black;
+  color: white;
+  z-index: 1;
+}
+
+input:focus {
+  background: transparent;
+  border: 1px solid green;
+  color: white;
+}
+
+@media screen and (max-width: 768px) {
+  .brand {
+    font-size: 65px;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .brand {
+    font-size: 55px;
+  }
+}

@@ -10,8 +10,8 @@ import { DealsTableComponent } from './components/deals/deals-table/deals-table.
 import { PriceRangeComponent } from './components/deals/price-range/price-range.component';
 import { WriteCommentComponent } from './components/game-review/comments/leave-comment/leave-comment.component';
 import { ReviewCommentComponent } from './components/game-review/comments/review-comment/review-comment.component';
-import { LoginComponent } from './components/login/login.component';
-import { RegisterComponent } from './components/register/register.component';
+import { LoginFormComponent } from './components/login-form/login-form.component';
+import { RegisterFormComponent } from './components/register-form/register-form.component';
 import { ComboBoxComponent } from './components/shared/combo-box/combo-box.component';
 import { InputFieldComponent } from './components/shared/input-field/input-field.component';
 import { NavbarComponent } from './components/shared/navbar/navbar.component';
@@ -27,8 +27,8 @@ import { StoresService } from './services/stores-service.service';
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
-    RegisterComponent,
+    LoginFormComponent,
+    RegisterFormComponent,
     LoginPageComponent,
     DealsPageComponent,
     SearchBoxComponent,
