@@ -1,0 +1,22 @@
+<app-title-underline title="Browse deals"></app-title-underline>
+<div class="row mb-3">
+  <div class="col-xl">
+    <app-title-with-content title="Search by title">
+      <app-search-box placeholder="Search games" (searchEvent)="buscar($event)">
+        <i class="bi bi-search search-box__icon" style="font-size: 22px"></i>
+      </app-search-box>
+    </app-title-with-content>
+  </div>
+  <div class="col-xl">
+    <app-title-with-content title="Price range">
+      <app-price-range
+        (minPriceEvent)="setMinPrice($event)"
+        (maxPriceEvent)="setMaxPrice($event)"
+        (currencyEvent)="setCurrency($event)"
+      >
+      </app-price-range>
+    </app-title-with-content>
+  </div>
+</div>
+
+<app-deals-table [deals]="deals"></app-deals-table>

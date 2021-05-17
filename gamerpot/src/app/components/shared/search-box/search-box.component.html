@@ -1,0 +1,11 @@
+<div class="search-box">
+  <input
+    #searchBox
+    type="text"
+    [placeholder]="placeholder"
+    class="search-box__input rounded-pill"
+  />
+  <div (click)="search(searchBox.value)">
+    <ng-content select="i"></ng-content>
+  </div>
+</div>

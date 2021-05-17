@@ -1,0 +1,5 @@
+@import "../../../shared/search-box/search-box.component.css";
+
+.wrapper {
+  background-color: var(--background-secondary);
+}

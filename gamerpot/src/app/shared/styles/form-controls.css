@@ -1,0 +1,16 @@
+.input-label {
+  font-weight: bold;
+  font-size: 20px;
+  margin-right: 0.5rem;
+}
+
+.input-form-control select {
+  height: 30px;
+}
+
+.input-form-control input,
+.input-form-control select {
+  background-color: var(--background-primary);
+  color: white;
+  border-radius: 5px;
+}

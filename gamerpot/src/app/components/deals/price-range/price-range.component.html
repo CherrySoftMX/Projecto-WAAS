@@ -1,0 +1,26 @@
+<div class="container-fluid">
+  <div class="row align-items-center">
+    <div class="col-md">
+      <app-input-field
+        label="Min"
+        placeholder="$0"
+        (onChange)="setMinPrice($event)"
+      ></app-input-field>
+    </div>
+    <div class="col-md">
+      <app-input-field
+        label="Max"
+        placeholder="$500"
+        (onChange)="setMaxPrice($event)"
+      ></app-input-field>
+    </div>
+    <div class="col-md">
+      <app-combo-box
+        label="Cur"
+        [options]="['USD', 'MXN']"
+        (onChange)="setCurrency($event)"
+      >
+      </app-combo-box>
+    </div>
+  </div>
+</div>

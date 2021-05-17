@@ -1,0 +1,23 @@
+<!--Header-->
+<div
+  class="row text-center border-top border-bottom border-secondary py-3 mb-3"
+  style="font-size: 16px"
+>
+  <div class="col col-md-3 deals_header__title">
+    <!-- Game title | List of deals -->
+  </div>
+  <span class="col deals-columns-wrapper">
+    <div class="row">
+      <div class="col">Discount</div>
+      <div class="col">Deal price</div>
+      <div class="col">Regular price</div>
+      <div class="col">Metacritic</div>
+      <div class="col">Store</div>
+    </div>
+  </span>
+</div>
+
+<!--Table rows-->
+<ng-container *ngFor="let deal of deals">
+  <app-deal-table-row [deal]="deal"></app-deal-table-row>
+</ng-container>

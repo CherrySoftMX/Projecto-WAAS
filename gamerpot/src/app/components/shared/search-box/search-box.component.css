@@ -1,0 +1,38 @@
+i {
+  color: white;
+}
+
+.search-box {
+  width: 100%;
+  position: relative;
+  font-family: var(--font-primary);
+}
+
+.search-box__input {
+  background-color: #3b3b3b;
+  border: none;
+  color: white;
+  padding: 0.3em 1em;
+  width: 100%;
+}
+
+.search-box__input:focus {
+  outline: none;
+}
+
+.search-box__icon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.search-box__icon:hover {
+  cursor: pointer;
+}
+
+@media screen and (max-width: 555px) {
+  .search-box {
+    font-size: 16px;
+  }
+}

@@ -1,0 +1,13 @@
+.deals_header__title::before {
+  content: "Game title";
+}
+
+@media screen and (max-width: 768px) {
+  .deals_header__title::before {
+    content: "List of deals";
+  }
+
+  .deals-columns-wrapper {
+    display: none;
+  }
+}
