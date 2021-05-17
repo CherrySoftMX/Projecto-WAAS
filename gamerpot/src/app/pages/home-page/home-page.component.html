@@ -1,0 +1,62 @@
+<div class="container-fluid h-100 p-0 m-0">
+    <app-navbar></app-navbar>
+    <!--Serach bar-->
+    <div class=" pb-0 text-center p-4">
+        <h1>Checkout the newest games</h1>
+        <app-search-box></app-search-box>
+    </div>
+    <div class="row h-100 m-0 pt-0">
+        <!--Recent deals side-->
+        <div class="col-md-4 pr-5 m-0 pl-5">
+            <app-title-underline title="Recent deals"></app-title-underline>
+            <div *ngFor="let item of items">
+                <app-deal-table-row></app-deal-table-row>
+            </div>
+
+        </div>
+        <!--News games side-->
+        <div class="col-md-8 p-0 m-0">
+            <app-title-underline title="New games"></app-title-underline>
+            <!--Filters-->
+
+            <div class="d-flex flex-wrap">
+                <div class="flex-fill">
+                    <app-input-field label="Order by"></app-input-field>
+                </div>
+                <div class="flex-fill">
+                    <app-input-field label="Plataform"></app-input-field>
+                </div>
+            </div>
+
+            <!--Game cards-->
+            <div class="d-flex flex-wrap justify-content-center">
+                <div class="flex-fill pb-2" *ngFor="let i of items">
+                    <div class="card" style="width: 18rem;">
+                        <img class="card-img-top" src=".../100px180/" alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title">Card title</h5>
+                            <p class="card-text text-dark">Some quick example text to build on the card title and make
+                                up the
+                                bulk of the card's
+                                content.</p>
+                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item"><a class="page-link" href="#">&#60;</a></li>
+                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item"><a class="page-link">...</a></li>
+                    <li class="page-item"><a class="page-link" href="#">8</a></li>
+                    <li class="page-item"><a class="page-link" href="#">&#62;</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
