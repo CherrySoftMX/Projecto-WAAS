@@ -23,6 +23,7 @@ import { DealsPageComponent } from './pages/deals-page/deals-page.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { DealsService } from './services/deals-service.service';
 import { StoresService } from './services/stores-service.service';
+import { GamePageComponent } from './pages/game-page/game-page.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { StoresService } from './services/stores-service.service';
     WriteCommentComponent,
     ReviewCommentComponent,
     ProfileImgComponent,
+    GamePageComponent,
   ],
   imports: [
     BrowserModule,
