@@ -12,7 +12,7 @@ export class GameDatailsService {
 
   constructor(private http: HttpClient) { }
 
-  getGameDetails = async (id: number): Promise<GameDetails> => {
+  getGameDetails = (id: number): Promise<GameDetails> => {
     const url = `${this.apiUrl}/${id}?key=${this.apiKey}`;
 
     let promise = new Promise<GameDetails>((resolve, reject) => {

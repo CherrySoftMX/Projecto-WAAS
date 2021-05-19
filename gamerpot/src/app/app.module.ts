@@ -57,4 +57,4 @@ import { GamePageComponent } from './pages/game-page/game-page.component';
   providers: [DealsService, StoresService],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }
