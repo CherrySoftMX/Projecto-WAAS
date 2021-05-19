@@ -20,12 +20,13 @@ export class GamePageComponent implements OnInit {
 
   constructor(private gameDetailsService: GameDatailsService,
     private dealsService: DealsService, private storesService: StoresService) {
-    this.id = 5000;
+    this.id = 33311;
+    this.gameDetails?.description.substr(300);
   }
 
   ngOnInit(): void {
     this.get();
-    this.getDeals();
+
   }
 
   get = () => {
@@ -57,10 +58,41 @@ export class GamePageComponent implements OnInit {
 
 
   }
-  getDeals = () => {
 
+  displayMore() {
+    if (document.getElementById('more')?.style.display == 'none') {
+      document.getElementById('more')?.style.display = 'inline';
+      document.getElementById('more-btn')?.innerHTML = 'Less more';
+      document.getElementById('dots')?.style.display = 'none';
+    } else {
+      console.log("Nooo")
+      document.getElementById('more')?.style.display = 'none';
+      document.getElementById('more-btn')?.innerHTML = 'See more';
+      document.getElementById('dots')?.style.display = 'inline';
+    }
+  }
 
+  setMetacriticState() {
 
-  };
+    if (this.gameDetails) {
+      const metacritic = this.gameDetails.metacritic;
+      const nm = metacritic == null;
+      const lm = metacritic <= 30;
+      const mm = metacritic > 30 && metacritic < 70;
+      const hm = metacritic >= 70;
+      let classes = {
+        'no-metacritic': nm,
+        'metacritic-low': lm,
+        'metacritic-medium': mm,
+        'metacritic-high': hm
+      }
+
+      return classes;
+    }
+
+    return {
+
+    }
+  }
 
 }
