@@ -15,7 +15,7 @@ export class DealTableRowComponent implements OnInit {
 
   constructor() {
     this.deal = {
-      title: '',
+      title: 'Grand Theft Auto V',
       dealID: '',
       storeID: '',
       gameID: '',

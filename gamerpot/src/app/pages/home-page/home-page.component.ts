@@ -3,14 +3,13 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-home-page',
   templateUrl: './home-page.component.html',
-  styleUrls: ['./home-page.component.css']
+  styleUrls: ['./home-page.component.css'],
 })
 export class HomePageComponent implements OnInit {
+  items = new Array<number>(10).fill(0);
+  deals = new Array<number>(15).fill(0);
 
-  items = [1, 3, 4, 5, 6, 7, 8, 3, 4, 4];
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }
