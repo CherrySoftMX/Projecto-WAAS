@@ -1,0 +1,26 @@
+::ng-deep ngb-pagination {
+  transform: scale(0.95);
+}
+
+::ng-deep ngb-pagination a {
+  color: white !important;
+}
+
+::ng-deep ngb-pagination .page-item .page-link {
+  background-color: var(--background-secondary) !important;
+  border: 1px solid white !important;
+}
+
+::ng-deep ngb-pagination .page-item.active .page-link {
+  background-color: white !important;
+  color: black !important;
+}
+
+::ng-deep ngb-pagination .page-item.active .page-link:focus,
+.page-link:not(:disabled):not(.disabled):active:focus {
+  box-shadow: 0 0 0 0.1rem var(--background-primary);
+}
+
+::ng-deep ngb-pagination .page-link:not(:disabled):not(.disabled):active:focus {
+  box-shadow: 0 0 0 0.1rem var(--background-primary);
+}

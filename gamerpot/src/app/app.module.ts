@@ -17,16 +17,19 @@ import { ComboBoxComponent } from './components/shared/combo-box/combo-box.compo
 import { GameCardComponent } from './components/shared/game-card/game-card.component';
 import { InputFieldComponent } from './components/shared/input-field/input-field.component';
 import { NavbarComponent } from './components/shared/navbar/navbar.component';
+import { PaginationComponent } from './components/shared/pagination/pagination.component';
 import { ProfileImgComponent } from './components/shared/profile-img/profile-img.component';
 import { SearchBoxComponent } from './components/shared/search-box/search-box.component';
 import { SubtitleComponent } from './components/shared/subtitle/subtitle.component';
 import { TitleWithContentComponent } from './components/shared/title-with-content/title-with-content.component';
+import { TitleComponent } from './components/shared/title/title.component';
+import { BestGamesPageComponent } from './pages/best-games-page/best-games-page.component';
 import { DealsPageComponent } from './pages/deals-page/deals-page.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { DealsService } from './services/deals-service.service';
 import { StoresService } from './services/stores-service.service';
-import { TitleComponent } from './components/shared/title/title.component';
+import { WishlistPageComponent } from './pages/wishlist-page/wishlist-page.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +54,9 @@ import { TitleComponent } from './components/shared/title/title.component';
     DealTableRowMinimalComponent,
     GameCardComponent,
     TitleComponent,
+    PaginationComponent,
+    BestGamesPageComponent,
+    WishlistPageComponent,
   ],
   imports: [
     BrowserModule,

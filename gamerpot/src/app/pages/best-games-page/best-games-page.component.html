@@ -1,0 +1,26 @@
+<div class="d-flex flex-column h-100">
+  <app-navbar></app-navbar>
+  <app-title title="Best games of all time"></app-title>
+
+  <div class="row px-2 px-md-3 px-lg-5" style="max-width: 1000px">
+    <div class="col-sm col-md-5">
+      <app-combo-box label="Genre"></app-combo-box>
+    </div>
+    <div class="col-sm col-md-5">
+      <app-combo-box label="Platform"></app-combo-box>
+    </div>
+  </div>
+
+  <div class="px-2 px-md-3 px-lg-5 content-wrapper">
+    <div class="col flex-column section">
+      <div class="row mt-2 p-2">
+        <ng-container *ngFor="let bestGame of bestGames">
+          <div class="col p-1">
+            <app-game-card></app-game-card>
+          </div>
+        </ng-container>
+      </div>
+      <app-pagination></app-pagination>
+    </div>
+  </div>
+</div>
