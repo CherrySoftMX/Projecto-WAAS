@@ -2,9 +2,6 @@
   font-weight: bold;
 }
 
-.subtitle {
-}
-
 @media screen and (max-width: 768px) {
   .title {
     font-size: 32px;
