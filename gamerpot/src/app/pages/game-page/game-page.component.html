@@ -1,19 +1,18 @@
 <app-navbar></app-navbar>
 <div class="row h-100 m-0 p-0">
     <!--Recent deals game-->
-    <div class="col-12 col-lg-3 p-5" style="">
-        <app-title-underline title="Recent deals">
-            <div class="mt-2" *ngFor="let deal of deals">
-                <app-deal-table-row displayType="row-minimal" [deal]="deal"></app-deal-table-row>
-            </div>
-        </app-title-underline>
+    <div class="col-12 col-lg-3 p-5">
+        <app-subtitle subtitle="Recent deals"></app-subtitle>
+        <div class="mt-2" *ngFor="let deal of deals">
+            <app-deal-table-row-minimal [deal]="deal"></app-deal-table-row-minimal>
+        </div>
     </div>
     <!--Information game-->
     <div class="col-12 col-lg-6 p-5">
         <!--Tittle-->
         <div>
             <div class="">{{gameDetails.updated | date}}</div>
-            <div class="display-3">{{gameDetails.name}}</div>
+            <h1 style="font-size: 4rem;">{{gameDetails.name}}</h1>
             <div>Average playtime: {{gameDetails.playtime}} hours</div>
         </div>
         <!--Carousel game pictures-->
@@ -32,72 +31,58 @@
         <button class="mt-3">add to my whislist</button>
         <!--About-->
         <div class="about-wrapper mb-0 mt-3">
-            <app-title-underline title="About">
-                <span>{{gameDetails.description_raw.substr(0,300)}} </span>
-                <span id="dots"> ... </span>
-                <span id="more" style="display: none;">{{gameDetails.description_raw.substr(300)}} </span>
-                <button class="mt-0 mb-2 p-0" (click)="displayMore()" id="more-btn">See more</button>
-            </app-title-underline>
-
-
+            <app-subtitle subtitle="About"></app-subtitle>
+            <span>{{gameDetails.description_raw.substr(0,300)}} </span>
+            <span id="dots"> ... </span>
+            <span id="more" style="display: none;">{{gameDetails.description_raw.substr(300)}} </span>
+            <button class="mt-0 mb-2 p-0" (click)="displayMore()" id="more-btn">See more</button>
         </div>
         <!--Additional information-->
         <div class="row">
             <div class="col">
                 <!--Plataforms-->
-                <app-title-underline title="Platforms">
-                    <ng-container *ngFor="let i of gameDetails.platforms">
-                        <p>{{i.platform.name}}</p>
-                    </ng-container>
-                </app-title-underline>
+                <app-subtitle subtitle="Platforms"></app-subtitle>
+                <ng-container *ngFor="let i of gameDetails.platforms">
+                    <p>{{i.platform.name}}</p>
+                </ng-container>
 
-                <app-title-underline title="Developers">
-                    <ng-container *ngFor="let i of gameDetails.developers">
-                        <p>{{i.name}}</p>
-                    </ng-container>
+                <app-subtitle subtitle="Developers"></app-subtitle>
+                <ng-container *ngFor="let i of gameDetails.developers">
+                    <p>{{i.name}}</p>
+                </ng-container>
 
-                </app-title-underline>
-                <app-title-underline title="Website">
-                    <a [href]="gameDetails.website? gameDetails.website: 'without website'" target="_blank"
-                        rel="noopener noreferrer">{{gameDetails.website? gameDetails.website: 'without website'}}</a>
+                <app-subtitle subtitle="Website"></app-subtitle>
+                <a class="website" [href]="gameDetails.website? gameDetails.website: 'without website'" target="_blank"
+                    rel="noopener noreferrer">{{gameDetails.website? gameDetails.website: 'without website'}}</a>
 
-                </app-title-underline>
             </div>
             <div class="col">
-                <app-title-underline title="Genre">
-                    <div *ngFor="let i of gameDetails.genres">
-                        <p>{{i.name}}</p>
-                    </div>
-                </app-title-underline>
-                <app-title-underline title="Publisher">
-                    <div *ngFor="let i of gameDetails.publishers">
-                        <p>{{i.name}}</p>
-                    </div>
-                </app-title-underline>
-                <app-title-underline title="Relase date">
-                    <p>{{gameDetails.released | date}}</p>
-                </app-title-underline>
+                <app-subtitle subtitle="Genre"></app-subtitle>
+                <div *ngFor="let i of gameDetails.genres">
+                    <p>{{i.name}}</p>
+                </div>
+                <app-subtitle subtitle="Publisher"></app-subtitle>
+                <div *ngFor="let i of gameDetails.publishers">
+                    <p>{{i.name}}</p>
+                </div>
+                <app-subtitle subtitle="Relase date"></app-subtitle>
+                <p>{{gameDetails.released | date}}</p>
             </div>
         </div>
     </div>
     <!--Metracritic and comments-->
-    <div class="col-12 col-lg-3 p-5 " style="">
-        <div style="" class="square" [ngClass]="setMetacriticState()">
+    <div class="col-12 col-lg-3 p-5 ">
+        <div class="square mb-2" [ngClass]="setMetacriticState()">
             <h1 class="content">
-                {{gameDetails.metacritic? gameDetails.metacritic: 'not metacritic data'}}
+                {{gameDetails.metacritic? gameDetails.metacritic: '-'}}
             </h1>
         </div>
-        <div class="mt-3">
-            <app-title-underline title="commentaries">
-                <div *ngFor="let i of gameDetails.platforms" class="mt-2">
-                    <nav aria-label="breadcrumb">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="#">S</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">'So cool'</li>
-                        </ol>
-                    </nav>
-                </div>
-            </app-title-underline>
-        </div>
+
+        <app-subtitle subtitle="commentaries"></app-subtitle>
+        <app-leave-comment></app-leave-comment>
+        <ng-container *ngFor="let i of commentaries">
+            <app-review-comment></app-review-comment>
+        </ng-container>
+
     </div>
 </div>

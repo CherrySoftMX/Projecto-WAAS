@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { GameDealInterface } from 'src/app/interfaces/game-deal';
 
 @Component({
   selector: 'app-deal-table-row-minimal',
@@ -6,7 +7,25 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./deal-table-row-minimal.component.css'],
 })
 export class DealTableRowMinimalComponent implements OnInit {
-  constructor() {}
+  @Input() deal: GameDealInterface;
 
-  ngOnInit(): void {}
+  constructor() {
+    this.deal = {
+      title: 'Grand Theft Auto V',
+      dealID: '',
+      storeID: '',
+      gameID: '',
+      salePrice: 0,
+      normalPrice: 0,
+      savings: 0,
+      metacriticScore: 0,
+      thumb: '',
+      storeName: '',
+      images: {
+        icon: '',
+      },
+    };
+  }
+
+  ngOnInit(): void { }
 }

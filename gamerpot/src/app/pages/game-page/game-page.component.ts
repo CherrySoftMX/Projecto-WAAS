@@ -3,6 +3,7 @@ import { GameDatailsService } from '../../services/game-details.service';
 import { GameDetails } from '../../interfaces/game-details';
 import { DealsService } from '../../services/deals-service.service'
 import { StoresService } from '../../services/stores-service.service'
+import { CssSelector } from '@angular/compiler';
 
 @Component({
   selector: 'app-game-page',
@@ -11,8 +12,9 @@ import { StoresService } from '../../services/stores-service.service'
 })
 export class GamePageComponent implements OnInit {
 
-  @Input() id: number;
-  gameDetails: GameDetails | undefined;
+  @Input() id: number; //maybe a param in url
+  gameDetails: GameDetails;
+  commentaries: any;
   deals: any;
   stores: any;
 
@@ -20,8 +22,27 @@ export class GamePageComponent implements OnInit {
 
   constructor(private gameDetailsService: GameDatailsService,
     private dealsService: DealsService, private storesService: StoresService) {
-    this.id = 33311;
-    this.gameDetails?.description.substr(300);
+    this.id = 2221;
+    this.commentaries = Array<number>(10).fill(0);
+    this.gameDetails = {
+      id: 0,
+      slug: '',
+      name: '',
+      playtime: 0,
+      name_original: '',
+      description: '',
+      description_raw: '',
+      metacritic: 0,
+      released: '',
+      updated: '',
+      background_image: '',
+      background_image_additional: '',
+      website: '',
+      platforms: [],
+      developers: [],
+      genres: [],
+      publishers: []
+    }
   }
 
   ngOnInit(): void {
@@ -29,8 +50,7 @@ export class GamePageComponent implements OnInit {
 
   }
 
-  get = () => {
-
+  get(): void {
     this.gameDetailsService.getGameDetails(this.id).then((res) => {
       this.gameDetails = res;
       this.dealsService.getDealsByNameGame(this.gameDetails.name).then(
@@ -45,54 +65,53 @@ export class GamePageComponent implements OnInit {
           },
             (error) => {
 
-            })
+            });
         },
         (error) => {
 
         }
-      )
+      );
     }, (error) => {
-      alert('F');
-    })
 
-
-
+    });
   }
 
-  displayMore() {
-    if (document.getElementById('more')?.style.display == 'none') {
-      document.getElementById('more')?.style.display = 'inline';
-      document.getElementById('more-btn')?.innerHTML = 'Less more';
-      document.getElementById('dots')?.style.display = 'none';
-    } else {
-      console.log("Nooo")
-      document.getElementById('more')?.style.display = 'none';
-      document.getElementById('more-btn')?.innerHTML = 'See more';
-      document.getElementById('dots')?.style.display = 'inline';
-    }
-  }
+  displayMore(): void {
+    const more = document.getElementById('more');
+    const moreBtn = document.getElementById('more-btn');
+    const dots = document.getElementById('dots');
 
-  setMetacriticState() {
-
-    if (this.gameDetails) {
-      const metacritic = this.gameDetails.metacritic;
-      const nm = metacritic == null;
-      const lm = metacritic <= 30;
-      const mm = metacritic > 30 && metacritic < 70;
-      const hm = metacritic >= 70;
-      let classes = {
-        'no-metacritic': nm,
-        'metacritic-low': lm,
-        'metacritic-medium': mm,
-        'metacritic-high': hm
+    if (more && moreBtn && dots) {
+      if (document.getElementById('more')?.style.display == 'none') {
+        more.style.display = 'inline';
+        moreBtn.innerHTML = 'Less more';
+        dots.style.display = 'none';
+      } else {
+        more.style.display = 'none';
+        moreBtn.innerHTML = 'See more';
+        dots.style.display = 'inline';
       }
-
-      return classes;
     }
 
-    return {
-
-    }
   }
+
+  setMetacriticState(): any {
+    const metacritic = this.gameDetails.metacritic;
+    const nm = metacritic == null;
+    const lm = metacritic <= 30;
+    const mm = metacritic > 30 && metacritic < 70;
+    const hm = metacritic >= 70;
+    let classes = {
+      'no-metacritic': nm,
+      'metacritic-low': lm,
+      'metacritic-medium': mm,
+      'metacritic-high': hm
+    }
+
+    return classes;
+  }
+
+
+
 
 }

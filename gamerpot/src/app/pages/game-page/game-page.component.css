@@ -37,3 +37,8 @@ background-color: #66CC33;
 .no-metacritic{
 background-color: gray;
 }
+
+.website{
+    overflow-wrap: break-word;
+  word-wrap: break-word;
+}
