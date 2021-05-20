@@ -1,6 +1,9 @@
 @import "~bootstrap/dist/css/bootstrap.min.css";
 @import "~bootstrap-icons/font/bootstrap-icons.css";
 @import "./app/shared/styles/form-controls.css";
+@import "./app/shared/styles/titles.css";
+@import "./app/shared/styles/scrollbar.css";
+@import "./app/shared/styles/layout.css";
 @import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Rubik+Mono+One&display=swap");
 
@@ -9,6 +12,7 @@
   --background-secondary: #161618;
   --background-tertiary: #ea7f7f;
   --custom-green: #66cc33;
+  --input-field-placeholder: #dcdcdc;
   --font-primary: "Montserrat", "Arial";
   --font-secondary: "Rubik Mono One", sans-serif;
   --deal-row-height: 60px;

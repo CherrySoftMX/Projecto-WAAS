@@ -1,10 +1,7 @@
 <div class="row table-row text-center align-items-center mb-3">
   <div class="col-10 col-md-3">
     <div class="row align-items-center">
-      <div
-        class="col-5 p-0"
-        [ngClass]="displayType == 'row-minimal' ? 'hide' : ''"
-      >
+      <div class="col-5 p-0">
         <img
           class="w-100"
           style="height: var(--deal-row-height); object-fit: cover"
@@ -17,10 +14,8 @@
       </div>
     </div>
   </div>
-  <div
-    *ngIf="screenTooSmall || displayType == 'row-minimal'; else normalRow"
-    class="col-1 ml-auto mr-3 mr-sm-2"
-  >
+
+  <div *ngIf="screenTooSmall; else normalRow" class="col ml-auto mr-3 mr-sm-2">
     <div class="row flex-column">
       <div class="col p-0 row-minimal-item discount">
         -{{ deal.savings | number: "1.0-0" }}%

@@ -1,0 +1,21 @@
+.game-card {
+  background-color: var(--background-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.game-card-title {
+  font-weight: bold;
+  font-size: 25px;
+}
+
+.metacritic {
+  padding: 2px;
+  font-weight: bold;
+}
+
+.save-badge {
+  font-size: 15px;
+  font-weight: 400;
+}
