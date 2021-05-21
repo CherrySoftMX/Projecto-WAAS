@@ -11,10 +11,6 @@
   padding-bottom: 100%;
 }
 
-#more{
-  display: none;
-}
-
 .content {
   position: absolute;
   width: 100%;
@@ -41,4 +37,17 @@ background-color: gray;
 .website{
     overflow-wrap: break-word;
   word-wrap: break-word;
+}
+
+.wishlist-btn{
+  background: #373737;
+  width: fit-content;
+}
+.wishlist-btn:hover{
+  background: #535353;
+  cursor: pointer;
+}
+
+#more-btn{
+  background: #FFFFFF;
 }
