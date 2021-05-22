@@ -1,0 +1,8 @@
+<div class="d-flex table-row align-items-center mb-3 m-0 p-4">
+  <div class="mr-auto text-truncate">{{deal.title}}</div>
+  <div class="d-flex flex-column justify-content-center align-items-center" style="line-height: 95%">
+    <div class="row-minimal-item discount">-{{ deal.savings | number: "1.0-0" }}%</div>
+    <div class="row-minimal-item original-price">{{ deal.normalPrice | currency }}</div>
+    <div class="row-minimal-item">{{ deal.salePrice | currency }}</div>
+  </div>
+</div>

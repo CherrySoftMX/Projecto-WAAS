@@ -6,13 +6,12 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
   styleUrls: ['./search-box.component.css'],
 })
 export class SearchBoxComponent implements OnInit {
-  @Input() placeholder: string;
+  @Input() type: 'thin' | 'thick' = 'thin';
+  @Input() placeholder: string = 'Search a game';
 
   @Output() searchEvent = new EventEmitter<string>();
 
-  constructor() {
-    this.placeholder = 'search';
-  }
+  constructor() {}
 
   ngOnInit(): void {}
 

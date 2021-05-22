@@ -2,10 +2,15 @@ i {
   color: white;
 }
 
+.search-box input::placeholder {
+  color: var(--input-field-placeholder);
+}
+
 .search-box {
   width: 100%;
   position: relative;
   font-family: var(--font-primary);
+  font-size: 20px;
 }
 
 .search-box__input {

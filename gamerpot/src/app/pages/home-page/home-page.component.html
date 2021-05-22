@@ -1,0 +1,37 @@
+<div class="scrollable-page-wrapper">
+  <app-navbar></app-navbar>
+
+  <!--Search bar-->
+  <div class="text-center mb-3">
+    <app-title title="Checkout the newest games"></app-title>
+    <div class="container" style="max-width: 800px">
+      <app-search-box type="thick"></app-search-box>
+    </div>
+  </div>
+
+  <div class="px-4 px-md-5 scrollable-container">
+    <div class="d-none d-lg-flex col-4 mr-xl-4 flex-column scrollable-column">
+      <app-recent-deals-list></app-recent-deals-list>
+    </div>
+
+    <div class="col flex-column scrollable-column">
+      <app-subtitle subtitle="New games"></app-subtitle>
+      <div class="row row-cols-1 row-cols-md-2" style="max-width: 700px">
+        <div class="col">
+          <app-combo-box label="Order by"></app-combo-box>
+        </div>
+        <div class="col">
+          <app-combo-box label="Platform"></app-combo-box>
+        </div>
+      </div>
+      <div class="row mt-2 p-2">
+        <ng-container *ngFor="let card of items">
+          <div class="col p-1">
+            <app-game-card></app-game-card>
+          </div>
+        </ng-container>
+      </div>
+      <app-pagination></app-pagination>
+    </div>
+  </div>
+</div>

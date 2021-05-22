@@ -8,14 +8,13 @@ import { breakpoints } from 'src/app/shared/breakpoints';
   styleUrls: ['./deal-table-row.component.css'],
 })
 export class DealTableRowComponent implements OnInit {
-  @Input() displayType: 'row-normal' | 'row-minimal' = 'row-normal';
   @Input() deal: GameDealInterface;
 
   screenTooSmall: boolean = false;
 
   constructor() {
     this.deal = {
-      title: '',
+      title: 'Grand Theft Auto V',
       dealID: '',
       storeID: '',
       gameID: '',

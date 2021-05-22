@@ -1,0 +1,23 @@
+.title {
+  font-weight: bold;
+}
+
+@media screen and (max-width: 768px) {
+  .title {
+    font-size: 32px;
+  }
+
+  .subtitle {
+    font-size: 25px;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .title {
+    font-size: 28px;
+  }
+
+  .subtitle {
+    font-size: 22px;
+  }
+}

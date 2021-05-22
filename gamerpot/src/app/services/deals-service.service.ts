@@ -31,4 +31,27 @@ export class DealsService {
     });
     return promise;
   };
+
+  getDealsByNameGame = async (
+    title: string,
+    page: number = 0,
+    maxResults: number = 10
+  ): Promise<GameDealInterface> => {
+    const params = `title=${title}&pageSize=${maxResults}&pageNumber=${page}`;
+    const url = `${this.apiUrl}?${params}`;
+    let promise = new Promise<GameDealInterface>((resolve, reject) => {
+      this.http
+        .get(url)
+        .toPromise()
+        .then(
+          (response) => {
+            resolve(response as GameDealInterface);
+          },
+          (error) => {
+            reject(error);
+          }
+        );
+    });
+    return promise;
+  };
 }

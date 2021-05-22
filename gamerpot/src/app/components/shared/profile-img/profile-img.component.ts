@@ -6,8 +6,8 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./profile-img.component.css'],
 })
 export class ProfileImgComponent implements OnInit {
-  @Input() label: string = '';
-  @Input() imgUrl: string = '';
+  @Input() label: string = 'Shadic';
+  @Input() imgUrl: string = 'http://unsplash.it/50/50';
 
   constructor() {}
 

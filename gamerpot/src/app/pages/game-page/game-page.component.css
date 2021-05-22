@@ -1,0 +1,51 @@
+.metacritic-square {
+  position: relative;
+  width: 25%;
+  padding-top: 25%;
+  margin: auto;
+  border-radius: 15%;
+}
+
+.metacritic-score {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  text-align: center;
+}
+
+.metacritic-low {
+  background: #da1106;
+}
+
+.metacritic-medium {
+  background-color: #ffcc33;
+}
+
+.metacritic-high {
+  background-color: #66cc33;
+}
+
+.no-metacritic {
+  background-color: gray;
+}
+
+.website {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+.wishlist-btn {
+  background: #373737;
+  width: fit-content;
+}
+
+.wishlist-btn:hover {
+  background: #535353;
+  cursor: pointer;
+}
+
+#more-btn {
+  background: #ffffff;
+}

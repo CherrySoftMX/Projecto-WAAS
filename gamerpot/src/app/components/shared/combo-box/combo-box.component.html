@@ -1,18 +1,14 @@
-<div class="col my-1 p-0">
-  <div class="row align-items-center input-form-control">
-    <div class="input-label col-3 text-center">{{ label }}</div>
-    <div class="col p-0">
-      <select
-        #items
-        (change)="onValueChanged(items.value)"
-        class="w-100 border border-light"
-        name="combo"
-        id="combo-box"
-      >
-        <ng-container *ngFor="let option of options">
-          <option [value]="option">{{ option }}</option>
-        </ng-container>
-      </select>
-    </div>
-  </div>
+<div class="row align-items-center text-nowrap input-form-control m-0 my-1">
+  <div class="input-label col-3 text-center p-0">{{ label }}</div>
+  <select
+    #items
+    (change)="onValueChanged(items.value)"
+    class="col p-0 m-0 ml-2 w-100 border border-light"
+    name="combo"
+    id="combo-box"
+  >
+    <ng-container *ngFor="let option of options">
+      <option [value]="option">{{ option }}</option>
+    </ng-container>
+  </select>
 </div>
