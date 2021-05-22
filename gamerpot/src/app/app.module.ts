@@ -32,6 +32,7 @@ import { StoresService } from './services/stores-service.service';
 import { GamePageComponent } from './pages/game-page/game-page.component';
 import { WishlistPageComponent } from './pages/wishlist-page/wishlist-page.component';
 import { CarouselComponent } from './components/shared/carousel/carousel.component';
+import { RecentDealsListComponent } from './components/shared/recent-deals-list/recent-deals-list.component';
 
 @NgModule({
   declarations: [
@@ -61,6 +62,7 @@ import { CarouselComponent } from './components/shared/carousel/carousel.compone
     BestGamesPageComponent,
     WishlistPageComponent,
     CarouselComponent,
+    RecentDealsListComponent,
   ],
   imports: [
     BrowserModule,

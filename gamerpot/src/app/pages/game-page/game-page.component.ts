@@ -1,27 +1,26 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { GameDatailsService } from '../../services/game-details.service';
 import { GameDetails } from '../../interfaces/game-details';
-import { DealsService } from '../../services/deals-service.service'
-import { StoresService } from '../../services/stores-service.service'
-import { CssSelector } from '@angular/compiler';
+import { DealsService } from '../../services/deals-service.service';
+import { GameDatailsService } from '../../services/game-details.service';
+import { StoresService } from '../../services/stores-service.service';
 
 @Component({
   selector: 'app-game-page',
   templateUrl: './game-page.component.html',
-  styleUrls: ['./game-page.component.css']
+  styleUrls: ['./game-page.component.css'],
 })
 export class GamePageComponent implements OnInit {
-
   @Input() id: number; //maybe a param in url
   gameDetails: GameDetails;
   commentaries: any;
   deals: any;
   stores: any;
 
-
-
-  constructor(private gameDetailsService: GameDatailsService,
-    private dealsService: DealsService, private storesService: StoresService) {
+  constructor(
+    private gameDetailsService: GameDatailsService,
+    private dealsService: DealsService,
+    private storesService: StoresService
+  ) {
     this.id = 22121;
     this.commentaries = Array<number>(10).fill(0);
     this.gameDetails = {
@@ -41,23 +40,23 @@ export class GamePageComponent implements OnInit {
       platforms: [],
       developers: [],
       genres: [],
-      publishers: []
-    }
+      publishers: [],
+    };
   }
 
   ngOnInit(): void {
     this.get();
-
   }
 
   get(): void {
-    this.gameDetailsService.getGameDetails(this.id).then((res) => {
-      this.gameDetails = res;
-      this.getDealsGame();
-      this.getStores();
-    }, (error) => {
-
-    });
+    this.gameDetailsService.getGameDetails(this.id).then(
+      (res) => {
+        this.gameDetails = res;
+        this.getDealsGame();
+        this.getStores();
+      },
+      (error) => {}
+    );
   }
 
   getDealsGame(): void {
@@ -65,23 +64,21 @@ export class GamePageComponent implements OnInit {
       (res) => {
         this.deals = res;
       },
-      (error) => {
-
-      }
+      (error) => {}
     );
   }
 
   getStores(): void {
-    this.storesService.getStores().then((res) => {
-      this.stores = res;
-      this.deals = this.deals.map(
-        (deal: any) => (deal = { ...this.stores[deal.storeID], ...deal })
-      );
-      console.log(this.deals);
-    },
-      (error) => {
-
-      });
+    this.storesService.getStores().then(
+      (res) => {
+        this.stores = res;
+        this.deals = this.deals.map(
+          (deal: any) => (deal = { ...this.stores[deal.storeID], ...deal })
+        );
+        console.log(this.deals);
+      },
+      (error) => {}
+    );
   }
 
   displayMore(): void {
@@ -100,7 +97,6 @@ export class GamePageComponent implements OnInit {
         dots.style.display = 'inline';
       }
     }
-
   }
 
   setMetacriticState(): any {
@@ -113,17 +109,13 @@ export class GamePageComponent implements OnInit {
       'no-metacritic': nm,
       'metacritic-low': lm,
       'metacritic-medium': mm,
-      'metacritic-high': hm
-    }
+      'metacritic-high': hm,
+    };
 
     return classes;
   }
 
   addWishlistGame(): void {
-    console.log("game added");
+    console.log('game added');
   }
-
-
-
-
 }

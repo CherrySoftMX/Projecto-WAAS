@@ -1,53 +1,51 @@
-.square {
+.metacritic-square {
   position: relative;
-  width: 50%;
+  width: 25%;
+  padding-top: 25%;
   margin: auto;
   border-radius: 15%;
 }
 
-.square:after {
-  content: "";
-  display: block;
-  padding-bottom: 100%;
-}
-
-.content {
+.metacritic-score {
   position: absolute;
   width: 100%;
-  padding: 33% 0;
+  top: 0;
+  top: 50%;
+  transform: translateY(-50%);
   text-align: center;
 }
 
-.metacritic-low{
-  background: #DA1106;
+.metacritic-low {
+  background: #da1106;
 }
 
-.metacritic-medium{
-background-color: #FFCC33;
+.metacritic-medium {
+  background-color: #ffcc33;
 }
 
-.metacritic-high{
-background-color: #66CC33;
+.metacritic-high {
+  background-color: #66cc33;
 }
 
-.no-metacritic{
-background-color: gray;
+.no-metacritic {
+  background-color: gray;
 }
 
-.website{
-    overflow-wrap: break-word;
+.website {
+  overflow-wrap: break-word;
   word-wrap: break-word;
 }
 
-.wishlist-btn{
+.wishlist-btn {
   background: #373737;
   width: fit-content;
 }
-.wishlist-btn:hover{
+
+.wishlist-btn:hover {
   background: #535353;
   cursor: pointer;
 }
 
-#more-btn{
-  background: #FFFFFF;
+#more-btn {
+  background: #ffffff;
 }

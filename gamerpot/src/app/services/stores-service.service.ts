@@ -7,7 +7,7 @@ import { Injectable } from '@angular/core';
 export class StoresService {
   private apiUrl = 'https://www.cheapshark.com/api/1.0/stores';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   getStores = async () => {
     let promise = new Promise((resolve, reject) => {

@@ -1,16 +1,13 @@
-<div class="d-flex flex-column h-100">
+<div class="scrollable-page-wrapper">
   <app-navbar></app-navbar>
   <app-title title="Wishlist of {Username}"></app-title>
 
-  <div class="px-4 px-md-5 content-wrapper">
-    <div class="d-none d-lg-flex col-4 mr-xl-4 flex-column section">
-      <app-subtitle subtitle="Recent deals"></app-subtitle>
-      <ng-container *ngFor="let deal of deals">
-        <app-deal-table-row-minimal></app-deal-table-row-minimal>
-      </ng-container>
+  <div class="px-4 px-md-5 scrollable-container">
+    <div class="d-none d-lg-flex col-4 mr-xl-4 flex-column scrollable-column">
+      <app-recent-deals-list></app-recent-deals-list>
     </div>
 
-    <div class="col flex-column ml-md-2 section">
+    <div class="col flex-column ml-md-2 scrollable-column">
       <app-subtitle subtitle="Games in my wishlist"></app-subtitle>
       <div class="row mt-2 p-2">
         <ng-container *ngFor="let card of items">

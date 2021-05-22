@@ -1,4 +1,4 @@
-<div class="d-flex flex-column h-100">
+<div class="scrollable-page-wrapper">
   <app-navbar></app-navbar>
   <app-title title="Best games of all time"></app-title>
 
@@ -11,8 +11,8 @@
     </div>
   </div>
 
-  <div class="px-2 px-md-3 px-lg-5 content-wrapper">
-    <div class="col flex-column section">
+  <div class="px-2 px-md-3 px-lg-5 scrollable-container">
+    <div class="col flex-column scrollable-column">
       <div class="row mt-2 p-2">
         <ng-container *ngFor="let bestGame of bestGames">
           <div class="col p-1">

@@ -1,0 +1,4 @@
+<app-subtitle subtitle="Recent deals"></app-subtitle>
+<ng-container *ngFor="let deal of deals">
+  <app-deal-table-row-minimal [deal]="deal"></app-deal-table-row-minimal>
+</ng-container>

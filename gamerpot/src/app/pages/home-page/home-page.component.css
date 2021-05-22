@@ -1,4 +1,4 @@
-.content-wrapper {
+.scrollable-container {
   height: 0px;
   width: 100%;
   display: flex;
@@ -6,7 +6,7 @@
   flex-direction: row;
 }
 
-.section {
+.scrollable-column {
   width: 100%;
   display: flex;
   padding: 3px;
