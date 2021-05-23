@@ -33,6 +33,7 @@ import { GamePageComponent } from './pages/game-page/game-page.component';
 import { WishlistPageComponent } from './pages/wishlist-page/wishlist-page.component';
 import { CarouselComponent } from './components/shared/carousel/carousel.component';
 import { RecentDealsListComponent } from './components/shared/recent-deals-list/recent-deals-list.component';
+import { GameCardsContainerComponent } from './components/shared/game-cards-container/game-cards-container.component';
 
 @NgModule({
   declarations: [
@@ -63,6 +64,7 @@ import { RecentDealsListComponent } from './components/shared/recent-deals-list/
     WishlistPageComponent,
     CarouselComponent,
     RecentDealsListComponent,
+    GameCardsContainerComponent,
   ],
   imports: [
     BrowserModule,
