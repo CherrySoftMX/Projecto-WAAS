@@ -1,20 +1,16 @@
 <div class="card game-card">
-  <img
-    class="card-img-top border-bottom border-danger"
-    src="https://wallpapercave.com/wp/wc1765288.jpg"
-    alt="Game card img"
-  />
+  <img class="card-img-top border-bottom border-danger" [src]="gameDetails.background_image" alt="Game card img" />
   <div class="card-body p-2 text-capitalize">
     <div class="d-flex align-items-center">
-      <div class="mr-auto date text-light">Sep 17, 2013</div>
+      <div class="mr-auto date text-light">{{gameDetails.released | date}}</div>
       <div class="metacritic border border-success text-success rounded">
-        94
+        {{gameDetails.metacritic}}
       </div>
     </div>
-    <h3 class="game-card-title my-4">Grand theft auto V</h3>
+    <h3 class="game-card-title my-4">{{gameDetails.name}}</h3>
     <a href="#" class="badge badge-secondary save-badge">
       <i class="bi bi-heart"> </i>
-      <span class="ml-1">15, 568</span>
+      <span class="ml-1">8888</span>
     </a>
   </div>
 </div>

@@ -27,11 +27,12 @@
       <div class="row mt-2 p-2">
         <ng-container *ngFor="let card of items">
           <div class="col p-1">
-            <app-game-card></app-game-card>
+            <app-game-card [gameDetails]="card"></app-game-card>
           </div>
         </ng-container>
       </div>
-      <app-pagination></app-pagination>
+      <app-pagination [total]="totalPages" (nextPage)="getNewItems($event)" [maxSize]="5" [pageSize]="12">
+      </app-pagination>
     </div>
   </div>
 </div>
