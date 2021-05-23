@@ -13,14 +13,7 @@
 
   <div class="px-2 px-md-3 px-lg-5 scrollable-container">
     <div class="col flex-column scrollable-column">
-      <div class="row mt-2 p-2">
-        <ng-container *ngFor="let bestGame of bestGames">
-          <div class="col p-1">
-            <app-game-card></app-game-card>
-          </div>
-        </ng-container>
-      </div>
-      <app-pagination></app-pagination>
+      <app-game-cards-container></app-game-cards-container>
     </div>
   </div>
 </div>

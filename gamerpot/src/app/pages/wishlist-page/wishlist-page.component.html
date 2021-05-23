@@ -9,14 +9,7 @@
 
     <div class="col flex-column ml-md-2 scrollable-column">
       <app-subtitle subtitle="Games in my wishlist"></app-subtitle>
-      <div class="row mt-2 p-2">
-        <ng-container *ngFor="let card of items">
-          <div class="col p-1">
-            <app-game-card></app-game-card>
-          </div>
-        </ng-container>
-      </div>
-      <app-pagination></app-pagination>
+      <app-game-cards-container></app-game-cards-container>
     </div>
   </div>
 </div>
