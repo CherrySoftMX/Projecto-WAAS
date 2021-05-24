@@ -42,4 +42,9 @@ export class DealTableRowComponent implements OnInit {
   isScreenTooSmall() {
     return window.innerWidth < breakpoints.md;
   }
+
+  redirectToDeal() {
+    window.open(`https://www.cheapshark.com/redirect?dealID=${this.deal.dealID}`, "_blank");
+  }
+
 }
