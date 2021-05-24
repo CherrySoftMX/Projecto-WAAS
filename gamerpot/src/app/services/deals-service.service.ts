@@ -2,6 +2,12 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { GameDealInterface } from '../interfaces/game-deal';
 
+interface DealsSearchParameters {
+  maxResults?: number,
+  page: number,
+  params?: string
+}
+
 @Injectable({
   providedIn: 'root',
 })
@@ -10,19 +16,20 @@ export class DealsService {
 
   constructor(private http: HttpClient) {}
 
-  getDeals = async (
-    maxResults: number = 10,
-    page: number = 0
-  ): Promise<GameDealInterface> => {
+  getDeals = async ({
+    maxResults = 15,
+    page = 0
+  }: DealsSearchParameters): Promise<GameDealInterface> => {
     const params = `pageSize=${maxResults}&pageNumber=${page}`;
     const url = `${this.apiUrl}?${params}`;
     let promise = new Promise<GameDealInterface>((resolve, reject) => {
       this.http
-        .get(url)
+        .get(url, {observe: 'response' as 'response'})
         .toPromise()
         .then(
           (response) => {
-            resolve(response as GameDealInterface);
+            console.log(response.body);
+            resolve(response.body as GameDealInterface);
           },
           (error) => {
             reject(error);

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DealsService } from '../../services/deals-service.service';
 import { StoresService } from '../../services/stores-service.service';
+import { Router, ActivatedRoute, ParamMap, NavigationExtras } from '@angular/router';
 
 @Component({
   selector: 'app-deals-page',
@@ -14,10 +15,13 @@ export class DealsPageComponent implements OnInit {
   currency: string;
   deals: any;
   stores: any;
+  currentPage: number;
 
   constructor(
     private dealsService: DealsService,
-    private storesService: StoresService
+    private storesService: StoresService,
+    private route: ActivatedRoute,
+    private router: Router
   ) {
     this.search = 'busqueda';
     this.minPrice = '0';
@@ -25,17 +29,21 @@ export class DealsPageComponent implements OnInit {
     this.currency = 'USD';
     this.dealsService = dealsService;
     this.storesService = storesService;
+    this.currentPage = 0;
   }
 
   ngOnInit(): void {
-    this.getDeals();
+    this.route.params.subscribe(params => {
+      this.currentPage = params['page'];
+      this.getDeals();
+    });
   }
 
   getDeals = async () => {
-    this.deals = await this.dealsService.getDeals();
+    this.deals = await this.dealsService.getDeals({ page: this.currentPage });
     this.stores = await this.storesService.getStores();
     this.deals = this.deals.map(
-      (deal: any) => (deal = { ...this.stores[deal.storeID], ...deal })
+      (deal: any) => (deal = { ...this.stores[deal.storeID - 1], ...deal })
     );
   };
 
@@ -54,4 +62,10 @@ export class DealsPageComponent implements OnInit {
   setCurrency(cur: string) {
     this.currency = cur;
   }
+
+  changePage(page: number) {
+    this.currentPage = page;
+    this.router.navigate([`deals/${this.currentPage}`]);
+  }
+
 }
