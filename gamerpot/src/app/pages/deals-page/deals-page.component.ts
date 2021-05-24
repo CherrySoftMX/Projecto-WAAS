@@ -10,7 +10,7 @@ import { Router, ActivatedRoute, ParamMap, NavigationExtras } from '@angular/rou
 })
 export class DealsPageComponent implements OnInit {
   search: string;
-  minPrice: string;
+  minPrice: number;
   maxPrice: string;
   currency: string;
   deals: any;
@@ -24,7 +24,7 @@ export class DealsPageComponent implements OnInit {
     private router: Router
   ) {
     this.search = 'busqueda';
-    this.minPrice = '0';
+    this.minPrice = 0;
     this.maxPrice = '500';
     this.currency = 'USD';
     this.dealsService = dealsService;
@@ -33,20 +33,20 @@ export class DealsPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-   /* this.route.params.subscribe(params => {
-      this.currentPage = params['page'];
-      this.getDeals();
-    });*/
-
     this.route.queryParams.subscribe(params => {
       this.currentPage = params['page'] || 1;
       this.search = params['title'];
+      this.minPrice = params['lowerPrice'];
       this.getDeals();
     });
   }
 
   getDeals = async () => {
-    this.deals = await this.dealsService.getDeals({ page: this.currentPage - 1, title: this.search });
+    this.deals = await this.dealsService.getDeals({
+      page: this.currentPage - 1,
+      title: this.search ,
+      lowerPrice: this.minPrice
+    });
     this.stores = await this.storesService.getStores();
     this.deals = this.deals.map(
       (deal: any) => (deal = { ...this.stores[deal.storeID - 1], ...deal })
@@ -54,17 +54,25 @@ export class DealsPageComponent implements OnInit {
   };
 
   buscar(query: string) {
-    this.search = query;
-    const searchQuery = query.length > 0 ? query: null;
     this.router.navigate([], {
       relativeTo: this.route,
-      queryParams: { title: searchQuery, page: null }
+      queryParams: {
+        title: query.length > 0 ? query: null,
+        page: null
+      },
+      queryParamsHandling: 'merge'
     });
   }
 
   setMinPrice(price: string) {
-    this.minPrice = price;
-    console.log(this.minPrice);
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: {
+        lowerPrice: price,
+        page: null
+      },
+      queryParamsHandling: 'merge'
+    });
   }
 
   setMaxPrice(price: string) {
