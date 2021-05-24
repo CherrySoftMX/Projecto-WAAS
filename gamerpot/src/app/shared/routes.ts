@@ -7,7 +7,7 @@ export const DomainRoutes: Route = {
   },
 
   DEALS: {
-    NG_PATH: 'deals/:page',
+    NG_PATH: 'deals',
     PATH: '/deals',
   },
 

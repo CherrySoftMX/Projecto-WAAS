@@ -33,14 +33,20 @@ export class DealsPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.route.params.subscribe(params => {
+   /* this.route.params.subscribe(params => {
       this.currentPage = params['page'];
+      this.getDeals();
+    });*/
+
+    this.route.queryParams.subscribe(params => {
+      this.currentPage = params['page'] || 1;
+      this.search = params['title'];
       this.getDeals();
     });
   }
 
   getDeals = async () => {
-    this.deals = await this.dealsService.getDeals({ page: this.currentPage });
+    this.deals = await this.dealsService.getDeals({ page: this.currentPage - 1, title: this.search });
     this.stores = await this.storesService.getStores();
     this.deals = this.deals.map(
       (deal: any) => (deal = { ...this.stores[deal.storeID - 1], ...deal })
@@ -49,10 +55,16 @@ export class DealsPageComponent implements OnInit {
 
   buscar(query: string) {
     this.search = query;
+    const searchQuery = query.length > 0 ? query: null;
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: { title: searchQuery, page: null }
+    });
   }
 
   setMinPrice(price: string) {
     this.minPrice = price;
+    console.log(this.minPrice);
   }
 
   setMaxPrice(price: string) {
@@ -63,9 +75,12 @@ export class DealsPageComponent implements OnInit {
     this.currency = cur;
   }
 
-  changePage(page: number) {
-    this.currentPage = page;
-    this.router.navigate([`deals/${this.currentPage}`]);
+  changePage(newPage: number) {
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: { page: newPage },
+      queryParamsHandling: 'merge'
+    });
   }
 
 }

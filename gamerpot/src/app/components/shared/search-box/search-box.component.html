@@ -13,5 +13,9 @@
   </div>
 
   <!--Default icon-->
-  <i *ngIf="!ref.innerHTML.trim()" class="bi bi-search search-box__icon"></i>
+  <i
+   *ngIf="!ref.innerHTML.trim()"
+   (click)="search(searchBox.value)"
+   class="bi bi-search search-box__icon">
+  </i>
 </div>
