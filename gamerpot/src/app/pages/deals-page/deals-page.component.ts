@@ -11,7 +11,7 @@ import { Router, ActivatedRoute, ParamMap, NavigationExtras } from '@angular/rou
 export class DealsPageComponent implements OnInit {
   search: string;
   minPrice: number;
-  maxPrice: string;
+  maxPrice: number;
   currency: string;
   deals: any;
   stores: any;
@@ -25,7 +25,7 @@ export class DealsPageComponent implements OnInit {
   ) {
     this.search = 'busqueda';
     this.minPrice = 0;
-    this.maxPrice = '500';
+    this.maxPrice = 500;
     this.currency = 'USD';
     this.dealsService = dealsService;
     this.storesService = storesService;
@@ -37,6 +37,7 @@ export class DealsPageComponent implements OnInit {
       this.currentPage = params['page'] || 1;
       this.search = params['title'];
       this.minPrice = params['lowerPrice'];
+      this.maxPrice = params['upperPrice'];
       this.getDeals();
     });
   }
@@ -45,7 +46,8 @@ export class DealsPageComponent implements OnInit {
     this.deals = await this.dealsService.getDeals({
       page: this.currentPage - 1,
       title: this.search ,
-      lowerPrice: this.minPrice
+      lowerPrice: this.minPrice,
+      upperPrice: this.maxPrice
     });
     this.stores = await this.storesService.getStores();
     this.deals = this.deals.map(
@@ -68,7 +70,7 @@ export class DealsPageComponent implements OnInit {
     this.router.navigate([], {
       relativeTo: this.route,
       queryParams: {
-        lowerPrice: price,
+        lowerPrice: price.length > 0 ? price: null,
         page: null
       },
       queryParamsHandling: 'merge'
@@ -76,7 +78,14 @@ export class DealsPageComponent implements OnInit {
   }
 
   setMaxPrice(price: string) {
-    this.maxPrice = price;
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: {
+        upperPrice: price.length > 0 ? price: null,
+        page: null
+      },
+      queryParamsHandling: 'merge'
+    });
   }
 
   setCurrency(cur: string) {

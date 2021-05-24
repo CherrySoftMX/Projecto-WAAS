@@ -7,7 +7,8 @@ interface DealsSearchParameters {
   page: number,
   params?: string,
   title?: string,
-  lowerPrice?: number
+  lowerPrice?: number,
+  upperPrice?: number
 }
 
 @Injectable({
@@ -22,9 +23,10 @@ export class DealsService {
     maxResults = 15,
     page = 0,
     title = '',
-    lowerPrice = 0
+    lowerPrice = 0,
+    upperPrice = 500
   }: DealsSearchParameters): Promise<GameDealInterface> => {
-    const params = `pageSize=${maxResults}&pageNumber=${page}&title=${title}&lowerPrice=${lowerPrice}`;
+    const params = `pageSize=${maxResults}&pageNumber=${page}&title=${title}&lowerPrice=${lowerPrice}&upperPrice=${upperPrice}`;
     const url = `${this.apiUrl}?${params}`;
     let promise = new Promise<GameDealInterface>((resolve, reject) => {
       this.http
