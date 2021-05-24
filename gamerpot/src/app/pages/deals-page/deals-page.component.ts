@@ -43,14 +43,14 @@ export class DealsPageComponent implements OnInit {
   }
 
   getDeals = async () => {
-    this.deals = await this.dealsService.getDeals({
+    const newDeals: any = await this.dealsService.getDeals({
       page: this.currentPage - 1,
       title: this.search ,
       lowerPrice: this.minPrice,
       upperPrice: this.maxPrice
     });
     this.stores = await this.storesService.getStores();
-    this.deals = this.deals.map(
+    this.deals = newDeals.map(
       (deal: any) => (deal = { ...this.stores[deal.storeID - 1], ...deal })
     );
   };

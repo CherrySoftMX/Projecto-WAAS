@@ -34,7 +34,7 @@ export class DealsService {
         .toPromise()
         .then(
           (response) => {
-            console.log(response.body);
+            console.log(response);
             resolve(response.body as GameDealInterface);
           },
           (error) => {
