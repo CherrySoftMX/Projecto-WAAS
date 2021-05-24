@@ -1,21 +1,27 @@
 .game-card {
   background-color: var(--background-secondary);
+  height: 370px;
+  transition: all ease-in 0.1s;
   white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+}
+
+.game-card:hover {
+  cursor: pointer;
+  transform: scale(1.01);
 }
 
 .game-card-title {
-  font-weight: bold;
   font-size: 25px;
+  font-weight: bold;
 }
 
 .metacritic {
-  padding: 2px;
+  font-size: 20px;
   font-weight: bold;
+  padding: 7px;
 }
 
 .save-badge {
-  font-size: 15px;
+  font-size: 20px;
   font-weight: 400;
 }

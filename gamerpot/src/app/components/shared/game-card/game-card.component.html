@@ -1,7 +1,8 @@
-<div class="card game-card">
+<div class="card game-card" [routerLink]="[routes.GAME.PATH, gameDetails.id]">
   <img
     class="card-img-top border-bottom border-danger"
     [src]="gameDetails.background_image"
+    style="height: 50%; object-fit: cover; object-position: 50% 0"
     alt="Game card img"
   />
   <div class="card-body p-2 text-capitalize">
@@ -14,7 +15,7 @@
       </div>
     </div>
     <h3 class="game-card-title my-4 text-truncate">{{ gameDetails.name }}</h3>
-    <a href="#" class="badge badge-secondary save-badge">
+    <a (click)="onSaveGame($event)" class="badge badge-secondary save-badge">
       <i class="bi bi-heart"> </i>
       <span class="ml-1">8888</span>
     </a>

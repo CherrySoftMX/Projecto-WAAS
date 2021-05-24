@@ -24,7 +24,13 @@
           <app-combo-box label="Platform"></app-combo-box>
         </div>
       </div>
-      <app-game-cards-container></app-game-cards-container>
+      <app-game-cards-container
+        [games]="games"
+        [currentPage]="currentPage"
+        [totalPages]="totalPages"
+        [fetchingGames]="fetchingGames"
+        (nextPage)="loadGamesPage($event)"
+      ></app-game-cards-container>
     </div>
   </div>
 </div>

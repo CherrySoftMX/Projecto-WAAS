@@ -1,14 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { GameResponse } from '../interfaces/game-response';
+import { API_KEY, API_URL } from '../shared/api';
 
 @Injectable({
   providedIn: 'root',
 })
 export class BestGamesService {
-  private apiUrl = 'https://api.rawg.io/api/games';
-  private apiKey = 'bf2435ad67954a7abb2fa86caed830d3';
-
   constructor(private http: HttpClient) {}
 
   getBestGames = (
@@ -17,7 +15,12 @@ export class BestGamesService {
     pageSize: number = 12,
     page: number = 1
   ): Promise<GameResponse> => {
-    const url = `${this.apiUrl}?key=${this.apiKey}&metacritic=${metacriticLow},${metacriticHigh}&page_size=${pageSize}&page=${page}`;
+    const url =
+      `${API_URL}?key=${API_KEY}` +
+      `&metacritic=${metacriticLow},${metacriticHigh}` +
+      `&page=${page}` +
+      `&page_size=${pageSize}`;
+
     let promise = new Promise<GameResponse>((resolve, reject) => {
       this.http
         .get(url)

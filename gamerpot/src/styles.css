@@ -22,10 +22,10 @@
 
 html,
 body {
-  font-family: var(--font-primary);
-  font-size: 18px;
   background: var(--background-primary);
   color: white;
+  font-family: var(--font-primary);
+  font-size: 18px;
   height: 100%;
 }
 

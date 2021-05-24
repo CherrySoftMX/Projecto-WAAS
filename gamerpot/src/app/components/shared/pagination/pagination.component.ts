@@ -10,11 +10,12 @@ export class PaginationComponent implements OnInit {
   @Input() total: number = 120;
   @Input() maxSize: number = 5;
   @Input() pageSize: number = 12;
+
   @Output() nextPage: EventEmitter<number> = new EventEmitter();
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 
   pageChanged() {
     this.nextPage.emit(this.page);

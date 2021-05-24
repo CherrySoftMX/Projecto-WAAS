@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { GameDetails } from '../../interfaces/game-details';
 import { DealsService } from '../../services/deals-service.service';
 import { GameDatailsService } from '../../services/game-details.service';
@@ -10,76 +11,34 @@ import { StoresService } from '../../services/stores-service.service';
   styleUrls: ['./game-page.component.css'],
 })
 export class GamePageComponent implements OnInit {
-  @Input() id: number; //maybe a param in url
-  gameDetails: GameDetails;
-  commentaries: any;
-  deals: any;
-  stores: any;
+  gameDetails: GameDetails = {} as GameDetails;
+  commentaries: Array<any> = [];
+  fetching: boolean = true;
 
   constructor(
     private gameDetailsService: GameDatailsService,
+    private route: ActivatedRoute,
     private dealsService: DealsService,
     private storesService: StoresService
-  ) {
-    this.id = 22121;
-    this.commentaries = Array<number>(10).fill(0);
-    this.gameDetails = {
-      id: 0,
-      slug: '',
-      name: '',
-      playtime: 0,
-      name_original: '',
-      description: '',
-      description_raw: '',
-      metacritic: 0,
-      released: '',
-      updated: '',
-      background_image: '',
-      background_image_additional: '',
-      website: '',
-      platforms: [],
-      developers: [],
-      genres: [],
-      publishers: [],
-    };
+  ) {}
+
+  ngOnInit() {
+    this.fetching = true;
+    const id = this.route.snapshot.params.id;
+    this.loadGameDetails(id).then(() => {
+      this.fetching = false;
+    });
   }
 
-  ngOnInit(): void {
-    this.get();
-  }
+  loadGameDetails = async (id: number) => {
+    this.gameDetails = await this.gameDetailsService.getGameDetails(id);
+    this.getDealsGame();
+    this.getStores();
+  };
 
-  get(): void {
-    this.gameDetailsService.getGameDetails(this.id).then(
-      (res) => {
-        this.gameDetails = res;
-        this.getDealsGame();
-        this.getStores();
-      },
-      (error) => {}
-    );
-  }
+  getDealsGame(): void {}
 
-  getDealsGame(): void {
-    this.dealsService.getDealsByNameGame(this.gameDetails.name).then(
-      (res) => {
-        this.deals = res;
-      },
-      (error) => {}
-    );
-  }
-
-  getStores(): void {
-    this.storesService.getStores().then(
-      (res) => {
-        this.stores = res;
-        this.deals = this.deals.map(
-          (deal: any) => (deal = { ...this.stores[deal.storeID], ...deal })
-        );
-        console.log(this.deals);
-      },
-      (error) => {}
-    );
-  }
+  getStores(): void {}
 
   displayMore(): void {
     const more = document.getElementById('more');
@@ -89,7 +48,7 @@ export class GamePageComponent implements OnInit {
     if (more && moreBtn && dots) {
       if (document.getElementById('more')?.style.display == 'none') {
         more.style.display = 'inline';
-        moreBtn.innerHTML = 'Less more';
+        moreBtn.innerHTML = 'Show less';
         dots.style.display = 'none';
       } else {
         more.style.display = 'none';
@@ -101,10 +60,12 @@ export class GamePageComponent implements OnInit {
 
   setMetacriticState(): any {
     const metacritic = this.gameDetails.metacritic;
+
     const nm = metacritic == null;
     const lm = metacritic <= 30;
     const mm = metacritic > 30 && metacritic < 70;
     const hm = metacritic >= 70;
+
     let classes = {
       'no-metacritic': nm,
       'metacritic-low': lm,
@@ -115,7 +76,7 @@ export class GamePageComponent implements OnInit {
     return classes;
   }
 
-  addWishlistGame(): void {
+  addToWishlist(): void {
     console.log('game added');
   }
 }

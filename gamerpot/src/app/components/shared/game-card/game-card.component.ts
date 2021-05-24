@@ -1,5 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { GameDetails } from 'src/app/interfaces/game-details';
+import { DomainRoutes } from 'src/app/shared/routes';
 
 @Component({
   selector: 'app-game-card',
@@ -7,30 +8,18 @@ import { GameDetails } from 'src/app/interfaces/game-details';
   styleUrls: ['./game-card.component.css'],
 })
 export class GameCardComponent implements OnInit {
-  @Input() title: string = 'Default title';
-  @Input() gameDetails: GameDetails;
+  routes = DomainRoutes;
 
-  constructor() {
-    this.gameDetails = {
-      id: 0,
-      slug: '',
-      name: '',
-      playtime: 0,
-      name_original: '',
-      description: '',
-      description_raw: '',
-      metacritic: 0,
-      released: '',
-      updated: '',
-      background_image: '',
-      background_image_additional: '',
-      website: '',
-      platforms: [],
-      developers: [],
-      genres: [],
-      publishers: [],
-    };
-  }
+  @Input() gameDetails: GameDetails = {} as GameDetails;
 
-  ngOnInit(): void {}
+  @Output() saveGame = new EventEmitter<any>();
+
+  constructor() {}
+
+  ngOnInit = () => {};
+
+  onSaveGame = (event: MouseEvent) => {
+    event.stopPropagation();
+    this.saveGame.emit();
+  };
 }
