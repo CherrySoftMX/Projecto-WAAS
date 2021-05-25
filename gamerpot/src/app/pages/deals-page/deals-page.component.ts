@@ -29,6 +29,7 @@ export class DealsPageComponent implements OnInit {
   currentPage: number;
   pageSize = 15;
   collectionSize: number;
+  DEFAULT_CURRENCY = 'USD';
 
   constructor(
     private dealsService: DealsService,
@@ -40,8 +41,8 @@ export class DealsPageComponent implements OnInit {
     this.search = 'busqueda';
     this.minPrice = 0;
     this.maxPrice = 500;
-    this.oldCurrency = 'USD';
-    this.actualCurrency = 'USD';
+    this.oldCurrency = this.DEFAULT_CURRENCY;
+    this.actualCurrency = this.DEFAULT_CURRENCY;
     this.dealsService = dealsService;
     this.storesService = storesService;
     this.currentPage = 0;
@@ -73,6 +74,13 @@ export class DealsPageComponent implements OnInit {
     );
     this.totalPages = Number(newDeals.totalPages);
     this.collectionSize = this.totalPages * this.pageSize;
+    if(this.actualCurrency != this.DEFAULT_CURRENCY) {
+      this.deals = await this.calculateDealsNewCurrency({
+        deals: this.deals,
+        fromCurrency: this.oldCurrency,
+        toCurrency: this.actualCurrency
+      });
+    }
   };
 
   buscar(query: string) {
@@ -86,7 +94,8 @@ export class DealsPageComponent implements OnInit {
     });
   }
 
-  setMinPrice(price: string) {
+  setMinPrice = async (price: string) => {
+    price = await this.calculatePriceFilters(price);
     this.router.navigate([], {
       relativeTo: this.route,
       queryParams: {
@@ -95,9 +104,10 @@ export class DealsPageComponent implements OnInit {
       },
       queryParamsHandling: 'merge'
     });
-  }
+  };
 
-  setMaxPrice(price: string) {
+  setMaxPrice = async (price: string) => {
+    price = await this.calculatePriceFilters(price);
     this.router.navigate([], {
       relativeTo: this.route,
       queryParams: {
@@ -106,9 +116,10 @@ export class DealsPageComponent implements OnInit {
       },
       queryParamsHandling: 'merge'
     });
-  }
+  };
 
   setCurrency = async (cur: string) => {
+    if(cur == this.actualCurrency) return;
     this.oldCurrency = this.actualCurrency;
     this.actualCurrency = cur;
     this.deals = await this.calculateDealsNewCurrency({
@@ -140,6 +151,19 @@ export class DealsPageComponent implements OnInit {
       return { ...deal, salePrice, normalPrice };
     });
     return convertedDeals;
+  };
+
+  calculatePriceFilters = async (price: string) => {
+    if(this.actualCurrency != this.DEFAULT_CURRENCY) {
+      if(price.length == 0) return price;
+      const convertedPrice = await this.currencyConverter.currencyConvert({
+        from: this.actualCurrency,
+        to: this.oldCurrency,
+        amount: price
+      });
+      price = Math.round(convertedPrice).toString();
+    }
+    return price;
   };
 
 }
