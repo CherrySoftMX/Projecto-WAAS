@@ -37,6 +37,6 @@ export class HomePageComponent implements OnInit {
   }
 
   loadGamesPageBy():void{
-      console.log('test');
+      console.log('testsad');
   }
 }

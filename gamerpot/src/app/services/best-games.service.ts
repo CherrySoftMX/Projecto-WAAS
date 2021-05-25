@@ -45,7 +45,7 @@ export class BestGamesService {
     page: number = 1,
     plataform: number
   ) => {
-      const url = `${API_URL}games?key=${API_KEY}&platforms=${plataform}&page=${page}&metacritic=${metacriticLow},${metacriticHigh}&page_size=${pageSize}`;
+    const url = `${API_URL}games?key=${API_KEY}&platforms=${plataform}&page=${page}&metacritic=${metacriticLow},${metacriticHigh}&page_size=${pageSize}`;
     let promise = new Promise<GameResponse>((resolve, reject) => {
       this.http
         .get(url)
@@ -63,13 +63,14 @@ export class BestGamesService {
     return promise;
   };
 
-  getBestGamesByGenre =(metacriticLow: number = 70,
+  getBestGamesByGenre = (
+    metacriticLow: number = 70,
     metacriticHigh: number = 100,
     pageSize: number = 12,
     page: number = 1,
-    genre: string)=>{
-
-         const url = `${API_URL}games?key=${API_KEY}&genres=${genre}&page=${page}&metacritic=${metacriticLow},${metacriticHigh}&page_size=${pageSize}`;
+    genre: number
+  ) => {
+    const url = `${API_URL}games?key=${API_KEY}&genres=${genre}&page=${page}&metacritic=${metacriticLow},${metacriticHigh}&page_size=${pageSize}`;
     let promise = new Promise<GameResponse>((resolve, reject) => {
       this.http
         .get(url)
@@ -85,18 +86,17 @@ export class BestGamesService {
     });
 
     return promise;
+  };
 
-  }
-
-  getBestGamesByGenreAndPlatform = (metacriticLow: number = 70,
+  getBestGamesByGenreAndPlatform = (
+    metacriticLow: number = 70,
     metacriticHigh: number = 100,
     pageSize: number = 12,
     page: number = 1,
-    genre: string,
-    platform:number
-
-  )=>{
-   const url = `${API_URL}games?key=${API_KEY}&genres=${genre}&platforms=${platform}&page=${page}&metacritic=${metacriticLow},${metacriticHigh}&page_size=${pageSize}`;
+    genre: number,
+    platform: number
+  ) => {
+    const url = `${API_URL}games?key=${API_KEY}&genres=${genre}&platforms=${platform}&page=${page}&metacritic=${metacriticLow},${metacriticHigh}&page_size=${pageSize}`;
     let promise = new Promise<GameResponse>((resolve, reject) => {
       this.http
         .get(url)
@@ -112,8 +112,7 @@ export class BestGamesService {
     });
 
     return promise;
-
-  }
+  };
 
   getBestGamesOrderBy = (
     ordering: string,

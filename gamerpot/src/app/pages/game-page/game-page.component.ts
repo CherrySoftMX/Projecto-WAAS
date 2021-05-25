@@ -28,6 +28,7 @@ export class GamePageComponent implements OnInit {
     this.loadGameDetails(id).then(() => {
       this.fetching = false;
     });
+    
   }
 
   loadGameDetails = async (id: number) => {
