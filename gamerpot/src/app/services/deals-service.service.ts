@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { GameDealListInterface } from '../interfaces/game-deal-list';
+import { IndividualDealInterface } from '../interfaces/individual-deal';
 
 interface DealsSearchParameters {
   maxResults?: number,
@@ -46,20 +47,20 @@ export class DealsService {
     return promise;
   };
 
-  /*getDealsByNameGame = async (
+  getDealsByNameGame = async (
     title: string,
     page: number = 0,
     maxResults: number = 10
-  ): Promise<GameDealInterface> => {
+  ): Promise<IndividualDealInterface> => {
     const params = `title=${title}&pageSize=${maxResults}&pageNumber=${page}`;
     const url = `${this.apiUrl}?${params}`;
-    let promise = new Promise<GameDealInterface>((resolve, reject) => {
+    let promise = new Promise<IndividualDealInterface>((resolve, reject) => {
       this.http
         .get(url)
         .toPromise()
         .then(
           (response) => {
-            resolve(response as GameDealInterface);
+            resolve(response as IndividualDealInterface);
           },
           (error) => {
             reject(error);
@@ -67,5 +68,5 @@ export class DealsService {
         );
     });
     return promise;
-  };*/
+  };
 }
