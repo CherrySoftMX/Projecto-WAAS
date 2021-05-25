@@ -35,4 +35,8 @@ export class HomePageComponent implements OnInit {
     this.currentPage = page;
     this.getGameResponse(this.currentPage);
   }
+
+  loadGamesPageBy():void{
+      console.log('test');
+  }
 }

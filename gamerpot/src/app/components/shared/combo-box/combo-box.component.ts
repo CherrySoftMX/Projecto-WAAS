@@ -8,12 +8,14 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 export class ComboBoxComponent implements OnInit {
   @Input() options: string[] = [];
   @Input() label: string = '';
-
+  @Input() defaultOption: string = '';
+ 
   @Output() onChange = new EventEmitter<string>();
 
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+  }
 
   onValueChanged(value: string) {
     this.onChange.emit(value);

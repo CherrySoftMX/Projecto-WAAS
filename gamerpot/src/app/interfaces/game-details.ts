@@ -1,3 +1,5 @@
+import { GamePlatform } from "./game-platform";
+
 export interface GameDetails {
   id: number;
   slug: string;
@@ -12,13 +14,7 @@ export interface GameDetails {
   background_image: string;
   background_image_additional: string;
   website: string;
-  platforms: Array<{
-    platform: {
-      id: number;
-      slug: string;
-      name: string;
-    };
-  }>;
+  platforms: Array<GamePlatform>;
   developers: Array<{
     id: number;
     name: string;

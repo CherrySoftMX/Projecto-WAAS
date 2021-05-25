@@ -18,7 +18,7 @@
       <app-subtitle subtitle="New games"></app-subtitle>
       <div class="row row-cols-1 row-cols-md-2" style="max-width: 700px">
         <div class="col">
-          <app-combo-box label="Order by"></app-combo-box>
+          <app-combo-box defaultOption="released" [options] ="['rating', 'added', 'created', 'updated', 'name', 'metacritic']" label="Order by" (onChange)="loadGamesPageBy($event)"></app-combo-box>
         </div>
         <div class="col">
           <app-combo-box label="Platform"></app-combo-box>

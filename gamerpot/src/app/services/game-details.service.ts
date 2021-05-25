@@ -10,7 +10,7 @@ export class GameDatailsService {
   constructor(private http: HttpClient) {}
 
   getGameDetails = (id: number): Promise<GameDetails> => {
-    const url = `${API_URL}/${id}?key=${API_KEY}`;
+    const url = `${API_URL}games/${id}?key=${API_KEY}`;
 
     let promise = new Promise<GameDetails>((resolve, reject) => {
       this.http
