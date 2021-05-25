@@ -4,12 +4,12 @@ import { GameDealListInterface } from '../interfaces/game-deal-list';
 import { IndividualDealInterface } from '../interfaces/individual-deal';
 
 interface DealsSearchParameters {
-  maxResults?: number,
-  page: number,
-  params?: string,
-  title?: string,
-  lowerPrice?: number,
-  upperPrice?: number
+  maxResults?: number;
+  page: number;
+  params?: string;
+  title?: string;
+  lowerPrice?: number;
+  upperPrice?: number;
 }
 
 @Injectable({
@@ -69,4 +69,5 @@ export class DealsService {
     });
     return promise;
   };
+
 }

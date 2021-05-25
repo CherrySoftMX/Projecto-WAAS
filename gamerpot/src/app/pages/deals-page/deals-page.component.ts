@@ -3,6 +3,14 @@ import { DealsService } from '../../services/deals-service.service';
 import { StoresService } from '../../services/stores-service.service';
 import { Router, ActivatedRoute, ParamMap, NavigationExtras } from '@angular/router';
 import { GameDealListInterface } from '../../interfaces/game-deal-list';
+import { CurrencyConverterService } from '../../services/currency-converter.service';
+import { IndividualDealInterface } from '../../interfaces/individual-deal';
+
+interface DealsCurrencyConvertInterface {
+  deals: Array<IndividualDealInterface>;
+  fromCurrency: string;
+  toCurrency: string;
+}
 
 @Component({
   selector: 'app-deals-page',
@@ -13,7 +21,8 @@ export class DealsPageComponent implements OnInit {
   search: string;
   minPrice: number;
   maxPrice: number;
-  currency: string;
+  oldCurrency: string;
+  actualCurrency: string;
   totalPages: number;
   deals: any;
   stores: any;
@@ -25,12 +34,14 @@ export class DealsPageComponent implements OnInit {
     private dealsService: DealsService,
     private storesService: StoresService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private currencyConverter: CurrencyConverterService
   ) {
     this.search = 'busqueda';
     this.minPrice = 0;
     this.maxPrice = 500;
-    this.currency = 'USD';
+    this.oldCurrency = 'USD';
+    this.actualCurrency = 'USD';
     this.dealsService = dealsService;
     this.storesService = storesService;
     this.currentPage = 0;
@@ -97,9 +108,15 @@ export class DealsPageComponent implements OnInit {
     });
   }
 
-  setCurrency(cur: string) {
-    this.currency = cur;
-  }
+  setCurrency = async (cur: string) => {
+    this.oldCurrency = this.actualCurrency;
+    this.actualCurrency = cur;
+    this.deals = await this.calculateDealsNewCurrency({
+      deals: this.deals,
+      fromCurrency: this.oldCurrency,
+      toCurrency: this.actualCurrency
+    });
+  };
 
   changePage(newPage: number) {
     this.router.navigate([], {
@@ -108,5 +125,21 @@ export class DealsPageComponent implements OnInit {
       queryParamsHandling: 'merge'
     });
   }
+
+  calculateDealsNewCurrency = async ({
+    deals,
+    fromCurrency,
+    toCurrency
+  }: DealsCurrencyConvertInterface) => {
+    const response: any = await this.currencyConverter.getCurrencyConversion({ from: fromCurrency,  to: toCurrency });
+    const conversionRate = response[`${fromCurrency}_${toCurrency}`];
+    console.log(conversionRate);
+    const convertedDeals = deals.map((deal: IndividualDealInterface) => {
+      const salePrice = deal.salePrice * conversionRate;
+      const normalPrice = deal.normalPrice * conversionRate;
+      return { ...deal, salePrice, normalPrice };
+    });
+    return convertedDeals;
+  };
 
 }
