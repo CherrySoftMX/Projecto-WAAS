@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DealsService } from '../../services/deals-service.service';
 import { StoresService } from '../../services/stores-service.service';
 import { Router, ActivatedRoute, ParamMap, NavigationExtras } from '@angular/router';
+import { GameDealListInterface } from '../../interfaces/game-deal-list';
 
 @Component({
   selector: 'app-deals-page',
@@ -13,9 +14,12 @@ export class DealsPageComponent implements OnInit {
   minPrice: number;
   maxPrice: number;
   currency: string;
+  totalPages: number;
   deals: any;
   stores: any;
   currentPage: number;
+  pageSize = 15;
+  collectionSize: number;
 
   constructor(
     private dealsService: DealsService,
@@ -30,6 +34,8 @@ export class DealsPageComponent implements OnInit {
     this.dealsService = dealsService;
     this.storesService = storesService;
     this.currentPage = 0;
+    this.totalPages = 0;
+    this.collectionSize = 1;
   }
 
   ngOnInit(): void {
@@ -43,16 +49,19 @@ export class DealsPageComponent implements OnInit {
   }
 
   getDeals = async () => {
-    const newDeals: any = await this.dealsService.getDeals({
+    const newDeals: GameDealListInterface = await this.dealsService.getDeals({
       page: this.currentPage - 1,
       title: this.search ,
       lowerPrice: this.minPrice,
       upperPrice: this.maxPrice
     });
     this.stores = await this.storesService.getStores();
-    this.deals = newDeals.map(
+    const dealsList = newDeals.deals;
+    this.deals = dealsList.map(
       (deal: any) => (deal = { ...this.stores[deal.storeID - 1], ...deal })
     );
+    this.totalPages = Number(newDeals.totalPages);
+    this.collectionSize = this.totalPages * this.pageSize;
   };
 
   buscar(query: string) {

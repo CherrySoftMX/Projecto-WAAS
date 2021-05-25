@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { GameDealInterface } from '../interfaces/game-deal';
+import { GameDealListInterface } from '../interfaces/game-deal-list';
 
 interface DealsSearchParameters {
   maxResults?: number,
@@ -25,17 +25,18 @@ export class DealsService {
     title = '',
     lowerPrice = 0,
     upperPrice = 500
-  }: DealsSearchParameters): Promise<GameDealInterface> => {
+  }: DealsSearchParameters): Promise<GameDealListInterface> => {
     const params = `pageSize=${maxResults}&pageNumber=${page}&title=${title}&lowerPrice=${lowerPrice}&upperPrice=${upperPrice}`;
     const url = `${this.apiUrl}?${params}`;
-    let promise = new Promise<GameDealInterface>((resolve, reject) => {
+    let promise = new Promise<GameDealListInterface>((resolve, reject) => {
       this.http
         .get(url, {observe: 'response' as 'response'})
         .toPromise()
         .then(
           (response) => {
-            console.log(response);
-            resolve(response.body as GameDealInterface);
+            const totalPages = response.headers.get('x-total-page-count');
+            const listOfDeals = { deals: response.body, totalPages };
+            resolve(listOfDeals as GameDealListInterface);
           },
           (error) => {
             reject(error);
@@ -45,7 +46,7 @@ export class DealsService {
     return promise;
   };
 
-  getDealsByNameGame = async (
+  /*getDealsByNameGame = async (
     title: string,
     page: number = 0,
     maxResults: number = 10
@@ -66,5 +67,5 @@ export class DealsService {
         );
     });
     return promise;
-  };
+  };*/
 }

@@ -33,6 +33,8 @@
       <app-pagination
         (nextPage)="changePage($event)"
         [page]="currentPage"
+        [pageSize]="pageSize"
+        [totalPages]="collectionSize"
       >
       </app-pagination>
     </div>
