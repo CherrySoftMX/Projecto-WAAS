@@ -1,7 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { resolve } from '@angular/compiler-cli/src/ngtsc/file_system';
 import { Injectable } from '@angular/core';
-import { rejects } from 'assert';
 import { GameDetails } from '../interfaces/game-details';
 import { API_KEY, API_URL } from '../shared/api';
 
