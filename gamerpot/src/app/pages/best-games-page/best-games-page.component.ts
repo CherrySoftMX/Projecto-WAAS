@@ -69,23 +69,28 @@ export class BestGamesPageComponent implements OnInit {
   getGameResponse = async () => {
     this.fetchingGames = true;
 
-    const response = await this.bestGameService.getBestGames(
-      80,
-      100,
-      12,
-      this.currentPage
-    );
-    const { results, count } = response;
+    const response = await this.bestGameService
+      .getBestGames(80, 100, 12, this.currentPage)
+      .catch(() => {
+        this.fetchingGames = false;
+      });
+    if (response) {
+      const { results, count } = response;
 
-    this.bestGames = results;
-    this.totalPages = count;
-    this.fetchingGames = false;
+      this.bestGames = results;
+      this.totalPages = count;
+      this.fetchingGames = false;
+    }
   };
 
   getPlatforms = async () => {
     const response = await this.platformService.getPlatforms();
     this.platforms = response.results;
     this.platformsNames = this.platforms.map((p) => p.name);
+    this.setCurrentPlatform();
+  };
+
+  setCurrentPlatform = () => {
     const p = this.platforms.filter((plat) => plat.id == this.platformId)[0];
     if (p) {
       this.platformCurrent = p.name;
@@ -98,6 +103,10 @@ export class BestGamesPageComponent implements OnInit {
     const response = await this.genreService.getGenres();
     this.genres = response.results;
     this.genresNames = response.results.map((g) => g.name);
+    this.setCurrentGenre();
+  };
+
+  setCurrentGenre = () => {
     const g = this.genres.filter((gen) => gen.id == this.genreId)[0];
     if (g) {
       this.genreCurrent = g.name;
@@ -113,49 +122,55 @@ export class BestGamesPageComponent implements OnInit {
 
   getBestGamesByPlatform = async () => {
     this.fetchingGames = true;
-    const response = await this.bestGameService.getBestGamesByPlataform(
-      80,
-      100,
-      12,
-      this.currentPage,
-      this.platformId
-    );
-    const { results, count } = response;
-    this.bestGames = results;
-    this.totalPages = count;
-    this.fetchingGames = false;
+    const response = await this.bestGameService
+      .getBestGamesByPlataform(80, 100, 12, this.currentPage, this.platformId)
+      .catch((error) => {
+        this.fetchingGames = false;
+      });
+    if (response) {
+      const { results, count } = response;
+      this.bestGames = results;
+      this.totalPages = count;
+      this.fetchingGames = false;
+    }
   };
 
   getBestGamesByGenre = async () => {
     this.fetchingGames = true;
-    const response = await this.bestGameService.getBestGamesByGenre(
-      80,
-      100,
-      12,
-      this.currentPage,
-      this.genreId
-    );
+    const response = await this.bestGameService
+      .getBestGamesByGenre(80, 100, 12, this.currentPage, this.genreId)
+      .catch((error) => {
+        this.fetchingGames = false;
+      });
 
-    const { results, count } = response;
-    this.bestGames = results;
-    this.totalPages = count;
-    this.fetchingGames = false;
+    if (response) {
+      const { results, count } = response;
+      this.bestGames = results;
+      this.totalPages = count;
+      this.fetchingGames = false;
+    }
   };
 
   getBestGamesByGenreAndPlatform = async () => {
     this.fetchingGames = true;
-    const response = await this.bestGameService.getBestGamesByGenreAndPlatform(
-      80,
-      100,
-      12,
-      this.currentPage,
-      this.genreId,
-      this.platformId
-    );
-    const { results, count } = response;
-    this.bestGames = results;
-    this.totalPages = count;
-    this.fetchingGames = false;
+    const response = await this.bestGameService
+      .getBestGamesByGenreAndPlatform(
+        80,
+        100,
+        12,
+        this.currentPage,
+        this.genreId,
+        this.platformId
+      )
+      .catch((error) => {
+        this.fetchingGames = false;
+      });
+    if (response) {
+      const { results, count } = response;
+      this.bestGames = results;
+      this.totalPages = count;
+      this.fetchingGames = false;
+    }
   };
 
   getBestGames = () => {

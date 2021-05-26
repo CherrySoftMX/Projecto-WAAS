@@ -35,6 +35,7 @@ import { CarouselComponent } from './components/shared/carousel/carousel.compone
 import { RecentDealsListComponent } from './components/shared/recent-deals-list/recent-deals-list.component';
 import { GameCardsContainerComponent } from './components/shared/game-cards-container/game-cards-container.component';
 import { LoadingSpinnerComponent } from './components/shared/loading-spinner/loading-spinner.component';
+import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
 
 @NgModule({
   declarations: [
@@ -67,6 +68,7 @@ import { LoadingSpinnerComponent } from './components/shared/loading-spinner/loa
     RecentDealsListComponent,
     GameCardsContainerComponent,
     LoadingSpinnerComponent,
+    NotFoundPageComponent,
   ],
   imports: [
     BrowserModule,
@@ -79,4 +81,4 @@ import { LoadingSpinnerComponent } from './components/shared/loading-spinner/loa
   providers: [DealsService, StoresService],
   bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
