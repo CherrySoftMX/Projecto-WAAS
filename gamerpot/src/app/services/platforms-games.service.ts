@@ -1,31 +1,29 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { GameDetails } from '../interfaces/game-details';
+import { PlatformResponse } from '../interfaces/platform-response';
 import { API_KEY, API_URL } from '../shared/api';
 
 @Injectable({
   providedIn: 'root',
 })
-export class GameDatailsService {
+export class PlatformsGamesService {
   constructor(private http: HttpClient) {}
 
-  getGameDetails = (id: number): Promise<GameDetails> => {
-    const url = `${API_URL}games/${id}?key=${API_KEY}`;
-
-    let promise = new Promise<GameDetails>((resolve, reject) => {
+  getPlatforms(): Promise<PlatformResponse> {
+    const url = `${API_URL}platforms?key=${API_KEY}`;
+    let promise = new Promise<PlatformResponse>((resolve, rejects) => {
       this.http
         .get(url)
         .toPromise()
         .then(
           (response) => {
-            resolve(response as GameDetails);
+            resolve(response as PlatformResponse);
           },
           (error) => {
-            reject(error);
+            rejects(error);
           }
         );
     });
-
     return promise;
-  };
+  }
 }

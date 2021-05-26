@@ -15,8 +15,8 @@ export interface GameDetails {
   platforms: Array<{
     platform: {
       id: number;
-      slug: string;
       name: string;
+      slug: string;
     };
   }>;
   developers: Array<{

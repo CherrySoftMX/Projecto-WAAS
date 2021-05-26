@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { GameDetails } from 'src/app/interfaces/game-details';
+import { BestGamesService } from 'src/app/services/best-games.service';
 
 @Component({
   selector: 'app-home-page',
@@ -6,10 +8,35 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home-page.component.css'],
 })
 export class HomePageComponent implements OnInit {
-  items = new Array<number>(10).fill(0);
-  deals = new Array<number>(15).fill(0);
+  games: Array<GameDetails> = [];
 
-  constructor() {}
+  currentPage: number = 1;
+  totalPages: number = 0;
+  fetchingGames: boolean = true;
 
-  ngOnInit(): void {}
+  constructor(private bestGameService: BestGamesService) {}
+
+  ngOnInit(): void {
+    this.getGameResponse(this.currentPage);
+  }
+
+  getGameResponse = async (page: number) => {
+    this.fetchingGames = true;
+
+    const response = await this.bestGameService.getBestGames(80, 100, 12, page);
+    const { results, count } = response;
+
+    this.games = results;
+    this.totalPages = count;
+    this.fetchingGames = false;
+  };
+
+  loadGamesPage(page: number): void {
+    this.currentPage = page;
+    this.getGameResponse(this.currentPage);
+  }
+
+  loadGamesPageBy():void{
+      console.log('testsad');
+  }
 }

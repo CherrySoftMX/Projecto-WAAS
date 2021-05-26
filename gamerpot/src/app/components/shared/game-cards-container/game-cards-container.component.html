@@ -1,15 +1,25 @@
-<div class="row p-2 my-2 row-cols-1 row-cols-md-2 row-cols-lg-3 p-0">
-  <div class="col p-1">
-    <app-game-card title="A very very large title"></app-game-card>
+<app-loading-spinner
+  *ngIf="fetchingGames; else gameCardsContainer"
+></app-loading-spinner>
+
+<ng-template #gameCardsContainer>
+  <div class="col text-center" *ngIf="games.length === 0; else content">
+    <div class="display-4 my-5">No games available :(</div>
   </div>
-  <div class="col p-1">
-    <app-game-card></app-game-card>
-  </div>
-  <div class="col p-1">
-    <app-game-card></app-game-card>
-  </div>
-  <div class="col p-1">
-    <app-game-card></app-game-card>
-  </div>
-</div>
-<app-pagination></app-pagination>
+  <ng-template #content>
+    <div class="row p-2 my-2 row-cols-1 row-cols-md-2 row-cols-lg-3 p-0">
+      <ng-container *ngFor="let game of games">
+        <div class="col p-1">
+          <app-game-card [gameDetails]="game"></app-game-card>
+        </div>
+      </ng-container>
+    </div>
+    <app-pagination
+      [total]="totalPages"
+      [page]="currentPage"
+      (nextPage)="loadPage($event)"
+      [maxSize]="5"
+      [pageSize]="12"
+    ></app-pagination>
+  </ng-template>
+</ng-template>

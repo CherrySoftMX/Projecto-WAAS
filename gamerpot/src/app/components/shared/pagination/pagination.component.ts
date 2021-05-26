@@ -10,6 +10,7 @@ export class PaginationComponent implements OnInit {
   @Input() collectionSize: number = 120;
   @Input() maxSize: number = 5;
   @Input() pageSize: number = 12;
+
   @Output() nextPage: EventEmitter<number> = new EventEmitter();
 
   constructor() {}
