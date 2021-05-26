@@ -4,10 +4,10 @@
 
   <div class="row px-2 px-md-3 px-lg-5" style="max-width: 1000px">
     <div class="col-sm col-md-5">
-      <app-combo-box label="Genre" [options]="genresNames" (onChange)="filterByGenre($event)"></app-combo-box>
+      <app-combo-box label="Genre" [defaultOption]="genreCurrent" [options]="genresNames" (onChange)="filterByGenre($event)"></app-combo-box>
     </div>
     <div class="col-sm col-md-5">
-      <app-combo-box label="Platform" [options]="platformsNames" (onChange)="filterByPlatform($event)"></app-combo-box>
+      <app-combo-box label="Platform" [defaultOption]="platformCurrent" [options]="platformsNames" (onChange)="filterByPlatform($event)"></app-combo-box>
     </div>
   </div>
 
