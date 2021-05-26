@@ -1,5 +1,5 @@
 import { Component, HostListener, Input, OnInit } from '@angular/core';
-import { GameDealInterface } from 'src/app/interfaces/game-deal';
+import { IndividualDealInterface } from 'src/app/interfaces/individual-deal';
 import { breakpoints } from 'src/app/shared/breakpoints';
 
 @Component({
@@ -8,7 +8,7 @@ import { breakpoints } from 'src/app/shared/breakpoints';
   styleUrls: ['./deal-table-row.component.css'],
 })
 export class DealTableRowComponent implements OnInit {
-  @Input() deal: GameDealInterface;
+  @Input() deal: IndividualDealInterface;
 
   screenTooSmall: boolean = false;
 
@@ -42,4 +42,9 @@ export class DealTableRowComponent implements OnInit {
   isScreenTooSmall() {
     return window.innerWidth < breakpoints.md;
   }
+
+  redirectToDeal() {
+    window.open(`https://www.cheapshark.com/redirect?dealID=${this.deal.dealID}`, "_blank");
+  }
+
 }

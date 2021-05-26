@@ -34,6 +34,7 @@ import { WishlistPageComponent } from './pages/wishlist-page/wishlist-page.compo
 import { CarouselComponent } from './components/shared/carousel/carousel.component';
 import { RecentDealsListComponent } from './components/shared/recent-deals-list/recent-deals-list.component';
 import { GameCardsContainerComponent } from './components/shared/game-cards-container/game-cards-container.component';
+import { CurrencyConverterService } from './services/currency-converter.service';
 import { LoadingSpinnerComponent } from './components/shared/loading-spinner/loading-spinner.component';
 import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
 
@@ -78,7 +79,7 @@ import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.com
     ReactiveFormsModule,
     FormsModule,
   ],
-  providers: [DealsService, StoresService],
+  providers: [DealsService, StoresService, CurrencyConverterService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

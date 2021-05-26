@@ -1,11 +1,11 @@
 <div class="d-flex justify-content-center">
   <ngb-pagination
-    [collectionSize]="total"
+    [pageSize]="pageSize"
+    [collectionSize]="collectionSize"
     [(page)]="page"
     [maxSize]="maxSize"
     [boundaryLinks]="true"
-    [pageSize]="pageSize"
-    (pageChange)="pageChanged()"
+    (pageChange)="changePage()"
   >
   </ngb-pagination>
 </div>

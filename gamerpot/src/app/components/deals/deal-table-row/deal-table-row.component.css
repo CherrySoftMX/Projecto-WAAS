@@ -1,6 +1,12 @@
 .table-row {
   height: var(--deal-row-height);
   background-color: var(--background-secondary);
+  transition: all ease .4s;
+}
+
+.table-row:hover {
+  cursor: pointer;
+  transform: translateY(-.2em);
 }
 
 .hide {

@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { GameDealInterface } from 'src/app/interfaces/game-deal';
+import { IndividualDealInterface } from 'src/app/interfaces/individual-deal';
 
 @Component({
   selector: 'app-deal-table-row-minimal',
@@ -7,7 +7,7 @@ import { GameDealInterface } from 'src/app/interfaces/game-deal';
   styleUrls: ['./deal-table-row-minimal.component.css'],
 })
 export class DealTableRowMinimalComponent implements OnInit {
-  @Input() deal: GameDealInterface;
+  @Input() deal: IndividualDealInterface;
 
   constructor() {
     this.deal = {
