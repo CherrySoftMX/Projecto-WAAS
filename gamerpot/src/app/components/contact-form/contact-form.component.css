@@ -1,0 +1,11 @@
+.send-btn {
+  background-color: black;
+  border: 1px solid white;
+  color: white;
+  transition: all ease .5s;
+}
+
+.send-btn:hover {
+  background-color: white;
+  color: black;
+}

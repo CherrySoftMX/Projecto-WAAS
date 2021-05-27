@@ -38,6 +38,8 @@ import { CurrencyConverterService } from './services/currency-converter.service'
 import { LoadingSpinnerComponent } from './components/shared/loading-spinner/loading-spinner.component';
 import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
 import { PluckPipe } from './pipes/pluck.pipe';
+import { FooterComponent } from './components/footer/footer.component';
+import { ContactFormComponent } from './components/contact-form/contact-form.component';
 
 @NgModule({
   declarations: [
@@ -72,6 +74,8 @@ import { PluckPipe } from './pipes/pluck.pipe';
     LoadingSpinnerComponent,
     NotFoundPageComponent,
     PluckPipe,
+    FooterComponent,
+    ContactFormComponent,
   ],
   imports: [
     BrowserModule,
