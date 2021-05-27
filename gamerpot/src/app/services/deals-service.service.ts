@@ -25,13 +25,13 @@ export class DealsService {
     page = 0,
     title = '',
     lowerPrice = 0,
-    upperPrice = 500
+    upperPrice = 500,
   }: DealsSearchParameters): Promise<GameDealListInterface> => {
     const params = `pageSize=${maxResults}&pageNumber=${page}&title=${title}&lowerPrice=${lowerPrice}&upperPrice=${upperPrice}`;
     const url = `${this.apiUrl}?${params}`;
     let promise = new Promise<GameDealListInterface>((resolve, reject) => {
       this.http
-        .get(url, {observe: 'response' as 'response'})
+        .get(url, { observe: 'response' as 'response' })
         .toPromise()
         .then(
           (response) => {
@@ -69,5 +69,4 @@ export class DealsService {
     });
     return promise;
   };
-
 }

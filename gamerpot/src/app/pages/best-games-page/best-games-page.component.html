@@ -4,20 +4,32 @@
 
   <div class="row px-2 px-md-3 px-lg-5" style="max-width: 1000px">
     <div class="col-sm col-md-5">
-      <app-combo-box label="Genre" [defaultOption]="genreCurrent" [options]="genresNames" (onChange)="filterByGenre($event)"></app-combo-box>
+      <app-combo-box
+        label="Genre"
+        [defaultOption]="currentGenre.name"
+        [options]="genres | pluck: 'name'"
+        (onChange)="filterByGenre($event)"
+      ></app-combo-box>
     </div>
     <div class="col-sm col-md-5">
-      <app-combo-box label="Platform" [defaultOption]="platformCurrent" [options]="platformsNames" (onChange)="filterByPlatform($event)"></app-combo-box>
+      <app-combo-box
+        label="Platform"
+        [defaultOption]="currentPlatform.name"
+        [options]="platforms | pluck: 'name'"
+        (onChange)="filterByPlatform($event)"
+      ></app-combo-box>
     </div>
   </div>
 
   <div class="px-2 px-md-3 px-lg-5 scrollable-container">
     <div class="col flex-column scrollable-column">
-      <app-game-cards-container [games]="bestGames"
-        [currentPage]="currentPage"
-        [totalPages]="totalPages"
+      <app-game-cards-container
+        [games]="bestGames"
+        [page]="currentPage"
+        [collectionSize]="collectionSize"
         [fetchingGames]="fetchingGames"
-        (nextPage)="loadGamesPage($event)"></app-game-cards-container>
+        (nextPage)="changePage($event)"
+      ></app-game-cards-container>
     </div>
   </div>
 </div>

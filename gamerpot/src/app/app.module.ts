@@ -37,6 +37,7 @@ import { GameCardsContainerComponent } from './components/shared/game-cards-cont
 import { CurrencyConverterService } from './services/currency-converter.service';
 import { LoadingSpinnerComponent } from './components/shared/loading-spinner/loading-spinner.component';
 import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
+import { PluckPipe } from './pipes/pluck.pipe';
 
 @NgModule({
   declarations: [
@@ -70,6 +71,7 @@ import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.com
     GameCardsContainerComponent,
     LoadingSpinnerComponent,
     NotFoundPageComponent,
+    PluckPipe,
   ],
   imports: [
     BrowserModule,

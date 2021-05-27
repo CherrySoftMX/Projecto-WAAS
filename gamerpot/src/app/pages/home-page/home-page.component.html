@@ -18,7 +18,19 @@
       <app-subtitle subtitle="New games"></app-subtitle>
       <div class="row row-cols-1 row-cols-md-2" style="max-width: 700px">
         <div class="col">
-          <app-combo-box defaultOption="released" [options] ="['rating', 'added', 'created', 'updated', 'name', 'metacritic']" label="Order by" (onChange)="loadGamesPageBy()"></app-combo-box>
+          <app-combo-box
+            defaultOption="released"
+            [options]="[
+              'rating',
+              'added',
+              'created',
+              'updated',
+              'name',
+              'metacritic'
+            ]"
+            label="Order by"
+            (onChange)="loadGamesPageBy()"
+          ></app-combo-box>
         </div>
         <div class="col">
           <app-combo-box label="Platform"></app-combo-box>
@@ -26,10 +38,10 @@
       </div>
       <app-game-cards-container
         [games]="games"
-        [currentPage]="currentPage"
-        [totalPages]="totalPages"
+        [page]="currentPage"
+        [collectionSize]="collectionSize"
         [fetchingGames]="fetchingGames"
-        (nextPage)="loadGamesPage($event)"
+        (nextPage)="changePage($event)"
       ></app-game-cards-container>
     </div>
   </div>

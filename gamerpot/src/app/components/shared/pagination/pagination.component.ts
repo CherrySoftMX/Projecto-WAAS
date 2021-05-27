@@ -1,4 +1,5 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-pagination',
@@ -6,19 +7,24 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./pagination.component.css'],
 })
 export class PaginationComponent implements OnInit {
-  @Input() page = 1;
-  @Input() collectionSize: number = 120;
-  @Input() maxSize: number = 5;
-  @Input() pageSize: number = 12;
+  @Input() page: number = 1;
+  @Input() pageSize?: number;
+  @Input() maxSize?: number;
+  @Input() collectionSize?: number;
 
   @Output() nextPage: EventEmitter<number> = new EventEmitter();
 
-  constructor() {}
+  constructor(private router: Router, private route: ActivatedRoute) {}
 
   ngOnInit(): void {}
 
   changePage() {
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: { page: this.page },
+      queryParamsHandling: 'merge',
+    });
+
     this.nextPage.emit(this.page);
   }
-
 }

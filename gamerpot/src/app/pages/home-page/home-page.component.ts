@@ -11,7 +11,7 @@ export class HomePageComponent implements OnInit {
   games: Array<GameDetails> = [];
 
   currentPage: number = 1;
-  totalPages: number = 0;
+  collectionSize: number = 0;
   fetchingGames: boolean = true;
 
   constructor(private bestGameService: BestGamesService) {}
@@ -23,20 +23,20 @@ export class HomePageComponent implements OnInit {
   getGameResponse = async (page: number) => {
     this.fetchingGames = true;
 
-    const response = await this.bestGameService.getBestGames(80, 100, 12, page);
+    const response = await this.bestGameService.buildUrl({ page }).fetchGames();
     const { results, count } = response;
 
     this.games = results;
-    this.totalPages = count;
+    this.collectionSize = count;
     this.fetchingGames = false;
   };
 
-  loadGamesPage(page: number): void {
+  changePage(page: number): void {
     this.currentPage = page;
     this.getGameResponse(this.currentPage);
   }
 
-  loadGamesPageBy():void{
-      console.log('testsad');
+  loadGamesPageBy(): void {
+    console.log('testsad');
   }
 }

@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { GameDealListInterface } from '../../interfaces/game-deal-list';
+import { IndividualDealInterface } from '../../interfaces/individual-deal';
+import { CurrencyConverterService } from '../../services/currency-converter.service';
 import { DealsService } from '../../services/deals-service.service';
 import { StoresService } from '../../services/stores-service.service';
-import { Router, ActivatedRoute, ParamMap, NavigationExtras } from '@angular/router';
-import { GameDealListInterface } from '../../interfaces/game-deal-list';
-import { CurrencyConverterService } from '../../services/currency-converter.service';
-import { IndividualDealInterface } from '../../interfaces/individual-deal';
 
 interface DealsCurrencyConvertInterface {
   deals: Array<IndividualDealInterface>;
@@ -18,18 +18,22 @@ interface DealsCurrencyConvertInterface {
   styleUrls: ['./deals-page.component.css'],
 })
 export class DealsPageComponent implements OnInit {
-  search: string;
-  minPrice: number;
-  maxPrice: number;
-  oldCurrency: string;
-  actualCurrency: string;
-  totalPages: number;
+  readonly DEFAULT_CURRENCY = 'USD';
+
+  search: string = 'search';
+  minPrice: number = 0;
+  maxPrice: number = 500;
+  oldCurrency: string = this.DEFAULT_CURRENCY;
+  actualCurrency: string = this.DEFAULT_CURRENCY;
   deals: any;
   stores: any;
-  currentPage: number;
+
+  totalPages: number = 0;
+  currentPage: number = 0;
   pageSize = 15;
-  collectionSize: number;
-  DEFAULT_CURRENCY = 'USD';
+  collectionSize: number = 1;
+
+  fetching: boolean = true;
 
   constructor(
     private dealsService: DealsService,
@@ -37,60 +41,56 @@ export class DealsPageComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private currencyConverter: CurrencyConverterService
-  ) {
-    this.search = 'busqueda';
-    this.minPrice = 0;
-    this.maxPrice = 500;
-    this.oldCurrency = this.DEFAULT_CURRENCY;
-    this.actualCurrency = this.DEFAULT_CURRENCY;
-    this.dealsService = dealsService;
-    this.storesService = storesService;
-    this.currentPage = 0;
-    this.totalPages = 0;
-    this.collectionSize = 1;
-  }
+  ) {}
 
   ngOnInit(): void {
-    this.route.queryParams.subscribe(params => {
+    this.route.queryParams.subscribe((params) => {
       this.currentPage = params['page'] || 1;
       this.search = params['title'];
       this.minPrice = params['lowerPrice'];
       this.maxPrice = params['upperPrice'];
-      this.getDeals();
+      this.fetchDeals();
     });
   }
 
-  getDeals = async () => {
+  fetchDeals = async () => {
+    this.fetching = true;
+
     const newDeals: GameDealListInterface = await this.dealsService.getDeals({
       page: this.currentPage - 1,
-      title: this.search ,
+      title: this.search,
       lowerPrice: this.minPrice,
-      upperPrice: this.maxPrice
+      upperPrice: this.maxPrice,
     });
+
     this.stores = await this.storesService.getStores();
     const dealsList = newDeals.deals;
     this.deals = dealsList.map(
       (deal: any) => (deal = { ...this.stores[deal.storeID - 1], ...deal })
     );
+
     this.totalPages = Number(newDeals.totalPages);
     this.collectionSize = this.totalPages * this.pageSize;
-    if(this.actualCurrency != this.DEFAULT_CURRENCY) {
+
+    if (this.actualCurrency != this.DEFAULT_CURRENCY) {
       this.deals = await this.calculateDealsNewCurrency({
         deals: this.deals,
         fromCurrency: this.oldCurrency,
-        toCurrency: this.actualCurrency
+        toCurrency: this.actualCurrency,
       });
     }
+
+    this.fetching = false;
   };
 
   buscar(query: string) {
     this.router.navigate([], {
       relativeTo: this.route,
       queryParams: {
-        title: query.length > 0 ? query: null,
-        page: null
+        title: query.length > 0 ? query : null,
+        page: null,
       },
-      queryParamsHandling: 'merge'
+      queryParamsHandling: 'merge',
     });
   }
 
@@ -99,10 +99,10 @@ export class DealsPageComponent implements OnInit {
     this.router.navigate([], {
       relativeTo: this.route,
       queryParams: {
-        lowerPrice: price.length > 0 ? price: null,
-        page: null
+        lowerPrice: price.length > 0 ? price : null,
+        page: null,
       },
-      queryParamsHandling: 'merge'
+      queryParamsHandling: 'merge',
     });
   };
 
@@ -111,40 +111,35 @@ export class DealsPageComponent implements OnInit {
     this.router.navigate([], {
       relativeTo: this.route,
       queryParams: {
-        upperPrice: price.length > 0 ? price: null,
-        page: null
+        upperPrice: price.length > 0 ? price : null,
+        page: null,
       },
-      queryParamsHandling: 'merge'
+      queryParamsHandling: 'merge',
     });
   };
 
   setCurrency = async (cur: string) => {
-    if(cur == this.actualCurrency) return;
+    if (cur == this.actualCurrency) return;
+
     this.oldCurrency = this.actualCurrency;
     this.actualCurrency = cur;
     this.deals = await this.calculateDealsNewCurrency({
       deals: this.deals,
       fromCurrency: this.oldCurrency,
-      toCurrency: this.actualCurrency
+      toCurrency: this.actualCurrency,
     });
   };
-
-  changePage(newPage: number) {
-    this.router.navigate([], {
-      relativeTo: this.route,
-      queryParams: { page: newPage },
-      queryParamsHandling: 'merge'
-    });
-  }
 
   calculateDealsNewCurrency = async ({
     deals,
     fromCurrency,
-    toCurrency
+    toCurrency,
   }: DealsCurrencyConvertInterface) => {
-    const response: any = await this.currencyConverter.getCurrencyConversion({ from: fromCurrency,  to: toCurrency });
+    const response: any = await this.currencyConverter.getCurrencyConversion({
+      from: fromCurrency,
+      to: toCurrency,
+    });
     const conversionRate = response[`${fromCurrency}_${toCurrency}`];
-    console.log(conversionRate);
     const convertedDeals = deals.map((deal: IndividualDealInterface) => {
       const salePrice = deal.salePrice * conversionRate;
       const normalPrice = deal.normalPrice * conversionRate;
@@ -154,16 +149,15 @@ export class DealsPageComponent implements OnInit {
   };
 
   calculatePriceFilters = async (price: string) => {
-    if(this.actualCurrency != this.DEFAULT_CURRENCY) {
-      if(price.length == 0) return price;
+    if (this.actualCurrency != this.DEFAULT_CURRENCY) {
+      if (price.length == 0) return price;
       const convertedPrice = await this.currencyConverter.currencyConvert({
         from: this.actualCurrency,
         to: this.oldCurrency,
-        amount: price
+        amount: price,
       });
       price = Math.round(convertedPrice).toString();
     }
     return price;
   };
-
 }

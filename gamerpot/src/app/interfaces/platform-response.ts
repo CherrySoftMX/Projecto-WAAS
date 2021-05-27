@@ -1,6 +1,5 @@
 export interface GamePlatform {
-  id: number;
-  slug: string;
+  id: number | null;
   name: string;
 }
 

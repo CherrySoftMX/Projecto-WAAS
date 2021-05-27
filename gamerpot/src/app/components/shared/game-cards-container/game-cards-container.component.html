@@ -15,11 +15,10 @@
       </ng-container>
     </div>
     <app-pagination
-      [total]="totalPages"
-      [page]="currentPage"
+      [page]="page"
+      [pageSize]="pageSize"
+      [collectionSize]="collectionSize"
       (nextPage)="loadPage($event)"
-      [maxSize]="5"
-      [pageSize]="12"
     ></app-pagination>
   </ng-template>
 </ng-template>

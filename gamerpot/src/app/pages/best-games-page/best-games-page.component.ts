@@ -13,23 +13,19 @@ import { PlatformsGamesService } from 'src/app/services/platforms-games.service'
   styleUrls: ['./best-games-page.component.css'],
 })
 export class BestGamesPageComponent implements OnInit {
+  readonly CLEAR_FIELD: any = null;
+
   bestGames: Array<GameDetails> = [];
 
-  platforms: Array<GamePlatform> = [];
-  platformsNames: Array<string> = [];
-  platformCurrent: string = '';
-
-  genres: Array<Genre> = [];
-  genresNames: Array<string> = [];
-  genreCurrent: string = '';
-
   currentPage: number = 1;
-  totalPages: number = 0;
+  collectionSize: number = 0;
   fetchingGames: boolean = true;
 
-  readonly CLEAR_FIELD: number = -1;
-  genreId: number = this.CLEAR_FIELD;
-  platformId: number = this.CLEAR_FIELD;
+  platforms: Array<GamePlatform> = [];
+  currentPlatform: GamePlatform = {} as GamePlatform;
+
+  genres: Array<Genre> = [];
+  currentGenre: Genre = {} as Genre;
 
   constructor(
     private bestGameService: BestGamesService,
@@ -40,172 +36,94 @@ export class BestGamesPageComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getDataRoute();
-    this.getPlatforms();
-    this.getGenres();
-  }
-
-  getDataRoute() {
-    this.activeRoute.queryParams.subscribe((params) => {
-      this.currentPage = params['page'] ? params['page'] : 1;
-      this.genreId = params['genre'] ? params['genre'] : this.CLEAR_FIELD;
-      this.platformId = params['platform']
-        ? params['platform']
-        : this.CLEAR_FIELD;
-      this.getBestGames();
-    });
+    this.getPathParameters();
+    this.fetchGenres();
+    this.fetchPlatforms();
   }
 
   navigate() {
-    this.router.navigate(['best-games'], {
+    this.router.navigate([], {
+      relativeTo: this.activeRoute,
       queryParams: {
         page: this.currentPage,
-        platform: this.platformId,
-        genre: this.genreId,
+        platform: this.currentPlatform.id,
+        genre: this.currentGenre.id,
       },
     });
   }
 
-  getGameResponse = async () => {
+  getPathParameters() {
+    this.activeRoute.queryParams.subscribe((params) => {
+      this.currentPage = params['page'] || 1;
+      this.currentGenre.id = params['genre'] || this.CLEAR_FIELD;
+      this.currentPlatform.id = params['platform'] || this.CLEAR_FIELD;
+      this.refreshGames();
+    });
+  }
+
+  refreshGames = async () => {
     this.fetchingGames = true;
 
     const response = await this.bestGameService
-      .getBestGames(80, 100, 12, this.currentPage)
-      .catch(() => {
-        this.fetchingGames = false;
-      });
+      .buildUrl({
+        page: this.currentPage,
+        platform: this.currentPlatform.id,
+        genre: this.currentGenre.id,
+      })
+      .fetchGames();
+
     if (response) {
       const { results, count } = response;
-
       this.bestGames = results;
-      this.totalPages = count;
-      this.fetchingGames = false;
+      this.collectionSize = count;
     }
+
+    this.fetchingGames = false;
   };
 
-  getPlatforms = async () => {
+  fetchPlatforms = async () => {
     const response = await this.platformService.getPlatforms();
     this.platforms = response.results;
-    this.platformsNames = this.platforms.map((p) => p.name);
     this.setCurrentPlatform();
   };
 
   setCurrentPlatform = () => {
-    const p = this.platforms.filter((plat) => plat.id == this.platformId)[0];
-    if (p) {
-      this.platformCurrent = p.name;
-      const i = this.platformsNames.indexOf(this.platformCurrent);
-      this.platformsNames.splice(i, 1);
-    }
+    const currentPlatform = this.platforms.find(
+      (plat) => plat.id == this.currentPlatform.id
+    );
+
+    if (currentPlatform) this.currentPlatform = currentPlatform;
   };
 
-  getGenres = async () => {
+  fetchGenres = async () => {
     const response = await this.genreService.getGenres();
     this.genres = response.results;
-    this.genresNames = response.results.map((g) => g.name);
     this.setCurrentGenre();
   };
 
   setCurrentGenre = () => {
-    const g = this.genres.filter((gen) => gen.id == this.genreId)[0];
-    if (g) {
-      this.genreCurrent = g.name;
-      const i = this.genresNames.indexOf(this.genreCurrent);
-      this.genresNames.splice(i, 1);
-    }
+    const currentGenre = this.genres.find(
+      (gen) => gen.id == this.currentGenre.id
+    );
+
+    if (currentGenre) this.currentGenre = currentGenre;
   };
 
-  loadGamesPage = (page: number): void => {
+  filterByPlatform = (selectedPlatform: string) => {
+    this.currentPage = 1;
+    const platform = this.platforms.find((p) => p.name === selectedPlatform);
+    this.currentPlatform.id = platform?.id || this.CLEAR_FIELD;
+    this.navigate();
+  };
+
+  filterByGenre = (selectedGenre: string) => {
+    this.currentPage = 1;
+    const genre = this.genres.find((g) => g.name === selectedGenre);
+    this.currentGenre.id = genre?.id || this.CLEAR_FIELD;
+    this.navigate();
+  };
+
+  changePage = (page: number): void => {
     this.currentPage = page;
-    this.navigate();
-  };
-
-  getBestGamesByPlatform = async () => {
-    this.fetchingGames = true;
-    const response = await this.bestGameService
-      .getBestGamesByPlataform(80, 100, 12, this.currentPage, this.platformId)
-      .catch((error) => {
-        this.fetchingGames = false;
-      });
-    if (response) {
-      const { results, count } = response;
-      this.bestGames = results;
-      this.totalPages = count;
-      this.fetchingGames = false;
-    }
-  };
-
-  getBestGamesByGenre = async () => {
-    this.fetchingGames = true;
-    const response = await this.bestGameService
-      .getBestGamesByGenre(80, 100, 12, this.currentPage, this.genreId)
-      .catch((error) => {
-        this.fetchingGames = false;
-      });
-
-    if (response) {
-      const { results, count } = response;
-      this.bestGames = results;
-      this.totalPages = count;
-      this.fetchingGames = false;
-    }
-  };
-
-  getBestGamesByGenreAndPlatform = async () => {
-    this.fetchingGames = true;
-    const response = await this.bestGameService
-      .getBestGamesByGenreAndPlatform(
-        80,
-        100,
-        12,
-        this.currentPage,
-        this.genreId,
-        this.platformId
-      )
-      .catch((error) => {
-        this.fetchingGames = false;
-      });
-    if (response) {
-      const { results, count } = response;
-      this.bestGames = results;
-      this.totalPages = count;
-      this.fetchingGames = false;
-    }
-  };
-
-  getBestGames = () => {
-    if (this.genreId == this.CLEAR_FIELD && this.platformId == this.CLEAR_FIELD)
-      this.getGameResponse();
-
-    if (this.genreId == this.CLEAR_FIELD && this.platformId != this.CLEAR_FIELD)
-      this.getBestGamesByPlatform();
-
-    if (this.genreId != this.CLEAR_FIELD && this.platformId == this.CLEAR_FIELD)
-      this.getBestGamesByGenre();
-
-    if (this.genreId != this.CLEAR_FIELD && this.platformId != this.CLEAR_FIELD)
-      this.getBestGamesByGenreAndPlatform();
-  };
-
-  filterByPlatform = (platform: string): void => {
-    this.currentPage = 1;
-    const p = this.platforms.filter((p) => p.name == platform)[0];
-    if (p == null) {
-      this.platformId = this.CLEAR_FIELD;
-    } else {
-      this.platformId = p.id;
-    }
-    this.navigate();
-  };
-
-  filterByGenre = (genre: string): void => {
-    this.currentPage = 1;
-    const g = this.genres.filter((g) => g.name == genre)[0];
-    if (g == null) {
-      this.genreId = this.CLEAR_FIELD;
-    } else {
-      this.genreId = g.id;
-    }
-    this.navigate();
   };
 }

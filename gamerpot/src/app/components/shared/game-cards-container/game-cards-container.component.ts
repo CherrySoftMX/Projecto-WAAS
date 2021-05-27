@@ -8,8 +8,11 @@ import { GameDetails } from 'src/app/interfaces/game-details';
 })
 export class GameCardsContainerComponent implements OnInit {
   @Input() games: Array<GameDetails> = [];
-  @Input() totalPages: number = 0;
-  @Input() currentPage: number = 1;
+
+  @Input() page: number = 1;
+  @Input() pageSize?: number;
+  @Input() collectionSize?: number;
+
   @Input() fetchingGames: boolean = true;
 
   @Output() nextPage = new EventEmitter<number>();

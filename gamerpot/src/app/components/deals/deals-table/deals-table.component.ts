@@ -8,6 +8,7 @@ import { IndividualDealInterface } from 'src/app/interfaces/individual-deal';
 })
 export class DealsTableComponent implements OnInit {
   @Input() deals: Array<IndividualDealInterface> = [];
+  @Input() fetching: boolean = false;
 
   constructor() {}
 
