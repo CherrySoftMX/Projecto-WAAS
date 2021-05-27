@@ -23,5 +23,6 @@ a {
 }
 
 .devs:hover {
+  cursor: pointer;
   transform: translateY(-1.2em);
 }
