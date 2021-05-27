@@ -1,1 +1,9 @@
 @import "../../components/shared/search-box/search-box.component.css";
+
+.deals-title {
+  font-size: 1.25em;
+  border-bottom: 1px solid #494A4F;
+  font-weight: bold;
+  margin-top: 1.8em;
+  padding-bottom: .6em;
+}
