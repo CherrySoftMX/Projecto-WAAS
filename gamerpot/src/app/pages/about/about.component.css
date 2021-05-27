@@ -1,5 +1,6 @@
 img {
   width: 100%;
+  margin-bottom: 1em;
 }
 
 .btn-a {
@@ -11,4 +12,16 @@ img {
 
 .btn-a:hover {
   background-color: #535353;
+}
+
+a {
+  color: white;
+}
+
+.devs {
+  transition: all ease .5s;
+}
+
+.devs:hover {
+  transform: translateY(-1.2em);
 }
