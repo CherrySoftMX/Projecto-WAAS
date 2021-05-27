@@ -1,8 +1,12 @@
 <div class="d-flex justify-content-center">
   <ngb-pagination
-    [collectionSize]="120"
     [(page)]="page"
-    [maxSize]="5"
+    [pageSize]="pageSize || 12"
+    [collectionSize]="collectionSize || 120"
+    [maxSize]="maxSize || 5"
     [boundaryLinks]="true"
-  ></ngb-pagination>
+    [rotate]="true"
+    (pageChange)="changePage()"
+  >
+  </ngb-pagination>
 </div>

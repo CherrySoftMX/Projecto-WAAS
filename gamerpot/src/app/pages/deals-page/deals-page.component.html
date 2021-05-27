@@ -27,10 +27,17 @@
     </div>
   </div>
 
-  <div class="px-1 px-md-3 scrollable-container">
+  <div class="px-1 px-md-3">
     <div class="scrollable-column">
-      <app-deals-table [deals]="deals"></app-deals-table>
-      <app-pagination></app-pagination>
+      <app-deals-table [deals]="deals" [fetching]="fetching"></app-deals-table>
+      <ng-container *ngIf="!fetching">
+        <app-pagination
+          [page]="currentPage"
+          [pageSize]="pageSize"
+          [collectionSize]="collectionSize"
+        >
+        </app-pagination>
+      </ng-container>
     </div>
   </div>
 </div>

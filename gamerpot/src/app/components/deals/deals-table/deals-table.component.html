@@ -18,6 +18,12 @@
 </div>
 
 <!--Table rows-->
-<ng-container *ngFor="let deal of deals">
-  <app-deal-table-row [deal]="deal"></app-deal-table-row>
+<ng-container *ngIf="fetching; else rows">
+  <app-loading-spinner></app-loading-spinner>
 </ng-container>
+
+<ng-template #rows>
+  <ng-container *ngFor="let deal of deals">
+    <app-deal-table-row [deal]="deal"></app-deal-table-row>
+  </ng-container>
+</ng-template>

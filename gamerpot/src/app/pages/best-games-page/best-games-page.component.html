@@ -4,23 +4,32 @@
 
   <div class="row px-2 px-md-3 px-lg-5" style="max-width: 1000px">
     <div class="col-sm col-md-5">
-      <app-combo-box label="Genre"></app-combo-box>
+      <app-combo-box
+        label="Genre"
+        [defaultOption]="currentGenre.name"
+        [options]="genres | pluck: 'name'"
+        (onChange)="filterByGenre($event)"
+      ></app-combo-box>
     </div>
     <div class="col-sm col-md-5">
-      <app-combo-box label="Platform"></app-combo-box>
+      <app-combo-box
+        label="Platform"
+        [defaultOption]="currentPlatform.name"
+        [options]="platforms | pluck: 'name'"
+        (onChange)="filterByPlatform($event)"
+      ></app-combo-box>
     </div>
   </div>
 
   <div class="px-2 px-md-3 px-lg-5 scrollable-container">
     <div class="col flex-column scrollable-column">
-      <div class="row mt-2 p-2">
-        <ng-container *ngFor="let bestGame of bestGames">
-          <div class="col p-1">
-            <app-game-card></app-game-card>
-          </div>
-        </ng-container>
-      </div>
-      <app-pagination></app-pagination>
+      <app-game-cards-container
+        [games]="bestGames"
+        [page]="currentPage"
+        [collectionSize]="collectionSize"
+        [fetchingGames]="fetchingGames"
+        (nextPage)="changePage($event)"
+      ></app-game-cards-container>
     </div>
   </div>
 </div>

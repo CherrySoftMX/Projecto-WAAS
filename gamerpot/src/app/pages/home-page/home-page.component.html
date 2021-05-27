@@ -9,8 +9,8 @@
     </div>
   </div>
 
-  <div class="px-4 px-md-5 scrollable-container">
-    <div class="d-none d-lg-flex col-4 mr-xl-4 flex-column scrollable-column">
+  <div class="px-1 px-sm-2 px-md-3 scrollable-container">
+    <div class="d-none d-lg-flex col-3 mr-xl-4 flex-column scrollable-column">
       <app-recent-deals-list></app-recent-deals-list>
     </div>
 
@@ -18,20 +18,31 @@
       <app-subtitle subtitle="New games"></app-subtitle>
       <div class="row row-cols-1 row-cols-md-2" style="max-width: 700px">
         <div class="col">
-          <app-combo-box label="Order by"></app-combo-box>
+          <app-combo-box
+            defaultOption="released"
+            [options]="[
+              'rating',
+              'added',
+              'created',
+              'updated',
+              'name',
+              'metacritic'
+            ]"
+            label="Order by"
+            (onChange)="loadGamesPageBy()"
+          ></app-combo-box>
         </div>
         <div class="col">
           <app-combo-box label="Platform"></app-combo-box>
         </div>
       </div>
-      <div class="row mt-2 p-2">
-        <ng-container *ngFor="let card of items">
-          <div class="col p-1">
-            <app-game-card></app-game-card>
-          </div>
-        </ng-container>
-      </div>
-      <app-pagination></app-pagination>
+      <app-game-cards-container
+        [games]="games"
+        [page]="currentPage"
+        [collectionSize]="collectionSize"
+        [fetchingGames]="fetchingGames"
+        (nextPage)="changePage($event)"
+      ></app-game-cards-container>
     </div>
   </div>
 </div>

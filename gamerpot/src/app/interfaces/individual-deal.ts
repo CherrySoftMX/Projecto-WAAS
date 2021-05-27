@@ -1,4 +1,4 @@
-export interface GameDealInterface {
+export interface IndividualDealInterface {
   title: string;
   dealID: string;
   storeID: string;

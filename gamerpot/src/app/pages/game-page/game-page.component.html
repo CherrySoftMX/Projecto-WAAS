@@ -4,95 +4,109 @@
   <div class="p-3 d-block d-lg-flex scrollable-container">
     <!--Recent deals game-->
     <div class="col-xl-3 d-none d-xl-block scrollable-column">
-      <app-recent-deals-list [deals]="deals"></app-recent-deals-list>
+      <app-recent-deals-list></app-recent-deals-list>
     </div>
 
     <!--Information game-->
     <div class="col-xl-6 mx-1 mx-lg-3 mx-xl-4 scrollable-column">
-      <!--Tittle-->
-      <div class="p-2">
-        <span class="font-weight-light">{{ gameDetails.updated | date }}</span>
-        <h1 class="title">{{ gameDetails.name }}</h1>
-        <span>Average playtime: {{ gameDetails.playtime }} hours</span>
-      </div>
+      <app-loading-spinner
+        *ngIf="fetching; else gameContent"
+      ></app-loading-spinner>
 
-      <!--Carousel game pictures-->
-      <app-carousel
-        [srcImages]="[
-          gameDetails.background_image,
-          gameDetails.background_image_additional
-        ]"
-      >
-      </app-carousel>
-
-      <!--Button whishlist-->
-      <div class="wishlist-btn p-2 mt-2 rounded" (click)="addWishlistGame()">
-        <i class="bi bi-bookmark-plus"></i>
-        <span> Add to my whislist</span>
-      </div>
-
-      <!--About-->
-      <div class="about-wrapper mb-0 mt-3">
-        <app-subtitle subtitle="About"></app-subtitle>
-        <span>{{ gameDetails.description_raw.substr(0, 300) }} </span>
-        <span id="dots"> ... </span>
-        <span id="more" style="display: none"
-          >{{ gameDetails.description_raw.substr(300) }}
-        </span>
-        <button class="mt-0 mb-2 rounded" (click)="displayMore()" id="more-btn">
-          See more
-        </button>
-      </div>
-
-      <!--Additional information-->
-      <div class="row row-cols-2">
-        <!--Plataforms-->
-        <div class="col">
-          <app-subtitle subtitle="Platforms"></app-subtitle>
-          <ng-container *ngFor="let i of gameDetails.platforms">
-            <p>{{ i.platform.name }}</p>
-          </ng-container>
+      <ng-template #gameContent>
+        <!--Tittle-->
+        <div class="p-2">
+          <span class="font-weight-light">{{
+            gameDetails.updated | date
+          }}</span>
+          <h1 class="title">{{ gameDetails.name }}</h1>
+          <span>Average playtime: {{ gameDetails.playtime }} hours</span>
         </div>
 
-        <div class="col">
-          <app-subtitle subtitle="Genre"></app-subtitle>
-          <div *ngFor="let i of gameDetails.genres">
-            <p>{{ i.name }}</p>
+        <!--Carousel game pictures-->
+        <app-carousel
+          [srcImages]="[
+            gameDetails.background_image,
+            gameDetails.background_image_additional
+          ]"
+        >
+        </app-carousel>
+
+        <!--Button whishlist-->
+        <div class="wishlist-btn p-2 mt-2 rounded" (click)="addToWishlist()">
+          <i class="bi bi-bookmark-plus"></i>
+          <span> Add to my whislist</span>
+        </div>
+
+        <!--About-->
+        <div class="about-wrapper mb-0 mt-3">
+          <app-subtitle subtitle="About"></app-subtitle>
+          <span>{{ gameDetails.description_raw.substr(0, 300) }} </span>
+          <span id="dots"> ... </span>
+          <span id="more" style="display: none"
+            >{{ gameDetails.description_raw.substr(300) }}
+          </span>
+          <button
+            class="mt-0 mb-2 rounded"
+            (click)="displayMore()"
+            id="more-btn"
+          >
+            See more
+          </button>
+        </div>
+
+        <!--Additional information-->
+        <div class="row row-cols-2">
+          <!--Plataforms-->
+          <div class="col">
+            <app-subtitle subtitle="Platforms"></app-subtitle>
+            <ng-container *ngFor="let i of gameDetails.platforms">
+              <p>{{ i.platform.name }}</p>
+            </ng-container>
+          </div>
+
+          <div class="col">
+            <app-subtitle subtitle="Genre"></app-subtitle>
+            <div *ngFor="let i of gameDetails.genres">
+              <p>{{ i.name }}</p>
+            </div>
+          </div>
+
+          <div class="col">
+            <app-subtitle subtitle="Developers"></app-subtitle>
+            <ng-container *ngFor="let i of gameDetails.developers">
+              <p>{{ i.name }}</p>
+            </ng-container>
+          </div>
+
+          <div class="col">
+            <app-subtitle subtitle="Publisher"></app-subtitle>
+            <div *ngFor="let i of gameDetails.publishers">
+              <p>{{ i.name }}</p>
+            </div>
+          </div>
+
+          <div class="col">
+            <app-subtitle subtitle="Website"></app-subtitle>
+            <a
+              class="website"
+              [href]="
+                gameDetails.website ? gameDetails.website : 'without website'
+              "
+              target="_blank"
+              rel="noopener noreferrer"
+              >{{
+                gameDetails.website ? gameDetails.website : "without website"
+              }}
+            </a>
+          </div>
+
+          <div class="col">
+            <app-subtitle subtitle="Relase date"></app-subtitle>
+            <p>{{ gameDetails.released | date }}</p>
           </div>
         </div>
-
-        <div class="col">
-          <app-subtitle subtitle="Developers"></app-subtitle>
-          <ng-container *ngFor="let i of gameDetails.developers">
-            <p>{{ i.name }}</p>
-          </ng-container>
-        </div>
-
-        <div class="col">
-          <app-subtitle subtitle="Publisher"></app-subtitle>
-          <div *ngFor="let i of gameDetails.publishers">
-            <p>{{ i.name }}</p>
-          </div>
-        </div>
-
-        <div class="col">
-          <app-subtitle subtitle="Website"></app-subtitle>
-          <a
-            class="website"
-            [href]="
-              gameDetails.website ? gameDetails.website : 'without website'
-            "
-            target="_blank"
-            rel="noopener noreferrer"
-            >{{ gameDetails.website ? gameDetails.website : "without website" }}
-          </a>
-        </div>
-
-        <div class="col">
-          <app-subtitle subtitle="Relase date"></app-subtitle>
-          <p>{{ gameDetails.released | date }}</p>
-        </div>
-      </div>
+      </ng-template>
     </div>
 
     <!--Metracritic and comments-->
