@@ -38,6 +38,8 @@ import { CurrencyConverterService } from './services/currency-converter.service'
 import { LoadingSpinnerComponent } from './components/shared/loading-spinner/loading-spinner.component';
 import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
 import { PluckPipe } from './pipes/pluck.pipe';
+import { BestGamesService } from './services/best-games.service';
+import { GamesService } from './services/games-service';
 
 @NgModule({
   declarations: [
@@ -81,7 +83,13 @@ import { PluckPipe } from './pipes/pluck.pipe';
     ReactiveFormsModule,
     FormsModule,
   ],
-  providers: [DealsService, StoresService, CurrencyConverterService],
+  providers: [
+    DealsService,
+    StoresService,
+    CurrencyConverterService,
+    BestGamesService,
+    GamesService,
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
