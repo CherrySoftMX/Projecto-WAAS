@@ -40,6 +40,7 @@ import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.com
 import { PluckPipe } from './pipes/pluck.pipe';
 import { BestGamesService } from './services/best-games.service';
 import { GamesService } from './services/games-service';
+import { AboutComponent } from './pages/about/about.component';
 
 @NgModule({
   declarations: [
@@ -74,6 +75,7 @@ import { GamesService } from './services/games-service';
     LoadingSpinnerComponent,
     NotFoundPageComponent,
     PluckPipe,
+    AboutComponent,
   ],
   imports: [
     BrowserModule,

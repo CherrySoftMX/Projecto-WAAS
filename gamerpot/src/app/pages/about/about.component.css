@@ -1,0 +1,15 @@
+img {
+  width: 22rem;
+  height: 22rem;
+}
+
+.btn-a {
+  background-color: #373737;
+  padding: 0.5rem 2rem 0.5rem 2rem;
+  text-decoration: none;
+  color: white;
+}
+
+.btn-a:hover {
+  background-color: #535353;
+}

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AboutComponent } from './pages/about/about.component';
 import { BestGamesPageComponent } from './pages/best-games-page/best-games-page.component';
 import { DealsPageComponent } from './pages/deals-page/deals-page.component';
 import { GamePageComponent } from './pages/game-page/game-page.component';
@@ -29,11 +30,13 @@ const routes: Routes = [
     path: DomainRoutes.GAME.NG_PATH,
     component: GamePageComponent,
   },
+  { path: DomainRoutes.ABOUT.NG_PATH, component: AboutComponent },
   {
     path: '',
     redirectTo: DomainRoutes.HOME.NG_PATH,
     pathMatch: 'full',
   },
+
   { path: '**', component: NotFoundPageComponent },
 ];
 
