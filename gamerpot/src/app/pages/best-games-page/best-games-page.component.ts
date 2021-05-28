@@ -67,8 +67,8 @@ export class BestGamesPageComponent implements OnInit {
     const response = await this.bestGameService
       .buildUrl({
         page: this.currentPage,
-        platform: this.currentPlatform.id,
-        genre: this.currentGenre.id,
+        platforms: this.currentPlatform.id,
+        genres: this.currentGenre.id,
       })
       .fetchGames();
 

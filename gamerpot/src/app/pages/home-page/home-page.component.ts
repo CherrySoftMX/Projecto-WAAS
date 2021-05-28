@@ -3,8 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { GameDetails } from 'src/app/interfaces/game-details';
 import { IndividualDealInterface } from 'src/app/interfaces/individual-deal';
 import { GamePlatform } from 'src/app/interfaces/platform-response';
-import { DealsService } from 'src/app/services/deals-service.service';
-import { GamesService } from 'src/app/services/games-service';
+import { BestGamesService } from 'src/app/services/best-games.service';
 import { PlatformsGamesService } from 'src/app/services/platforms-games.service';
 
 @Component({
@@ -41,7 +40,7 @@ export class HomePageComponent implements OnInit {
   fetchingGames: boolean = true;
 
   constructor(
-    private gameService: GamesService,
+    private bestGameService: BestGamesService,
     private platformsService: PlatformsGamesService,
     private activeRoute: ActivatedRoute,
     private router: Router
@@ -78,12 +77,12 @@ export class HomePageComponent implements OnInit {
   refreshGames = async () => {
     this.fetchingGames = true;
 
-    const response = await this.gameService
+    const response = await this.bestGameService
       .buildUrl({
         page: this.currentPage,
-        platform: this.currentPlatform.id,
-        order: this.currentOrder,
-        name: this.currentSearch,
+        platforms: this.currentPlatform.id,
+        ordering: this.currentOrder,
+        search: this.currentSearch,
       })
       .fetchGames();
 

@@ -4,46 +4,49 @@ import { GameResponse } from '../interfaces/game-response';
 import { API_KEY, API_URL } from '../shared/api';
 
 interface UrlParams {
-  metacriticLow: number;
-  metacriticHigh: number;
+  [key: string]: any;
+
+  metacritic: number[];
   page: number;
-  pageSize: number;
-  platform: number | null;
-  genre: number | null;
+  page_size: number;
+  platforms?: number;
+  genres?: number;
+  ordering?: string;
+  search?: string;
 }
+
+const DEFAULT_URL_PARAMS: UrlParams = {
+  metacritic: [70, 100],
+  page: 1,
+  page_size: 12,
+};
 
 @Injectable({
   providedIn: 'root',
 })
 export class BestGamesService {
-  readonly DEFAULT_URL: string = `${API_URL}games?key=${API_KEY}`;
+  readonly DEFAULT_URL = `${API_URL}games?key=${API_KEY}`;
 
   url: string = this.DEFAULT_URL;
 
   constructor(private http: HttpClient) {}
 
-  buildUrl = ({
-    metacriticLow = 70,
-    metacriticHigh = 100,
-    page = 1,
-    pageSize = 12,
-    platform,
-    genre,
-  }: Partial<UrlParams>) => {
+  buildUrl = (args: Partial<UrlParams>) => {
+    let ob = { ...DEFAULT_URL_PARAMS };
     this.url = this.DEFAULT_URL;
 
-    this.url +=
-      `&metacritic=${metacriticLow},${metacriticHigh}` +
-      `&page=${page}` +
-      `&page_size=${pageSize}`;
+    Object.getOwnPropertyNames(args).forEach((name) => {
+      ob = { ...ob, [name]: args[name] };
+    });
 
-    if (platform && genre) {
-      this.url += `&genres=${genre}&platforms=${platform}`;
-    } else if (platform) {
-      this.url += `&platforms=${platform}`;
-    } else if (genre) {
-      this.url += `&genres=${genre}`;
-    }
+    Object.getOwnPropertyNames(ob).forEach((property) => {
+      const value = args[property] || DEFAULT_URL_PARAMS[property];
+
+      if (value)
+        this.url += `&${property}=${
+          Array.isArray(value) ? value.join() : value
+        }`;
+    });
 
     return this;
   };
