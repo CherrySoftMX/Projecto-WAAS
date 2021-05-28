@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GameDetails } from 'src/app/interfaces/game-details';
+import { IndividualDealInterface } from 'src/app/interfaces/individual-deal';
 import { GamePlatform } from 'src/app/interfaces/platform-response';
+import { DealsService } from 'src/app/services/deals-service.service';
 import { GamesService } from 'src/app/services/games-service';
 import { PlatformsGamesService } from 'src/app/services/platforms-games.service';
 
@@ -16,6 +18,7 @@ export class HomePageComponent implements OnInit {
   readonly MAX_COUNT: number = 2000;
 
   games: Array<GameDetails> = [];
+  deals: Array<IndividualDealInterface> = [];
 
   platforms: Array<GamePlatform> = [];
   currentPlatform: GamePlatform = {} as GamePlatform;
@@ -40,6 +43,7 @@ export class HomePageComponent implements OnInit {
   constructor(
     private gameService: GamesService,
     private platformsService: PlatformsGamesService,
+    private dealsService: DealsService,
     private activeRoute: ActivatedRoute,
     private router: Router
   ) {}
@@ -47,6 +51,7 @@ export class HomePageComponent implements OnInit {
   ngOnInit(): void {
     this.getPathParams();
     this.fetchPlatforms();
+    this.fetchDeals();
     this.setCurrentOrder();
   }
 
@@ -95,8 +100,10 @@ export class HomePageComponent implements OnInit {
 
   fetchPlatforms = async () => {
     const response = await this.platformsService.getPlatforms();
-    this.platforms = response.results;
-    this.setCurrentPlatform();
+    if (response) {
+      this.platforms = response.results;
+      this.setCurrentPlatform();
+    }
   };
 
   setCurrentPlatform = () => {
@@ -109,6 +116,19 @@ export class HomePageComponent implements OnInit {
   setCurrentOrder = () => {
     const order = this.orders.find((o) => o == this.currentOrder);
     if (order) this.currentOrder = order;
+  };
+
+  fetchDeals = async () => {
+    const response = await this.dealsService.getDeals({
+      maxResults: 15,
+      page: 0,
+      title: '',
+      lowerPrice: 0,
+      upperPrice: 500,
+    });
+    if (response) {
+      this.deals = response.deals;
+    }
   };
 
   changePage(page: number): void {

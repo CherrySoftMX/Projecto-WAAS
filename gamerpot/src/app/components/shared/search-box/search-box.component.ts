@@ -8,6 +8,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 export class SearchBoxComponent implements OnInit {
   @Input() type: 'thin' | 'thick' = 'thin';
   @Input() placeholder: string = 'Search a game';
+  @Input() value: string = '';
 
   @Output() searchEvent = new EventEmitter<string>();
 

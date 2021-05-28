@@ -5,13 +5,14 @@
   <div class="text-center mb-3">
     <app-title title="Checkout the newest games"></app-title>
     <div class="container" style="max-width: 800px">
-      <app-search-box (searchEvent) = "searchGame($event)" type="thick"></app-search-box>
+      <app-search-box (searchEvent) = "searchGame($event)" type="thick"
+      [value]="currentSearch"></app-search-box>
     </div>
   </div>
 
   <div class="px-1 px-sm-2 px-md-3 scrollable-container">
     <div class="d-none d-lg-flex col-3 mr-xl-4 flex-column scrollable-column">
-      <app-recent-deals-list></app-recent-deals-list>
+      <app-recent-deals-list [deals]="deals"></app-recent-deals-list>
     </div>
 
     <div class="col flex-column scrollable-column">
