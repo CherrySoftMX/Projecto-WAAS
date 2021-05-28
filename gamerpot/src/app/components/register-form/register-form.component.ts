@@ -26,7 +26,7 @@ export class RegisterFormComponent implements OnInit {
   ngOnInit(): void {}
 
   register() {
-    alert(this.registerData.get('name')?.value);
+    alert('registered');
     //register user
 
     //if ok
