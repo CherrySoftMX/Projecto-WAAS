@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { IndividualDealInterface } from 'src/app/interfaces/individual-deal';
+import { DealsService } from '../../../services/deals-service.service';
 
 @Component({
   selector: 'app-recent-deals-list',
@@ -8,8 +9,19 @@ import { IndividualDealInterface } from 'src/app/interfaces/individual-deal';
 })
 export class RecentDealsListComponent implements OnInit {
   @Input() deals: Array<IndividualDealInterface> = [];
+  @Input() showRandomDeals: boolean = false;
 
-  constructor() {}
+  constructor(private dealsService: DealsService) {}
 
-  ngOnInit(): void {}
+  ngOnInit() {
+    console.log(this.showRandomDeals);
+    this.getDeals();
+  }
+
+  getDeals = async () => {
+    if(!this.showRandomDeals) return;
+    const response = await this.dealsService.getDeals({ page: 0 });
+    this.deals = response.deals;
+  };
+
 }
