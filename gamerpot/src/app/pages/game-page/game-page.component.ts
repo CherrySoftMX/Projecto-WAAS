@@ -4,6 +4,8 @@ import { GameDetails } from '../../interfaces/game-details';
 import { DealsService } from '../../services/deals-service.service';
 import { GameDatailsService } from '../../services/game-details.service';
 import { StoresService } from '../../services/stores-service.service';
+import { IndividualDealInterface } from 'src/app/interfaces/individual-deal';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-game-page',
@@ -14,6 +16,7 @@ export class GamePageComponent implements OnInit {
   gameDetails: GameDetails = {} as GameDetails;
   commentaries: Array<any> = [];
   fetching: boolean = true;
+  gameDeals: any = [];
 
   constructor(
     private gameDetailsService: GameDatailsService,
@@ -28,7 +31,7 @@ export class GamePageComponent implements OnInit {
     this.loadGameDetails(id).then(() => {
       this.fetching = false;
     });
-    
+
   }
 
   loadGameDetails = async (id: number) => {
@@ -37,7 +40,9 @@ export class GamePageComponent implements OnInit {
     this.getStores();
   };
 
-  getDealsGame(): void {}
+  getDealsGame = async () => {
+    this.gameDeals = await this.dealsService.getDealsByGameName({ title: this.gameDetails.name });
+  };
 
   getStores(): void {}
 

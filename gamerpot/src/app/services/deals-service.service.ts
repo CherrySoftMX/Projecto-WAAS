@@ -12,6 +12,12 @@ interface DealsSearchParameters {
   upperPrice?: number;
 }
 
+interface DealsSearchByName {
+  title: string;
+  page?: number;
+  maxResults?: number;
+}
+
 @Injectable({
   providedIn: 'root',
 })
@@ -47,11 +53,11 @@ export class DealsService {
     return promise;
   };
 
-  getDealsByNameGame = async (
-    title: string,
-    page: number = 0,
-    maxResults: number = 10
-  ): Promise<IndividualDealInterface> => {
+  getDealsByGameName = async ({
+    title,
+    page = 0,
+    maxResults = 10
+  }: DealsSearchByName): Promise<IndividualDealInterface> => {
     const params = `title=${title}&pageSize=${maxResults}&pageNumber=${page}`;
     const url = `${this.apiUrl}?${params}`;
     let promise = new Promise<IndividualDealInterface>((resolve, reject) => {
