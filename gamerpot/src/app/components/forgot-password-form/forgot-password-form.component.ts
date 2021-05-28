@@ -8,7 +8,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./forgot-password-form.component.css'],
 })
 export class ForgotPasswordFormComponent implements OnInit {
-  constructor(private activeModal: NgbActiveModal) {}
+  constructor(public activeModal: NgbActiveModal) {}
 
   data = new FormGroup({
     email: new FormControl('', [Validators.email]),
