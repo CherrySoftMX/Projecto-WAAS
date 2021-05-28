@@ -14,7 +14,6 @@ export class RecentDealsListComponent implements OnInit {
   constructor(private dealsService: DealsService) {}
 
   ngOnInit() {
-    console.log(this.showRandomDeals);
     this.getDeals();
   }
 
