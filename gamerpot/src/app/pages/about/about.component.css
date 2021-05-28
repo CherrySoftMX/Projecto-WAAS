@@ -1,6 +1,6 @@
 img {
-  width: 22rem;
-  height: 22rem;
+  width: 100%;
+  margin-bottom: 1em;
 }
 
 .btn-a {
@@ -12,4 +12,17 @@ img {
 
 .btn-a:hover {
   background-color: #535353;
+}
+
+a {
+  color: white;
+}
+
+.devs {
+  transition: all ease .5s;
+}
+
+.devs:hover {
+  cursor: pointer;
+  transform: translateY(-1.2em);
 }

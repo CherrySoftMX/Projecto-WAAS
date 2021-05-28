@@ -1,36 +1,30 @@
-<div class="scrollable-page-wrapper">
+<div>
     <app-navbar></app-navbar>
     <app-title title="About us?"></app-title>
     <div class="container-fluid text-center">
         <p>We are students from UADY university, and we need to pass WAAS</p>
     </div>
     <div class="d-flex flex-wrap text-center justify-content-center">
-        <picture class="p-5 col-xlg-4">
-            <img class="img-thumbnail rounded-circle" src="https://avatars.githubusercontent.com/u/48963587?v=4" alt="Team">
+        <picture class="p-5 col-lg-4 devs">
             <a href="https://github.com/SonBear" target="_blank">
-                <p>SonBear</p>
-            </a>
-           
-        </picture>
-        <picture class="p-5 col-xlg-4">
-            <img class="img-thumbnail rounded-circle" src="https://avatars.githubusercontent.com/u/47760015?v=4" alt="Team">
-            <a href="" target="_blank">
-                <p>HikingCarrot7</p>
+              <img class="img-thumbnail rounded-circle" src="https://avatars.githubusercontent.com/u/48963587?v=4" alt="Team">
+              <p>SonBear</p>
             </a>
         </picture>
-        <picture class="p-5  col-xlg-4">
+        <picture class="p-5 col-lg-4 devs">
+            <a href="https://github.com/HikingCarrot7" target="_blank">
+              <img class="img-thumbnail rounded-circle" src="https://avatars.githubusercontent.com/u/47760015?v=4" alt="Team">
+              <p>HikingCarrot7</p>
+            </a>
+        </picture>
+        <picture class="p-5 col-lg-4 devs">
+          <a href="https://github.com/Shadic78" target="_blank">
             <img class="img-thumbnail rounded-circle" src="https://avatars.githubusercontent.com/u/43481488?v=4" alt="Team">
-            <a href="https://github.com/Shadic78" target="_blank">
-                <p>Shadic78</p>
-            </a>
+            <p>Shadic78</p>
+          </a>
         </picture>
     </div>
-   <div class="container-fluid p-5 align-items-center text-center">
-        <app-title title="suggestion box"></app-title>
-        <textarea [(ngModel)]="body" class="form-control mb-3" rows="4"  placeholder="Tell us..."></textarea>
-        <a class="btn-a rounded"href="mailto:ricardoibarra2044@gmail.com?subject=GAMERPOT%20SUGGESTION&body={{body}}">Send</a>
-   </div>
-
 </div>
+<app-footer></app-footer>
 
 
