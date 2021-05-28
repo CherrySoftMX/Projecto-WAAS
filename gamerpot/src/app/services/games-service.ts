@@ -8,6 +8,7 @@ interface UrlParams {
   pageSize: number;
   platform: number | null;
   order: string | null;
+  name: string | null;
 }
 
 @Injectable({
@@ -24,17 +25,27 @@ export class GamesService {
     pageSize = 12,
     platform,
     order,
+    name,
   }: Partial<UrlParams>) => {
     this.url = this.DEFAULT_URL;
 
-    this.url += `&page=${page}` + `&page_size=${pageSize}`;
+    this.url +=
+      `&page=${page}` + `&page_size=${pageSize}` + `&search_precise=true`;
 
-    if (platform && order) {
+    if (platform && order && name) {
+      this.url += `&ordering=-${order}&platforms=${platform}&search=${name}`;
+    } else if (platform && order) {
       this.url += `&ordering=-${order}&platforms=${platform}`;
+    } else if (platform && name) {
+      this.url += `&search=${name}&platforms=${platform}`;
+    } else if (order && name) {
+      this.url += `&ordering=-${order}&search=${name}`;
     } else if (platform) {
       this.url += `&platforms=${platform}`;
     } else if (order) {
-      this.url += `&ordering=${order}`;
+      this.url += `&ordering=-${order}`;
+    } else if (name) {
+      this.url += `&search=${name}`;
     }
 
     return this;

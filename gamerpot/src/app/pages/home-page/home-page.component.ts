@@ -1,5 +1,3 @@
-import { ThrowStmt } from '@angular/compiler';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GameDetails } from 'src/app/interfaces/game-details';
@@ -35,6 +33,8 @@ export class HomePageComponent implements OnInit {
 
   currentPage: number = 1;
   collectionSize: number = 0;
+
+  currentSearch: string = this.CLEAR_FIELD;
   fetchingGames: boolean = true;
 
   constructor(
@@ -57,6 +57,7 @@ export class HomePageComponent implements OnInit {
         page: this.currentPage,
         order: this.currentOrder,
         platform: this.currentPlatform.id,
+        search: this.currentSearch,
       },
     });
   };
@@ -66,6 +67,7 @@ export class HomePageComponent implements OnInit {
       this.currentPage = params['page'] || 1;
       this.currentPlatform.id = params['platform'] || this.CLEAR_FIELD;
       this.currentOrder = params['order'] || this.CLEAR_FIELD;
+      this.currentSearch = params['search'] || this.CLEAR_FIELD;
       this.refreshGames();
     });
   };
@@ -78,6 +80,7 @@ export class HomePageComponent implements OnInit {
         page: this.currentPage,
         platform: this.currentPlatform.id,
         order: this.currentOrder,
+        name: this.currentSearch,
       })
       .fetchGames();
 
@@ -125,6 +128,12 @@ export class HomePageComponent implements OnInit {
     this.currentPage = 1;
     let plat = this.platforms.find((p) => p.name == platform);
     this.currentPlatform.id = plat?.id || this.CLEAR_FIELD;
+    this.navigate();
+  };
+
+  searchGame = (name: string) => {
+    this.currentPage = 1;
+    this.currentSearch = name;
     this.navigate();
   };
 }
