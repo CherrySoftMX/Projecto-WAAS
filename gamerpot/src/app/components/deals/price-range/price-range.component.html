@@ -18,6 +18,8 @@
       <app-combo-box
         label="Cur"
         [options]="['USD', 'MXN']"
+        [defaultOption]="'USD'"
+        [avaibleAllOption]="false"
         (onChange)="setCurrency($event)"
       >
       </app-combo-box>
