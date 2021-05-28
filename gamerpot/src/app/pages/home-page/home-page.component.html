@@ -5,7 +5,8 @@
   <div class="text-center mb-3">
     <app-title title="Checkout the newest games"></app-title>
     <div class="container" style="max-width: 800px">
-      <app-search-box type="thick"></app-search-box>
+      <app-search-box (searchEvent) = "searchGame($event)" type="thick"
+      [value]="currentSearch"></app-search-box>
     </div>
   </div>
 

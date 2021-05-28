@@ -27,10 +27,12 @@ export class DealTableRowMinimalComponent implements OnInit {
     };
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 
   redirectToDeal() {
-    window.open(`https://www.cheapshark.com/redirect?dealID=${this.deal.dealID}`, "_blank");
+    window.open(
+      `https://www.cheapshark.com/redirect?dealID=${this.deal.dealID}`,
+      '_blank'
+    );
   }
-
 }

@@ -7,6 +7,7 @@
     type="text"
     [placeholder]="placeholder"
     class="search-box__input rounded-pill"
+    [value]="value"
   />
   <div #ref (click)="search(searchBox.value)">
     <ng-content select="i"></ng-content>
