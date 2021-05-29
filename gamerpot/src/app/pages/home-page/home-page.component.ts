@@ -81,8 +81,10 @@ export class HomePageComponent implements OnInit {
       .buildUrl({
         page: this.currentPage,
         platforms: this.currentPlatform.id,
-        ordering: this.currentOrder,
+        ordering: '-' + this.currentOrder,
         search: this.currentSearch,
+        metacritic: [0, 100],
+        search_precise: true,
       })
       .fetchGames();
 

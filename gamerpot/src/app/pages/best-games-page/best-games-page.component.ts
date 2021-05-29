@@ -74,7 +74,6 @@ export class BestGamesPageComponent implements OnInit {
 
     if (response) {
       const { results, count } = response;
-      console.log(results, count);
       this.bestGames = results;
       this.collectionSize = count;
     }

@@ -14,6 +14,7 @@ interface UrlParams {
   genres?: number;
   ordering?: string;
   search?: string;
+  search_precise?: boolean;
 }
 
 const DEFAULT_URL_PARAMS: UrlParams = {
