@@ -41,6 +41,7 @@ import { BestGamesService } from './services/best-games.service';
 import { CurrencyConverterService } from './services/currency-converter.service';
 import { DealsService } from './services/deals-service.service';
 import { StoresService } from './services/stores-service.service';
+import { ForgotPasswordFormComponent } from './components/forgot-password-form/forgot-password-form.component';
 
 @NgModule({
   declarations: [
@@ -77,6 +78,7 @@ import { StoresService } from './services/stores-service.service';
     AboutComponent,
     FooterComponent,
     ContactFormComponent,
+    ForgotPasswordFormComponent,
   ],
   imports: [
     BrowserModule,

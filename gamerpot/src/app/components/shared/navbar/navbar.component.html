@@ -66,11 +66,15 @@
           my-3 my-md-0
           px-4
           mx-auto mx-lg-3 mx-xl-4
+          dropdown
         "
       >
-        <a class="nav-link p-0" href="#">
+        <a class="nav-link p-0" id="profile-item" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" role="button" href="#">
           <app-profile-img></app-profile-img>
         </a>
+        <div class="dropdown-menu text-center" aria-labelledby="profile-item" style="background-color: var(--background-secondary)">
+            <a [routerLink]="[routes.LOGIN.PATH]" href="#" class="dropdown-item" style="color:white;">Log out</a>
+        </div>
       </li>
     </div>
   </div>

@@ -5,6 +5,7 @@ import { BestGamesPageComponent } from './pages/best-games-page/best-games-page.
 import { DealsPageComponent } from './pages/deals-page/deals-page.component';
 import { GamePageComponent } from './pages/game-page/game-page.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
+import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
 import { WishlistPageComponent } from './pages/wishlist-page/wishlist-page.component';
 import { DomainRoutes } from './shared/routes';
@@ -31,6 +32,7 @@ const routes: Routes = [
     component: GamePageComponent,
   },
   { path: DomainRoutes.ABOUT.NG_PATH, component: AboutComponent },
+  { path: DomainRoutes.LOGIN.NG_PATH, component: LoginPageComponent },
   {
     path: '',
     redirectTo: DomainRoutes.HOME.NG_PATH,
