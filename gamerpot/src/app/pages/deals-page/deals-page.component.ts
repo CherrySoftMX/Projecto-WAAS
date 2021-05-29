@@ -1,16 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { GameDealListInterface } from '../../interfaces/game-deal-list';
+import { ActivatedRoute, QueryParamsHandling, Router } from '@angular/router';
+import { removeNullProperties } from 'src/app/services/utils/object-utils';
 import { IndividualDealInterface } from '../../interfaces/individual-deal';
 import { CurrencyConverterService } from '../../services/currency-converter.service';
 import { DealsService } from '../../services/deals-service.service';
-import { StoresService } from '../../services/stores-service.service';
-
-interface DealsCurrencyConvertInterface {
-  deals: Array<IndividualDealInterface>;
-  fromCurrency: string;
-  toCurrency: string;
-}
 
 @Component({
   selector: 'app-deals-page',
@@ -20,13 +13,18 @@ interface DealsCurrencyConvertInterface {
 export class DealsPageComponent implements OnInit {
   readonly DEFAULT_CURRENCY = 'USD';
 
-  search: string = 'search';
-  minPrice: number = 0;
-  maxPrice: number = 500;
+  search: string = '';
+
+  inputLowerPrice: string = '';
+  inputUpperPrice: string = '';
+
+  lowerPriceUSD: string = '0';
+  upperPriceUSD: string = '500';
+
   oldCurrency: string = this.DEFAULT_CURRENCY;
   actualCurrency: string = this.DEFAULT_CURRENCY;
-  deals: any;
-  stores: any;
+
+  deals: IndividualDealInterface[] = [];
 
   totalPages: number = 0;
   currentPage: number = 0;
@@ -37,7 +35,6 @@ export class DealsPageComponent implements OnInit {
 
   constructor(
     private dealsService: DealsService,
-    private storesService: StoresService,
     private route: ActivatedRoute,
     private router: Router,
     private currencyConverter: CurrencyConverterService
@@ -47,117 +44,87 @@ export class DealsPageComponent implements OnInit {
     this.route.queryParams.subscribe((params) => {
       this.currentPage = params['page'] || 1;
       this.search = params['title'];
-      this.minPrice = params['lowerPrice'];
-      this.maxPrice = params['upperPrice'];
+      this.lowerPriceUSD = params['lowerPrice'];
+      this.upperPriceUSD = params['upperPrice'];
       this.fetchDeals();
+    });
+  }
+
+  navigate(params: any, queryParamsHandling?: QueryParamsHandling) {
+    removeNullProperties(params);
+
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: {
+        ...params,
+      },
+      queryParamsHandling,
     });
   }
 
   fetchDeals = async () => {
     this.fetching = true;
 
-    const newDeals: GameDealListInterface = await this.dealsService.getDeals({
-      page: this.currentPage - 1,
-      title: this.search,
-      lowerPrice: this.minPrice,
-      upperPrice: this.maxPrice,
-    });
+    const { deals, totalPages } = await this.dealsService
+      .buildUrl({
+        page: this.currentPage - 1,
+        title: this.search,
+        lowerPrice: this.lowerPriceUSD,
+        upperPrice: this.upperPriceUSD,
+      })
+      .fetchDeals();
 
-    this.stores = await this.storesService.getStores();
-    const dealsList = newDeals.deals;
-    this.deals = dealsList.map(
-      (deal: any) => (deal = { ...this.stores[deal.storeID - 1], ...deal })
-    );
-
-    this.totalPages = Number(newDeals.totalPages);
+    this.deals = deals;
+    this.totalPages = totalPages;
     this.collectionSize = this.totalPages * this.pageSize;
 
-    if (this.actualCurrency != this.DEFAULT_CURRENCY) {
-      this.deals = await this.calculateDealsNewCurrency({
-        deals: this.deals,
-        fromCurrency: this.oldCurrency,
-        toCurrency: this.actualCurrency,
-      });
-    }
+    if (this.actualCurrency !== this.DEFAULT_CURRENCY)
+      this.updateDealsCurrency();
 
     this.fetching = false;
   };
 
-  buscar(query: string) {
-    this.router.navigate([], {
-      relativeTo: this.route,
-      queryParams: {
-        title: query.length > 0 ? query : null,
-        page: null,
-      },
-      queryParamsHandling: 'merge',
-    });
-  }
-
-  setMinPrice = async (price: string) => {
-    price = await this.calculatePriceFilters(price);
-    this.router.navigate([], {
-      relativeTo: this.route,
-      queryParams: {
-        lowerPrice: price.length > 0 ? price : null,
-        page: null,
-      },
-      queryParamsHandling: 'merge',
-    });
-  };
-
-  setMaxPrice = async (price: string) => {
-    price = await this.calculatePriceFilters(price);
-    this.router.navigate([], {
-      relativeTo: this.route,
-      queryParams: {
-        upperPrice: price.length > 0 ? price : null,
-        page: null,
-      },
-      queryParamsHandling: 'merge',
-    });
-  };
-
-  setCurrency = async (cur: string) => {
-    if (cur == this.actualCurrency) return;
-
-    this.oldCurrency = this.actualCurrency;
-    this.actualCurrency = cur;
-    this.deals = await this.calculateDealsNewCurrency({
+  updateDealsCurrency = async () => {
+    this.deals = await this.currencyConverter.calculateDealsNewCurrency({
       deals: this.deals,
       fromCurrency: this.oldCurrency,
       toCurrency: this.actualCurrency,
     });
   };
 
-  calculateDealsNewCurrency = async ({
-    deals,
-    fromCurrency,
-    toCurrency,
-  }: DealsCurrencyConvertInterface) => {
-    const response: any = await this.currencyConverter.getCurrencyConversion({
-      from: fromCurrency,
-      to: toCurrency,
+  searchGame(query: string) {
+    this.navigate({ title: query });
+  }
+
+  filterGamesByPrice = async (args: string) => {
+    const lowerPriceUSD = await this.calculatePriceToUSD(this.inputLowerPrice);
+    const upperPriceUSD = await this.calculatePriceToUSD(this.inputUpperPrice);
+
+    this.navigate({
+      lowerPrice: lowerPriceUSD,
+      upperPrice: upperPriceUSD,
     });
-    const conversionRate = response[`${fromCurrency}_${toCurrency}`];
-    const convertedDeals = deals.map((deal: IndividualDealInterface) => {
-      const salePrice = deal.salePrice * conversionRate;
-      const normalPrice = deal.normalPrice * conversionRate;
-      return { ...deal, salePrice, normalPrice };
-    });
-    return convertedDeals;
   };
 
-  calculatePriceFilters = async (price: string) => {
-    if (this.actualCurrency != this.DEFAULT_CURRENCY) {
-      if (price.length == 0) return price;
-      const convertedPrice = await this.currencyConverter.currencyConvert({
-        from: this.actualCurrency,
-        to: this.oldCurrency,
+  setCurrency = async (cur: string) => {
+    this.oldCurrency = this.actualCurrency;
+    this.actualCurrency = cur;
+    this.updateDealsCurrency();
+  };
+
+  calculatePriceToUSD = async (price: string) => {
+    if (this.actualCurrency !== this.DEFAULT_CURRENCY) {
+      if (!price) return price;
+
+      const convertedPrice = await this.currencyConverter.convertCurrency({
+        fromCurrency: this.actualCurrency,
+        toCurrency: this.DEFAULT_CURRENCY,
         amount: price,
       });
+
       price = Math.round(convertedPrice).toString();
     }
+
     return price;
   };
 }

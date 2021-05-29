@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { GameResponse } from '../interfaces/game-response';
-import { API_KEY, API_URL } from '../shared/api';
+import { API_KEY, API_URL } from '../shared/apis/rawg-api';
+import { UrlBuilder } from './utils/url-builder';
 
 interface UrlParams {
   [key: string]: any;
@@ -21,53 +22,18 @@ const DEFAULT_URL_PARAMS: UrlParams = {
   page_size: 12,
 };
 
+const DEFAULT_URL = `${API_URL}games?key=${API_KEY}`;
+
 @Injectable({
   providedIn: 'root',
 })
-export class BestGamesService {
-  readonly DEFAULT_URL = `${API_URL}games?key=${API_KEY}`;
-
-  url: string = this.DEFAULT_URL;
-
-  constructor(private http: HttpClient) {}
-
-  buildUrl = (args: Partial<UrlParams>) => {
-    let ob = { ...DEFAULT_URL_PARAMS };
-    this.url = this.DEFAULT_URL;
-
-    Object.getOwnPropertyNames(args).forEach((name) => {
-      ob = { ...ob, [name]: args[name] };
-    });
-
-    Object.getOwnPropertyNames(ob).forEach((property) => {
-      const value = args[property] || DEFAULT_URL_PARAMS[property];
-
-      if (value)
-        this.url += `&${property}=${
-          Array.isArray(value) ? value.join() : value
-        }`;
-    });
-
-    return this;
-  };
+export class BestGamesService extends UrlBuilder<UrlParams> {
+  constructor(private http: HttpClient) {
+    super(DEFAULT_URL, DEFAULT_URL_PARAMS);
+  }
 
   fetchGames = (url?: string): Promise<GameResponse> => {
-    let fetchUrl = url ? url : this.url;
-
-    let promise = new Promise<GameResponse>((resolve, reject) => {
-      this.http
-        .get(fetchUrl)
-        .toPromise()
-        .then(
-          (response) => {
-            resolve(response as GameResponse);
-          },
-          (error) => {
-            reject(error);
-          }
-        );
-    });
-
-    return promise;
+    let fetchUrl = url || this.url;
+    return this.http.get<GameResponse>(fetchUrl).toPromise();
   };
 }

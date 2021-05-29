@@ -9,13 +9,20 @@ export class InputFieldComponent implements OnInit {
   @Input() label: string = '';
   @Input() placeholder: string = '';
 
-  @Output() onChange = new EventEmitter<string>();
+  @Input() value: string = '';
+  @Output() valueChange = new EventEmitter<string>();
+
+  @Output() onEnter = new EventEmitter<string>();
 
   constructor() {}
 
   ngOnInit(): void {}
 
+  onEnterPressed(value: string) {
+    this.onEnter.emit(value);
+  }
+
   onValueChanged(value: string) {
-    this.onChange.emit(value);
+    this.valueChange.emit(value);
   }
 }

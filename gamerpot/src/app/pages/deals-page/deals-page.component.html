@@ -1,13 +1,13 @@
 <div>
   <app-navbar></app-navbar>
-  <div class="px-2 px-md-5">
+  <div class="px-2 px-md-4 px-xl-5">
     <div class="deals-title mb-4">Browse deals</div>
     <div class="row my-3">
       <div class="col-xl">
         <app-title-with-content title="Search by title">
           <app-search-box
             placeholder="Search games"
-            (searchEvent)="buscar($event)"
+            (searchEvent)="searchGame($event)"
           >
           </app-search-box>
         </app-title-with-content>
@@ -15,21 +15,43 @@
 
       <div class="col-xl">
         <app-title-with-content title="Price range">
-          <app-price-range
-            (minPriceEvent)="setMinPrice($event)"
-            (maxPriceEvent)="setMaxPrice($event)"
-            (currencyEvent)="setCurrency($event)"
-          >
-          </app-price-range>
+          <div class="container-fluid">
+            <div class="row align-items-center">
+              <div class="col-md">
+                <app-input-field
+                  label="Min"
+                  placeholder="$0"
+                  [(value)]="inputLowerPrice"
+                  (onEnter)="filterGamesByPrice($event)"
+                ></app-input-field>
+              </div>
+              <div class="col-md">
+                <app-input-field
+                  label="Max"
+                  placeholder="$500"
+                  [(value)]="inputUpperPrice"
+                  (onEnter)="filterGamesByPrice($event)"
+                ></app-input-field>
+              </div>
+              <div class="col-md p-0">
+                <app-combo-box
+                  label="Cur"
+                  [options]="['USD', 'MXN']"
+                  [defaultOption]="'USD'"
+                  [avaibleAllOption]="false"
+                  (onChange)="setCurrency($event)"
+                >
+                </app-combo-box>
+              </div>
+            </div>
+          </div>
         </app-title-with-content>
       </div>
     </div>
-  </div>
 
-  <div class="px-1 px-md-5">
     <div class="scrollable-column">
       <app-deals-table [deals]="deals" [fetching]="fetching"></app-deals-table>
-      <ng-container *ngIf="!fetching">
+      <ng-container *ngIf="!fetching && deals.length > 0">
         <app-pagination
           [page]="currentPage"
           [pageSize]="pageSize"

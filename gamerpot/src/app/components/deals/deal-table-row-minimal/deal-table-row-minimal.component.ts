@@ -12,8 +12,8 @@ export class DealTableRowMinimalComponent implements OnInit {
   constructor() {
     this.deal = {
       title: 'Grand Theft Auto V',
-      dealID: '',
-      storeID: '',
+      dealID: 0,
+      storeID: 0,
       gameID: '',
       salePrice: 0,
       normalPrice: 0,

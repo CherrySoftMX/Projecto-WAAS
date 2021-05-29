@@ -1,78 +1,60 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { GameDealListInterface } from '../interfaces/game-deal-list';
 import { IndividualDealInterface } from '../interfaces/individual-deal';
+import {
+  DEALS_END_POINT,
+  STORES_END_POINT,
+} from '../shared/apis/cheap-shark-api';
+import { StoresService } from './stores-service.service';
+import { UrlBuilder } from './utils/url-builder';
 
-interface DealsSearchParameters {
-  maxResults?: number;
+interface DealsSearchParams {
+  [key: string]: any;
+
   page: number;
+  pageSize?: number;
   params?: string;
   title?: string;
-  lowerPrice?: number;
-  upperPrice?: number;
+  lowerPrice?: string;
+  upperPrice?: string;
 }
 
-interface DealsSearchByName {
-  title: string;
-  page?: number;
-  maxResults?: number;
-}
+const DEFAULT_URL_PARAMS: DealsSearchParams = {
+  page: 0,
+  title: '',
+  pageSize: 15,
+  lowerPrice: '0',
+  upperPrice: '500',
+};
 
 @Injectable({
   providedIn: 'root',
 })
-export class DealsService {
-  private apiUrl = 'https://www.cheapshark.com/api/1.0/deals';
+export class DealsService extends UrlBuilder<DealsSearchParams> {
+  constructor(private http: HttpClient, private storeService: StoresService) {
+    super(DEALS_END_POINT, DEFAULT_URL_PARAMS);
+  }
 
-  constructor(private http: HttpClient) {}
+  fetchDeals = async (url?: string) => {
+    const fetchUrl = url || this.url;
 
-  getDeals = async ({
-    maxResults = 15,
-    page = 0,
-    title = '',
-    lowerPrice = 0,
-    upperPrice = 500,
-  }: DealsSearchParameters): Promise<GameDealListInterface> => {
-    const params = `pageSize=${maxResults}&pageNumber=${page}&title=${title}&lowerPrice=${lowerPrice}&upperPrice=${upperPrice}`;
-    const url = `${this.apiUrl}?${params}`;
-    let promise = new Promise<GameDealListInterface>((resolve, reject) => {
-      this.http
-        .get(url, { observe: 'response' as 'response' })
-        .toPromise()
-        .then(
-          (response) => {
-            const totalPages = response.headers.get('x-total-page-count');
-            const listOfDeals = { deals: response.body, totalPages };
-            resolve(listOfDeals as GameDealListInterface);
-          },
-          (error) => {
-            reject(error);
-          }
-        );
-    });
-    return promise;
+    const response = await this.http
+      .get<IndividualDealInterface[]>(fetchUrl, { observe: 'response' })
+      .toPromise();
+
+    const stores = await this.http.get<any>(STORES_END_POINT).toPromise();
+
+    const deals: IndividualDealInterface[] = response.body!.map((deal) => ({
+      ...stores[deal.storeID - 1],
+      ...deal,
+    }));
+
+    const totalPages = Number(response.headers.get('x-total-page-count')!);
+    return { deals, totalPages };
   };
 
-  getDealsByGameName = async ({
-    title,
-    page = 0,
-    maxResults = 10
-  }: DealsSearchByName): Promise<IndividualDealInterface> => {
-    const params = `title=${title}&pageSize=${maxResults}&pageNumber=${page}`;
-    const url = `${this.apiUrl}?${params}`;
-    let promise = new Promise<IndividualDealInterface>((resolve, reject) => {
-      this.http
-        .get(url)
-        .toPromise()
-        .then(
-          (response) => {
-            resolve(response as IndividualDealInterface);
-          },
-          (error) => {
-            reject(error);
-          }
-        );
-    });
-    return promise;
+  fetchDealsByGameName = (url?: string): Promise<IndividualDealInterface> => {
+    const fetchUrl = url || this.url;
+    return this.http.get<IndividualDealInterface>(fetchUrl).toPromise();
   };
 }

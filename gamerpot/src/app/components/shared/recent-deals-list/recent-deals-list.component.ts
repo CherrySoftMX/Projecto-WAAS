@@ -14,13 +14,12 @@ export class RecentDealsListComponent implements OnInit {
   constructor(private dealsService: DealsService) {}
 
   ngOnInit() {
-    this.getDeals();
+    this.fetchDeals();
   }
 
-  getDeals = async () => {
-    if(!this.showRandomDeals) return;
-    const response = await this.dealsService.getDeals({ page: 0 });
+  fetchDeals = async () => {
+    if (!this.showRandomDeals) return;
+    const response = await this.dealsService.buildUrl({ page: 0 }).fetchDeals();
     this.deals = response.deals;
   };
-
 }

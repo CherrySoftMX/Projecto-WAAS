@@ -2,7 +2,7 @@
 <ng-container *ngFor="let deal of deals">
   <app-deal-table-row-minimal [deal]="deal"></app-deal-table-row-minimal>
 </ng-container>
-<ng-container *ngIf="deals.length == 0">
+<ng-container *ngIf="deals.length === 0">
   <div class="row justify-content-center">
     <span>There aren't any deals</span>
   </div>

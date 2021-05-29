@@ -1,9 +1,0 @@
-.price-range__inputs__col_input input,
-.price-range__inputs__col_input select {
-  background-color: var(--background-primary);
-  color: white;
-}
-
-.price-range__inputs__col_input select {
-  height: 30px;
-}

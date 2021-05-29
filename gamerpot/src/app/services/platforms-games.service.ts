@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { PlatformResponse } from '../interfaces/platform-response';
-import { API_KEY, API_URL } from '../shared/api';
+import { API_KEY, API_URL } from '../shared/apis/rawg-api';
 
 @Injectable({
   providedIn: 'root',
@@ -11,19 +11,6 @@ export class PlatformsGamesService {
 
   getPlatforms(): Promise<PlatformResponse> {
     const url = `${API_URL}platforms?key=${API_KEY}`;
-    let promise = new Promise<PlatformResponse>((resolve, rejects) => {
-      this.http
-        .get(url)
-        .toPromise()
-        .then(
-          (response) => {
-            resolve(response as PlatformResponse);
-          },
-          (error) => {
-            rejects(error);
-          }
-        );
-    });
-    return promise;
+    return this.http.get<PlatformResponse>(url).toPromise();
   }
 }

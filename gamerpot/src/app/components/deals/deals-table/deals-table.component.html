@@ -23,7 +23,14 @@
 </ng-container>
 
 <ng-template #dealsContent>
-  <ng-container *ngFor="let deal of deals">
-    <app-deal-table-row [deal]="deal"></app-deal-table-row>
+  <ng-container *ngIf="deals.length === 0; else content">
+    <div class="col text-center">
+      <div class="display-4 my-5">No games found :(</div>
+    </div>
   </ng-container>
+  <ng-template #content>
+    <ng-container *ngFor="let deal of deals">
+      <app-deal-table-row [deal]="deal"></app-deal-table-row>
+    </ng-container>
+  </ng-template>
 </ng-template>
