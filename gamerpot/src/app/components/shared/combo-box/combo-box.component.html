@@ -7,7 +7,9 @@
     name="combo"
     id="combo-box"
   >
-    <option [selected]="!defaultOption">All</option>
+    <ng-container *ngIf="avaibleAllOption">
+        <option [selected]="!defaultOption">All</option>
+    </ng-container>
     <ng-container *ngFor="let option of options">
       <option
         [selected]="defaultOption && defaultOption === option"

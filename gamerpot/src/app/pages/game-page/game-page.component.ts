@@ -3,7 +3,6 @@ import { ActivatedRoute } from '@angular/router';
 import { GameDetails } from '../../interfaces/game-details';
 import { DealsService } from '../../services/deals-service.service';
 import { GameDatailsService } from '../../services/game-details.service';
-import { StoresService } from '../../services/stores-service.service';
 
 @Component({
   selector: 'app-game-page',
@@ -14,32 +13,32 @@ export class GamePageComponent implements OnInit {
   gameDetails: GameDetails = {} as GameDetails;
   commentaries: Array<any> = [];
   fetching: boolean = true;
+  gameDeals: any = [];
 
   constructor(
     private gameDetailsService: GameDatailsService,
     private route: ActivatedRoute,
-    private dealsService: DealsService,
-    private storesService: StoresService
+    private dealsService: DealsService
   ) {}
 
   ngOnInit() {
     this.fetching = true;
     const id = this.route.snapshot.params.id;
-    this.loadGameDetails(id).then(() => {
+    this.fetchGameDetails(id).then(() => {
       this.fetching = false;
     });
-    
   }
 
-  loadGameDetails = async (id: number) => {
-    this.gameDetails = await this.gameDetailsService.getGameDetails(id);
-    this.getDealsGame();
-    this.getStores();
+  fetchGameDetails = async (id: number) => {
+    this.gameDetails = await this.gameDetailsService.fetchGameDetails(id);
+    this.fetchGameDeals();
   };
 
-  getDealsGame(): void {}
-
-  getStores(): void {}
+  fetchGameDeals = async () => {
+    this.gameDeals = await this.dealsService
+      .buildUrl({ title: this.gameDetails.name, maxResults: 10 })
+      .fetchDealsByGameName();
+  };
 
   displayMore(): void {
     const more = document.getElementById('more');

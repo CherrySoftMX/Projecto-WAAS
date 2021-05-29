@@ -1,10 +1,9 @@
-import { ThrowStmt } from '@angular/compiler';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GameDetails } from 'src/app/interfaces/game-details';
+import { IndividualDealInterface } from 'src/app/interfaces/individual-deal';
 import { GamePlatform } from 'src/app/interfaces/platform-response';
-import { GamesService } from 'src/app/services/games-service';
+import { BestGamesService } from 'src/app/services/best-games.service';
 import { PlatformsGamesService } from 'src/app/services/platforms-games.service';
 
 @Component({
@@ -18,6 +17,7 @@ export class HomePageComponent implements OnInit {
   readonly MAX_COUNT: number = 2000;
 
   games: Array<GameDetails> = [];
+  deals: Array<IndividualDealInterface> = [];
 
   platforms: Array<GamePlatform> = [];
   currentPlatform: GamePlatform = {} as GamePlatform;
@@ -35,10 +35,12 @@ export class HomePageComponent implements OnInit {
 
   currentPage: number = 1;
   collectionSize: number = 0;
+
+  currentSearch: string = this.CLEAR_FIELD;
   fetchingGames: boolean = true;
 
   constructor(
-    private gameService: GamesService,
+    private bestGameService: BestGamesService,
     private platformsService: PlatformsGamesService,
     private activeRoute: ActivatedRoute,
     private router: Router
@@ -57,6 +59,7 @@ export class HomePageComponent implements OnInit {
         page: this.currentPage,
         order: this.currentOrder,
         platform: this.currentPlatform.id,
+        search: this.currentSearch,
       },
     });
   };
@@ -66,6 +69,7 @@ export class HomePageComponent implements OnInit {
       this.currentPage = params['page'] || 1;
       this.currentPlatform.id = params['platform'] || this.CLEAR_FIELD;
       this.currentOrder = params['order'] || this.CLEAR_FIELD;
+      this.currentSearch = params['search'] || this.CLEAR_FIELD;
       this.refreshGames();
     });
   };
@@ -73,11 +77,12 @@ export class HomePageComponent implements OnInit {
   refreshGames = async () => {
     this.fetchingGames = true;
 
-    const response = await this.gameService
+    const response = await this.bestGameService
       .buildUrl({
         page: this.currentPage,
-        platform: this.currentPlatform.id,
-        order: this.currentOrder,
+        platforms: this.currentPlatform.id,
+        ordering: this.currentOrder,
+        search: this.currentSearch,
       })
       .fetchGames();
 
@@ -92,8 +97,10 @@ export class HomePageComponent implements OnInit {
 
   fetchPlatforms = async () => {
     const response = await this.platformsService.getPlatforms();
-    this.platforms = response.results;
-    this.setCurrentPlatform();
+    if (response) {
+      this.platforms = response.results;
+      this.setCurrentPlatform();
+    }
   };
 
   setCurrentPlatform = () => {
@@ -125,6 +132,12 @@ export class HomePageComponent implements OnInit {
     this.currentPage = 1;
     let plat = this.platforms.find((p) => p.name == platform);
     this.currentPlatform.id = plat?.id || this.CLEAR_FIELD;
+    this.navigate();
+  };
+
+  searchGame = (name: string) => {
+    this.currentPage = 1;
+    this.currentSearch = name;
     this.navigate();
   };
 }

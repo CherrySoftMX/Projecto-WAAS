@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ForgotPasswordFormComponent } from 'src/app/components/forgot-password-form/forgot-password-form.component';
 import { RegisterFormComponent } from '../../components/register-form/register-form.component';
 
 @Component({
@@ -12,7 +13,10 @@ export class LoginPageComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  open() {
+  openForgotModal() {
+    const modalRef = this.modalService.open(ForgotPasswordFormComponent);
+  }
+  openRegisterModal() {
     const modalRef = this.modalService.open(RegisterFormComponent);
   }
 }

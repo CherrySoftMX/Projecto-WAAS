@@ -9,6 +9,7 @@ export class ComboBoxComponent implements OnInit {
   @Input() options: string[] = [];
   @Input() label: string = '';
   @Input() defaultOption: string = '';
+  @Input() avaibleAllOption: boolean = true;
 
   @Output() onChange = new EventEmitter<string>();
 

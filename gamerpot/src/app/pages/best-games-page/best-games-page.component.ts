@@ -67,13 +67,14 @@ export class BestGamesPageComponent implements OnInit {
     const response = await this.bestGameService
       .buildUrl({
         page: this.currentPage,
-        platform: this.currentPlatform.id,
-        genre: this.currentGenre.id,
+        platforms: this.currentPlatform.id,
+        genres: this.currentGenre.id,
       })
       .fetchGames();
 
     if (response) {
       const { results, count } = response;
+      console.log(results, count);
       this.bestGames = results;
       this.collectionSize = count;
     }
@@ -96,7 +97,7 @@ export class BestGamesPageComponent implements OnInit {
   };
 
   fetchGenres = async () => {
-    const response = await this.genreService.getGenres();
+    const response = await this.genreService.fetchGenres();
     this.genres = response.results;
     this.setCurrentGenre();
   };

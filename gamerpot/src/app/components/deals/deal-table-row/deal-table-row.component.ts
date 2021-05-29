@@ -15,8 +15,8 @@ export class DealTableRowComponent implements OnInit {
   constructor() {
     this.deal = {
       title: 'Grand Theft Auto V',
-      dealID: '',
-      storeID: '',
+      dealID: 0,
+      storeID: 0,
       gameID: '',
       salePrice: 0,
       normalPrice: 0,
@@ -44,7 +44,9 @@ export class DealTableRowComponent implements OnInit {
   }
 
   redirectToDeal() {
-    window.open(`https://www.cheapshark.com/redirect?dealID=${this.deal.dealID}`, "_blank");
+    window.open(
+      `https://www.cheapshark.com/redirect?dealID=${this.deal.dealID}`,
+      '_blank'
+    );
   }
-
 }

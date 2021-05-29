@@ -5,8 +5,10 @@
       #input
       class="col p-1 border border-light"
       type="number"
-      (change)="onValueChanged(input.value)"
+      [value]="value"
       [placeholder]="placeholder"
+      (change)="onValueChanged(input.value)"
+      (keyup.enter)="onEnterPressed(input.value)"
     />
   </div>
 </div>

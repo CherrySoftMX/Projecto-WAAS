@@ -1,7 +1,7 @@
 export interface IndividualDealInterface {
   title: string;
-  dealID: string;
-  storeID: string;
+  dealID: number;
+  storeID: number;
   gameID: string;
   salePrice: number;
   normalPrice: number;

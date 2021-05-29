@@ -1,5 +1,5 @@
 export interface GamePlatform {
-  id: number | null;
+  id: number;
   name: string;
 }
 
