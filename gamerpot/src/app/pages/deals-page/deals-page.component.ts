@@ -67,7 +67,7 @@ export class DealsPageComponent implements OnInit {
 
     const { deals, totalPages } = await this.dealsService
       .buildUrl({
-        page: this.currentPage - 1,
+        pageNumber: this.currentPage - 1,
         title: this.search,
         lowerPrice: this.lowerPriceUSD,
         upperPrice: this.upperPriceUSD,
