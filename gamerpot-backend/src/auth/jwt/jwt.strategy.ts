@@ -1,18 +1,28 @@
 import { Injectable } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { PassportStrategy } from '@nestjs/passport';
 import { ExtractJwt, Strategy } from 'passport-jwt';
+import { UserService } from 'src/user/user.service';
+import { InvalidEmailException } from '../exceptions/invalid-email-exception';
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
-  constructor() {
+  constructor(
+    private configService: ConfigService,
+    private userService: UserService,
+  ) {
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+      secretOrKey: configService.get('SECRET_KEY'),
       ignoreExpiration: false,
-      secretOrKey: `${process.env.SECRET_KEY}`,
     });
   }
 
   async validate(payload: any) {
-    return { email: payload.email };
+    const existsUser = this.userService.existsUser(payload.username);
+
+    if (!existsUser) throw new InvalidEmailException(payload.username);
+
+    return { ...payload };
   }
 }
