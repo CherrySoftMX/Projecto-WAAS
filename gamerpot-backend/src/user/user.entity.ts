@@ -1,5 +1,6 @@
 import { Exclude } from 'class-transformer';
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Comment } from 'src/games/entities/comment.entity';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { UserRole } from './user-role';
 
 @Entity({ name: 'users' })
@@ -24,6 +25,9 @@ export class User {
   })
   @Exclude({ toPlainOnly: true })
   role: UserRole;
+
+  @OneToMany((type) => Comment, (comment) => comment.user)
+  comments: Comment[];
 
   constructor(partial: Partial<User>) {
     Object.assign(this, partial);

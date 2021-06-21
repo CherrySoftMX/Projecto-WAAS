@@ -13,6 +13,7 @@ import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { JwtAuthGuard } from './auth/jwt/jwt-auth.guard';
 import { RolesGuard } from './auth/roles/roles.guard';
+import { GamesModule } from './games/games.module';
 import { LoggerMiddleware } from './loger.middleware';
 import { UserRole } from './user/user-role';
 import { User } from './user/user.entity';
@@ -25,6 +26,7 @@ import { UserService } from './user/user.service';
     TypeOrmModule.forRoot(),
     UserModule,
     AuthModule,
+    GamesModule,
   ],
   controllers: [AppController],
   providers: [
