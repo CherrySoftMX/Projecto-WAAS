@@ -14,7 +14,7 @@ import { AuthModule } from './auth/auth.module';
 import { JwtAuthGuard } from './auth/jwt/jwt-auth.guard';
 import { RolesGuard } from './auth/roles/roles.guard';
 import { GamesModule } from './games/games.module';
-import { LoggerMiddleware } from './loger.middleware';
+import { LoggerMiddleware } from './middleware/logger.middleware';
 import { UserRole } from './user/user-role';
 import { User } from './user/user.entity';
 import { UserModule } from './user/user.module';

@@ -1,6 +1,5 @@
 import {
   Body,
-  ClassSerializerInterceptor,
   Controller,
   Delete,
   Get,
@@ -10,7 +9,6 @@ import {
   Post,
   Put,
   Req,
-  UseInterceptors,
 } from '@nestjs/common';
 import { Request } from 'express';
 import { Comment } from '../entities/comment.entity';
@@ -18,7 +16,6 @@ import { CommentRequest } from '../request/comment.request';
 import { CommentService } from '../services/comment.service';
 
 @Controller('games/:gameId/comments')
-@UseInterceptors(ClassSerializerInterceptor)
 export class CommentController {
   constructor(private commentService: CommentService) {}
 
@@ -35,7 +32,7 @@ export class CommentController {
     @Req() request: Request,
     @Body() body: CommentRequest,
   ) {
-    const { id: userId } = request.user as any;
+    const { userId } = request.user as any;
 
     return this.commentService.createComment(
       userId,

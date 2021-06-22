@@ -3,8 +3,7 @@ import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
 import { User } from 'src/user/user.entity';
 import { UserService } from 'src/user/user.service';
-import { InvalidEmailException } from './exceptions/invalid-email-exception';
-import { InvalidPasswordException } from './exceptions/invalid-password-exception';
+import { InvalidPasswordException } from './exceptions/invalid-password.exception';
 
 @Injectable()
 export class AuthService {
@@ -14,9 +13,7 @@ export class AuthService {
   ) {}
 
   async validateUser(email: string, pass: string): Promise<any> {
-    const user = await this.usersService.getByEmail(email);
-
-    if (!user) throw new InvalidEmailException(email);
+    const user = await this.usersService.getuserByEmail(email);
 
     const isValidPassword = await bcrypt.compare(pass, user.password);
 

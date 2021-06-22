@@ -3,7 +3,6 @@ import { ConfigService } from '@nestjs/config';
 import { PassportStrategy } from '@nestjs/passport';
 import { ExtractJwt, Strategy } from 'passport-jwt';
 import { UserService } from 'src/user/user.service';
-import { InvalidEmailException } from '../exceptions/invalid-email-exception';
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
@@ -19,10 +18,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
   }
 
   async validate(payload: any) {
-    const existsUser = this.userService.existsUser(payload.username);
-
-    if (!existsUser) throw new InvalidEmailException(payload.username);
-
+    await this.userService.getUserById(payload.userId);
     return { ...payload };
   }
 }

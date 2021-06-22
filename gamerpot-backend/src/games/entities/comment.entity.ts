@@ -1,11 +1,17 @@
 import { User } from 'src/user/user.entity';
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import { Game } from './game.entity';
 
 @Entity({ name: 'comments' })
 export class Comment {
   @PrimaryGeneratedColumn()
-  id: number;
+  commentId: number;
 
   @ManyToOne((type) => User, (user) => user.comments, { eager: true })
   user: User;
@@ -15,6 +21,9 @@ export class Comment {
 
   @Column()
   content: string;
+
+  @CreateDateColumn()
+  createdAt: Date;
 
   constructor(partial: Partial<Comment>) {
     Object.assign(this, partial);

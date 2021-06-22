@@ -11,13 +11,11 @@ import {
   UseInterceptors,
 } from '@nestjs/common';
 import { Request } from 'express';
-import { UserRole } from 'src/user/user-role';
 import { User } from 'src/user/user.entity';
 import { UserService } from 'src/user/user.service';
 import { AuthService } from './auth.service';
 import { LocalAuthGuard } from './local-auth.guard';
 import { RegisterRequest } from './request/register.request';
-import { Roles } from './roles/role.decorator';
 import { Public } from './utils/public-endpoint.decorator';
 
 @Controller()
@@ -47,9 +45,18 @@ export class AuthController {
     return new User({ ...result });
   }
 
-  @Get('/test')
-  @Roles(UserRole.ADMIN)
-  async something(@Req() res: Request) {
-    console.log(res.user);
+  /**
+   * Retorna la información del usuario que está "loggeado" actualmente.
+   */
+  @Get('/self')
+  @HttpCode(HttpStatus.ACCEPTED)
+  async self(@Req() res: Request) {
+    const { userId } = res.user as any;
+
+    const { password, wishlist, ...user } = await this.userService.getUserById(
+      userId,
+    );
+
+    return user;
   }
 }

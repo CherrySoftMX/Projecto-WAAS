@@ -3,9 +3,8 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { User } from 'src/user/user.entity';
 import { Repository } from 'typeorm';
 import { Comment } from '../entities/comment.entity';
-import { Game } from '../entities/game.entity';
-import { CommentNotFoundException } from '../exceptions/comment-not-found-exception';
-import { NoCommentsYetException } from '../exceptions/no-comments-yet-exception';
+import { CommentNotFoundException } from '../exceptions/comment-not-found.exception';
+import { NoCommentsYetException } from '../exceptions/no-comments-yet.exception';
 import { GameService } from './game.service';
 
 @Injectable()
@@ -17,7 +16,7 @@ export class CommentService {
 
   async getComments(gameId: number) {
     return await this.commentRepository.find({
-      where: { game: { id: gameId } },
+      where: { game: { gameId } },
     });
   }
 
@@ -25,27 +24,26 @@ export class CommentService {
     const existsGame = await this.gameService.existsGame(gameId);
     if (!existsGame) throw new NoCommentsYetException(gameId);
 
-    const comment = await this.commentRepository.findOne({ id: commentId });
+    const comment = await this.commentRepository.findOne({ commentId });
     if (!comment) throw new CommentNotFoundException(commentId);
 
     return comment;
   }
 
   async createComment(userId: number, gameId: number, comment: Comment) {
-    let game = await this.gameService.getGame(gameId);
-
-    if (!game)
-      game = await this.gameService.createGame(new Game({ id: gameId }));
+    const game = await this.gameService.getOrCreateGame(gameId);
 
     const newComment = new Comment({
-      user: new User({ id: userId }),
+      user: new User({ userId }),
       game,
       ...comment,
     });
 
     const savedComment = await this.commentRepository.save(newComment);
 
-    return await this.commentRepository.findOne({ id: savedComment.id });
+    return await this.commentRepository.findOne({
+      commentId: savedComment.commentId,
+    });
   }
 
   async updateComment(gameId: number, commentId: number, newComment: Comment) {
@@ -59,7 +57,7 @@ export class CommentService {
   async deleteComment(gameId: number, commentId: number) {
     const comment = this.getComment(gameId, commentId);
 
-    await this.commentRepository.delete({ id: commentId });
+    await this.commentRepository.delete({ commentId });
 
     return comment;
   }

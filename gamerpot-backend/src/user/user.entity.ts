@@ -1,12 +1,20 @@
 import { Exclude } from 'class-transformer';
 import { Comment } from 'src/games/entities/comment.entity';
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Game } from 'src/games/entities/game.entity';
+import {
+  Column,
+  Entity,
+  JoinTable,
+  ManyToMany,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import { UserRole } from './user-role';
 
 @Entity({ name: 'users' })
 export class User {
   @PrimaryGeneratedColumn()
-  id: number;
+  userId: number;
 
   @Column()
   name: string;
@@ -28,6 +36,11 @@ export class User {
 
   @OneToMany((type) => Comment, (comment) => comment.user)
   comments: Comment[];
+
+  @ManyToMany(() => Game, (game) => game.savedBy, { eager: true })
+  @JoinTable()
+  @Exclude({ toPlainOnly: true })
+  wishlist: Game[];
 
   constructor(partial: Partial<User>) {
     Object.assign(this, partial);
