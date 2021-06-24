@@ -1,6 +1,6 @@
 import { Component, HostListener, Input, OnInit } from '@angular/core';
-import { IndividualDealInterface } from 'src/app/interfaces/individual-deal';
 import { breakpoints } from 'src/app/shared/breakpoints';
+import { Deal } from 'src/app/_models/deal';
 
 @Component({
   selector: 'app-deal-table-row',
@@ -8,7 +8,7 @@ import { breakpoints } from 'src/app/shared/breakpoints';
   styleUrls: ['./deal-table-row.component.css'],
 })
 export class DealTableRowComponent implements OnInit {
-  @Input() deal: IndividualDealInterface;
+  @Input() deal: Deal;
 
   screenTooSmall: boolean = false;
 

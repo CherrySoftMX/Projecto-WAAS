@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { GameDetails } from 'src/app/interfaces/game-details';
+import { GameDetails } from 'src/app/_models/game-details';
 
 @Component({
   selector: 'app-game-cards-container',

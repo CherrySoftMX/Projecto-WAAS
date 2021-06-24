@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { GenreResponse } from '../interfaces/genre-response';
 import { API_KEY, API_URL } from '../shared/apis/rawg-api';
+import { GenreResponse } from '../_models/genre-response';
 
 @Injectable({
   providedIn: 'root',

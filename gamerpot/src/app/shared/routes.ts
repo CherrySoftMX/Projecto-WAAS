@@ -25,10 +25,12 @@ export const DomainRoutes: Route = {
     NG_PATH: 'game/:id',
     PATH: '/game',
   },
+
   ABOUT: {
     NG_PATH: 'about',
     PATH: '/about',
   },
+
   LOGIN: {
     NG_PATH: 'login',
     PATH: '/login',

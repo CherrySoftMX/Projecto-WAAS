@@ -16,66 +16,59 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav ml-auto h5 text-nowrap align-items-center">
-      <a
-        [routerLink]="routes.DEALS.PATH"
-        class="
-          nav-item nav-link
-          styled-nav-item
-          my-3 my-md-0
-          px-4
-          mx-auto mx-lg-3 mx-xl-4
-        "
-        href="#"
-        >Deals <span class="sr-only">(current)</span></a
-      >
-      <a
-        [routerLink]="routes.BEST_GAMES.PATH"
-        class="
-          nav-item nav-link
-          styled-nav-item
-          my-3 my-md-0
-          px-4
-          mx-auto mx-lg-3 mx-xl-4
-        "
-        href="#"
-        >Best games</a
-      >
-      <a
-        [routerLink]="[routes.WISHLIST.PATH, 5]"
-        class="
-          nav-item nav-link
-          styled-nav-item
-          my-3 my-md-0
-          px-4
-          mx-auto mx-lg-3 mx-xl-4
-        "
-        href="#"
-        >Wishlist</a
-      >
-    <a [routerLink]="[routes.ABOUT.PATH]" class="
-              nav-item nav-link
-              styled-nav-item
-              my-3 my-md-0
-              px-4
-              mx-auto mx-lg-3 mx-xl-4
-            " href="#">About</a>
-      <li
-        class="
-          nav-item
-          styled-nav-item
-          my-3 my-md-0
-          px-4
-          mx-auto mx-lg-3 mx-xl-4
-          dropdown
-        "
-      >
-        <a class="nav-link p-0" id="profile-item" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" role="button" href="#">
-          <app-profile-img></app-profile-img>
-        </a>
-        <div class="dropdown-menu text-center" aria-labelledby="profile-item" style="background-color: var(--background-secondary)">
-            <a [routerLink]="[routes.LOGIN.PATH]" href="#" class="dropdown-item" style="color:white;">Log out</a>
-        </div>
-      </li>
+      <app-navbar-item-wrapper [routerLink]="routes.DEALS.PATH"
+        >Deals
+      </app-navbar-item-wrapper>
+
+      <app-navbar-item-wrapper [routerLink]="routes.BEST_GAMES.PATH"
+        >Best games
+      </app-navbar-item-wrapper>
+      <app-navbar-item-wrapper [routerLink]="[routes.WISHLIST.PATH, 5]"
+        >Wishlist
+      </app-navbar-item-wrapper>
+
+      <app-navbar-item-wrapper [routerLink]="[routes.ABOUT.PATH]"
+        >About
+      </app-navbar-item-wrapper>
+
+      <div *ngIf="user; else login">
+        <app-navbar-item-wrapper>
+          <li class="dropdown">
+            <a
+              class="nav-link p-0 m-0"
+              id="profile-item"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="true"
+              role="button"
+              href="#"
+            >
+              <app-profile-img [label]="user.name"></app-profile-img>
+            </a>
+            <div
+              class="dropdown-menu text-center"
+              aria-labelledby="profile-item"
+              style="background-color: var(--background-secondary)"
+            >
+              <a class="dropdown-item styled-dropdown-item" style="color: white"
+                ><i class="bi bi-person-circle mr-1"></i>Profile
+              </a>
+              <a
+                class="dropdown-item styled-dropdown-item"
+                style="color: white"
+                (click)="onLogout()"
+                ><i class="bi bi-box-arrow-left mr-1"></i>Log out
+              </a>
+            </div>
+          </li>
+        </app-navbar-item-wrapper>
+      </div>
+
+      <ng-template #login>
+        <app-navbar-item-wrapper [routerLink]="[routes.LOGIN.PATH]">
+          <i class="bi bi-box-arrow-in-right mr-1"></i>Login
+        </app-navbar-item-wrapper>
+      </ng-template>
     </div>
   </div>
 </nav>

@@ -1,7 +1,11 @@
 <div class="container-fluid h-100 position-relative">
   <div class="row h-100">
     <div class="col-md p-0">
-      <app-login-form (onSignUp)="openRegisterModal()" (onForgotPassword)="openForgotModal()"></app-login-form>
+      <app-login-form
+        (onLogin)="onLogin($event)"
+        (onSignUp)="openRegisterModal()"
+        (onForgotPassword)="openForgotModal()"
+      ></app-login-form>
     </div>
     <div class="col-md d-none d-xl-block p-0" style="overflow: hidden">
       <img src="https://wallpapercave.com/wp/wc1765288.jpg" alt="banner" />

@@ -1,4 +1,4 @@
-export interface IndividualDealInterface {
+export interface Deal {
   title: string;
   dealID: number;
   storeID: number;

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { GameResponse } from '../interfaces/game-response';
 import { API_KEY, API_URL } from '../shared/apis/rawg-api';
+import { GameResponse } from '../_models/game-response';
 import { UrlBuilder } from './utils/url-builder';
 
 interface UrlParams {

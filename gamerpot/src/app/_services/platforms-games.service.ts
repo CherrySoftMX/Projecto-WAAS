@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { PlatformResponse } from '../interfaces/platform-response';
 import { API_KEY, API_URL } from '../shared/apis/rawg-api';
+import { PlatformResponse } from '../_models/platform-response';
 
 @Injectable({
   providedIn: 'root',

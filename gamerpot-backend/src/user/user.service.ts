@@ -13,7 +13,7 @@ export class UserService {
     @InjectRepository(User) private userRepository: Repository<User>,
   ) {}
 
-  async getuserByEmail(email: string) {
+  async getUserByEmail(email: string) {
     const user = await this.userRepository.findOne({ email });
 
     if (!user)
@@ -78,7 +78,7 @@ export class UserService {
 
   async existsUser(email: string) {
     try {
-      await this.getuserByEmail(email);
+      await this.getUserByEmail(email);
       return true;
     } catch (e) {
       return false;

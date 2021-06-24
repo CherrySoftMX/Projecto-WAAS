@@ -13,7 +13,7 @@ export class AuthService {
   ) {}
 
   async validateUser(email: string, pass: string): Promise<any> {
-    const user = await this.usersService.getuserByEmail(email);
+    const user = await this.usersService.getUserByEmail(email);
 
     const isValidPassword = await bcrypt.compare(pass, user.password);
 
@@ -25,12 +25,12 @@ export class AuthService {
   }
 
   async login(user: User) {
-    delete user.name;
-
-    const payload = { ...user };
+    const { userId, name, email } = user;
 
     return {
-      access_token: this.jwtService.sign(payload),
+      name,
+      email,
+      token: this.jwtService.sign({ userId, name, email }),
     };
   }
 }

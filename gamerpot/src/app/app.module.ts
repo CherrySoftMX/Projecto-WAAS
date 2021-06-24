@@ -10,6 +10,7 @@ import { DealTableRowMinimalComponent } from './components/deals/deal-table-row-
 import { DealTableRowComponent } from './components/deals/deal-table-row/deal-table-row.component';
 import { DealsTableComponent } from './components/deals/deals-table/deals-table.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { ForgotPasswordFormComponent } from './components/forgot-password-form/forgot-password-form.component';
 import { WriteCommentComponent } from './components/game-review/comments/leave-comment/leave-comment.component';
 import { ReviewCommentComponent } from './components/game-review/comments/review-comment/review-comment.component';
 import { LoginFormComponent } from './components/login-form/login-form.component';
@@ -36,12 +37,12 @@ import { HomePageComponent } from './pages/home-page/home-page.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
 import { WishlistPageComponent } from './pages/wishlist-page/wishlist-page.component';
-import { PluckPipe } from './pipes/pluck.pipe';
-import { BestGamesService } from './services/best-games.service';
-import { CurrencyConverterService } from './services/currency-converter.service';
-import { DealsService } from './services/deals-service.service';
-import { StoresService } from './services/stores-service.service';
-import { ForgotPasswordFormComponent } from './components/forgot-password-form/forgot-password-form.component';
+import { PluckPipe } from './_pipes/pluck.pipe';
+import { BestGamesService } from './_services/best-games.service';
+import { CurrencyConverterService } from './_services/currency-converter.service';
+import { DealsService } from './_services/deals-service.service';
+import { StoresService } from './_services/stores-service.service';
+import { NavbarItemWrapperComponent } from './components/shared/navbar/navbar-item-wrapper/navbar-item-wrapper.component';
 
 @NgModule({
   declarations: [
@@ -79,6 +80,7 @@ import { ForgotPasswordFormComponent } from './components/forgot-password-form/f
     FooterComponent,
     ContactFormComponent,
     ForgotPasswordFormComponent,
+    NavbarItemWrapperComponent,
   ],
   imports: [
     BrowserModule,

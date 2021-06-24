@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { IndividualDealInterface } from 'src/app/interfaces/individual-deal';
+import { Deal } from 'src/app/_models/deal';
 
 @Component({
   selector: 'app-deals-table',
@@ -7,7 +7,7 @@ import { IndividualDealInterface } from 'src/app/interfaces/individual-deal';
   styleUrls: ['./deals-table.component.css'],
 })
 export class DealsTableComponent implements OnInit {
-  @Input() deals: Array<IndividualDealInterface> = [];
+  @Input() deals: Array<Deal> = [];
   @Input() fetching: boolean = false;
 
   constructor() {}

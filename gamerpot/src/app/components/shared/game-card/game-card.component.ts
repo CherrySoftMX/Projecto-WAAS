@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { GameDetails } from 'src/app/interfaces/game-details';
 import { DomainRoutes } from 'src/app/shared/routes';
+import { GameDetails } from 'src/app/_models/game-details';
 
 @Component({
   selector: 'app-game-card',

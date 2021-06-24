@@ -1,31 +1,27 @@
 <div class="bg-light register-wrapper">
-  <button class="cls-btn" (click)="this.activeModal.close()">
+  <button class="cls-btn" (click)="closeModal()">
     <i class="bi bi-x-lg"></i>
   </button>
+
   <div class="modal-header mt-3 mb-5 text-dark">
     <h1 class="display-4">Register</h1>
   </div>
 
-  <form
-    #registerForm="ngForm"
-    [formGroup]="registerData"
-    class="mb-5"
-    (ngSubmit)="register()"
-  >
+  <form [formGroup]="registerForm" class="mb-5" (ngSubmit)="register()">
     <!-- FullName -->
     <div class="mb-5">
       <input
         type="text"
         class="form-control"
-        placeholder="Enter username"
+        placeholder="Enter full name"
         formControlName="name"
         [ngClass]="validate('name')"
       />
       <div class="invalid-feedback">
-        <ul>
-          <li>Requiered</li>
-          <li>Minimum lenght three</li>
-        </ul>
+        <div *ngIf="fields.name.errors?.required">Name required</div>
+        <div *ngIf="fields.name.errors?.minlength">
+          At least 3 characters required
+        </div>
       </div>
     </div>
 
@@ -39,10 +35,8 @@
         [ngClass]="validate('email')"
       />
       <div class="invalid-feedback">
-        <ul>
-          <li>Requiered</li>
-          <li>Email invalid</li>
-        </ul>
+        <div *ngIf="fields.email.errors?.required">Email required</div>
+        <div *ngIf="fields.email.errors?.email">Invaild email format</div>
       </div>
     </div>
 
@@ -56,13 +50,16 @@
         [ngClass]="validate('password')"
       />
       <div class="invalid-feedback">
-        <ul>
-          <li>Required</li>
-          <li>Minimun lenght eight</li>
-          <li>Must contain one capital letter</li>
-          <li>Must contain one lowercase letter</li>
-          <li>Must contain one number</li>
-        </ul>
+        <div *ngIf="fields.password.errors?.required">Password required</div>
+        <div *ngIf="fields.password.errors?.pattern">
+          <p>Invalid password format</p>
+          <ul>
+            <li>At least 8 characters</li>
+            <li>Must contain one capital letter</li>
+            <li>Must contain one lowercase letter</li>
+            <li>Must contain one number</li>
+          </ul>
+        </div>
       </div>
     </div>
 
@@ -72,20 +69,27 @@
         type="password"
         class="form-control"
         placeholder="Repeat your password"
-        formControlName="rptPassword"
-        [ngClass]="validatePasswords()"
+        formControlName="confirmPassword"
+        [ngClass]="checkPasswords()"
       />
       <div class="invalid-feedback">
-        <ul>
-          <li>Required</li>
-          <li>Password must match</li>
-        </ul>
+        <div *ngIf="fields.confirmPassword.errors?.required">
+          Password confirmation required
+        </div>
+        <div
+          *ngIf="
+            !fields.confirmPassword.errors?.required &&
+            registerForm.errors?.mismatch
+          "
+        >
+          Passwords must match
+        </div>
       </div>
     </div>
 
     <!-- Sing up in button -->
     <button
-      class="btn-primary btn-lg bg-dark text-white mt-5 sub-btn"
+      class="btn-dark btn-lg bg-dark text-white mt-5 sub-btn"
       type="submit"
     >
       Sign up

@@ -1,10 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { IndividualDealInterface } from '../interfaces/individual-deal';
 import {
   DEALS_END_POINT,
   STORES_END_POINT,
 } from '../shared/apis/cheap-shark-api';
+import { Deal } from '../_models/deal';
 import { StoresService } from './stores-service.service';
 import { UrlBuilder } from './utils/url-builder';
 
@@ -39,12 +39,12 @@ export class DealsService extends UrlBuilder<DealsSearchParams> {
     const fetchUrl = url || this.url;
 
     const response = await this.http
-      .get<IndividualDealInterface[]>(fetchUrl, { observe: 'response' })
+      .get<Deal[]>(fetchUrl, { observe: 'response' })
       .toPromise();
 
     const stores = await this.http.get<any>(STORES_END_POINT).toPromise();
 
-    const deals: IndividualDealInterface[] = response.body!.map((deal) => ({
+    const deals: Deal[] = response.body!.map((deal) => ({
       ...stores[deal.storeID - 1],
       ...deal,
     }));
@@ -53,8 +53,8 @@ export class DealsService extends UrlBuilder<DealsSearchParams> {
     return { deals, totalPages };
   };
 
-  fetchDealsByGameName = (url?: string): Promise<IndividualDealInterface> => {
+  fetchDealsByGameName = (url?: string): Promise<Deal> => {
     const fetchUrl = url || this.url;
-    return this.http.get<IndividualDealInterface>(fetchUrl).toPromise();
+    return this.http.get<Deal>(fetchUrl).toPromise();
   };
 }

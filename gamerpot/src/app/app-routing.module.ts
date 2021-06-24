@@ -9,6 +9,7 @@ import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
 import { WishlistPageComponent } from './pages/wishlist-page/wishlist-page.component';
 import { DomainRoutes } from './shared/routes';
+import { AuthGuard } from './_helpers/auth.guard';
 
 const routes: Routes = [
   {
@@ -22,6 +23,7 @@ const routes: Routes = [
   {
     path: DomainRoutes.WISHLIST.NG_PATH,
     component: WishlistPageComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: DomainRoutes.BEST_GAMES.NG_PATH,

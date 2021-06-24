@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { GameDetails } from '../interfaces/game-details';
 import { API_KEY, API_URL } from '../shared/apis/rawg-api';
+import { GameDetails } from '../_models/game-details';
 
 @Injectable({
   providedIn: 'root',

@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, QueryParamsHandling, Router } from '@angular/router';
-import { removeNullProperties } from 'src/app/services/utils/object-utils';
-import { IndividualDealInterface } from '../../interfaces/individual-deal';
-import { CurrencyConverterService } from '../../services/currency-converter.service';
-import { DealsService } from '../../services/deals-service.service';
+import { Deal } from 'src/app/_models/deal';
+import { removeNullProperties } from 'src/app/_services/utils/object-utils';
+import { CurrencyConverterService } from '../../_services/currency-converter.service';
+import { DealsService } from '../../_services/deals-service.service';
 
 @Component({
   selector: 'app-deals-page',
@@ -24,7 +24,7 @@ export class DealsPageComponent implements OnInit {
   oldCurrency: string = this.DEFAULT_CURRENCY;
   actualCurrency: string = this.DEFAULT_CURRENCY;
 
-  deals: IndividualDealInterface[] = [];
+  deals: Deal[] = [];
 
   totalPages: number = 0;
   currentPage: number = 0;

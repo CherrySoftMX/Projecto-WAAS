@@ -1,10 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { IndividualDealInterface } from '../interfaces/individual-deal';
 import { API_KEY, API_URL } from '../shared/apis/curr-conv-api';
+import { Deal } from '../_models/deal';
 
 interface DealsCurrencyConvertion {
-  deals: IndividualDealInterface[];
+  deals: Deal[];
   fromCurrency: string;
   toCurrency: string;
 }

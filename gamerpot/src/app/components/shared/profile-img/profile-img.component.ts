@@ -11,5 +11,7 @@ export class ProfileImgComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.label = this.label.split(/\s/g)[0].substr(0, 8);
+  }
 }

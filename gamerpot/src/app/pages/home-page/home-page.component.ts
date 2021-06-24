@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { GameDetails } from 'src/app/interfaces/game-details';
-import { IndividualDealInterface } from 'src/app/interfaces/individual-deal';
-import { GamePlatform } from 'src/app/interfaces/platform-response';
-import { BestGamesService } from 'src/app/services/best-games.service';
-import { PlatformsGamesService } from 'src/app/services/platforms-games.service';
+import { Deal } from 'src/app/_models/deal';
+import { GameDetails } from 'src/app/_models/game-details';
+import { GamePlatform } from 'src/app/_models/platform-response';
+import { BestGamesService } from 'src/app/_services/best-games.service';
+import { PlatformsGamesService } from 'src/app/_services/platforms-games.service';
 
 @Component({
   selector: 'app-home-page',
@@ -17,7 +17,7 @@ export class HomePageComponent implements OnInit {
   readonly MAX_COUNT: number = 2000;
 
   games: Array<GameDetails> = [];
-  deals: Array<IndividualDealInterface> = [];
+  deals: Array<Deal> = [];
 
   platforms: Array<GamePlatform> = [];
   currentPlatform: GamePlatform = {} as GamePlatform;
@@ -50,6 +50,7 @@ export class HomePageComponent implements OnInit {
     this.getPathParams();
     this.fetchPlatforms();
     this.setCurrentOrder();
+    // localStorage.clear();
   }
 
   navigate = () => {

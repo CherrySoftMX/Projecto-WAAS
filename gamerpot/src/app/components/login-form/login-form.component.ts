@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { passwordRegex } from 'src/app/shared/forms';
 import { DomainRoutes } from 'src/app/shared/routes';
 
 @Component({
@@ -11,21 +11,32 @@ import { DomainRoutes } from 'src/app/shared/routes';
 export class LoginFormComponent implements OnInit {
   routes = DomainRoutes;
 
-  @Output() onSignUp = new EventEmitter<any>();
-  @Output() onForgotPassword = new EventEmitter<any>();
-
-  profileLogin = new FormGroup({
+  loginForm: FormGroup = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', [Validators.required]),
+    password: new FormControl('', [
+      Validators.pattern(passwordRegex),
+      Validators.required,
+    ]),
     remember: new FormControl(false),
   });
 
-  constructor(private router: Router) {}
+  @Output() onSignUp = new EventEmitter<any>();
+  @Output() onForgotPassword = new EventEmitter<any>();
+  @Output() onLogin = new EventEmitter<any>();
 
   ngOnInit(): void {}
 
+  get fields() {
+    return this.loginForm.controls;
+  }
+
   submit(): void {
-    this.router.navigate([this.routes.HOME.PATH]);
+    if (this.loginForm.invalid) return;
+
+    this.onLogin.emit({
+      email: this.fields.email.value,
+      password: this.fields.password.value,
+    });
   }
 
   signUp() {
@@ -36,12 +47,11 @@ export class LoginFormComponent implements OnInit {
     this.onForgotPassword.emit();
   }
 
-  validate(nameInput: string) {
+  validate(inputName: string) {
     let classes = {
-      'is-valid': this.profileLogin.get(nameInput)?.valid,
+      'is-valid': this.fields[inputName].valid,
       'is-invalid':
-        this.profileLogin.get(nameInput)?.invalid &&
-        this.profileLogin.get(nameInput)?.touched,
+        this.fields[inputName].invalid && this.fields[inputName].touched,
     };
 
     return classes;

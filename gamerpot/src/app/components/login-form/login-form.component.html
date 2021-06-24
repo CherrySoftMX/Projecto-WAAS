@@ -11,7 +11,7 @@
   <form
     #LoginForm="ngForm"
     class="pt-4"
-    [formGroup]="profileLogin"
+    [formGroup]="loginForm"
     (ngSubmit)="submit()"
   >
     <!-- Email -->
@@ -24,7 +24,10 @@
         placeholder="Email"
         [ngClass]="validate('email')"
       />
-      <div class="invalid-feedback">Invalid email</div>
+      <div class="invalid-feedback">
+        <div *ngIf="fields.email.errors?.required">Email requiered</div>
+        <div *ngIf="fields.email.errors?.email">Invalid email format</div>
+      </div>
     </div>
 
     <!-- Password -->
@@ -37,7 +40,18 @@
         placeholder="Password"
         [ngClass]="validate('password')"
       />
-      <div class="invalid-feedback">Password required</div>
+      <div class="invalid-feedback">
+        <div *ngIf="fields.password.errors?.required">Password required</div>
+        <div *ngIf="fields.password.errors?.pattern">
+          <p>Invalid password format</p>
+          <ul>
+            <li>At least 8 characters</li>
+            <li>Must contain one capital letter</li>
+            <li>Must contain one lowercase letter</li>
+            <li>Must contain one number</li>
+          </ul>
+        </div>
+      </div>
     </div>
 
     <div class="d-flex justify-content-between pt-2">
@@ -48,7 +62,9 @@
       </div>
       <div>
         <!-- Forgot password -->
-        <a class="" [routerLink]="" href="#" (click)="forgotPassword()" >Forgot password?</a>
+        <a class="" [routerLink]="" href="#" (click)="forgotPassword()"
+          >Forgot password?</a
+        >
       </div>
     </div>
 
@@ -63,7 +79,9 @@
   <div class="d-flex justify-content-end mt-3">
     <label
       >Don't have an account?
-      <a class="ml-2" [routerLink]="" href="#" (click)="signUp()">Sign up.</a></label
+      <a class="ml-2" [routerLink]="" href="#" (click)="signUp()"
+        >Sign up.</a
+      ></label
     >
   </div>
 </div>
