@@ -43,7 +43,7 @@ import { CurrencyConverterService } from './_services/currency-converter.service
 import { DealsService } from './_services/deals-service.service';
 import { StoresService } from './_services/stores-service.service';
 import { NavbarItemWrapperComponent } from './components/shared/navbar/navbar-item-wrapper/navbar-item-wrapper.component';
-import { ModalComponent } from './components/shared/modal-qr-code/modal-qr-code.component';
+import { ModalQRCodeComponent } from './components/shared/modal-qr-code/modal-qr-code.component';
 
 @NgModule({
   declarations: [
@@ -82,7 +82,7 @@ import { ModalComponent } from './components/shared/modal-qr-code/modal-qr-code.
     ContactFormComponent,
     ForgotPasswordFormComponent,
     NavbarItemWrapperComponent,
-    ModalComponent,
+    ModalQRCodeComponent,
   ],
   imports: [
     BrowserModule,

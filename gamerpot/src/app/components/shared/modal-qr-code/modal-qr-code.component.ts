@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -6,7 +6,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
   templateUrl: './modal-qr-code.component.html',
   styleUrls: ['./modal-qr-code.component.css'],
 })
-export class ModalComponent implements OnInit {
+export class ModalQRCodeComponent implements OnInit {
   public title: string;
   public url: string;
   constructor(private activeModal: NgbActiveModal) {

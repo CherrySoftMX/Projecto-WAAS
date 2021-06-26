@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ModalComponent } from 'src/app/components/shared/modal-qr-code/modal-qr-code.component';
+import { ModalQRCodeComponent } from 'src/app/components/shared/modal-qr-code/modal-qr-code.component';
 import { GameDetails } from '../../_models/game-details';
 import { DealsService } from '../../_services/deals-service.service';
 import { GameDatailsService } from '../../_services/game-details.service';
@@ -85,7 +84,7 @@ export class GamePageComponent implements OnInit {
   }
 
   showQRCode = () => {
-    const activeModal = this.modalService.open(ModalComponent, {
+    const activeModal = this.modalService.open(ModalQRCodeComponent, {
       centered: true,
       windowClass: 'modal-rounded',
       size: 'lg',
