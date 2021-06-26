@@ -49,3 +49,13 @@
 #more-btn {
   background: #ffffff;
 }
+
+.qr-btn {
+  background: #373737;
+  width: fit-content;
+}
+
+.qr-btn:hover {
+  background: #535353;
+  cursor: pointer;
+}
