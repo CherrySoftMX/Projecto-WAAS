@@ -49,3 +49,7 @@
 #more-btn {
   background: #ffffff;
 }
+
+.disabled-wishlist-btn {
+  pointer-events: none;
+}

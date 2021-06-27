@@ -1,4 +1,3 @@
-import { User } from 'src/user/user.entity';
 import {
   Column,
   CreateDateColumn,
@@ -6,6 +5,7 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+import { User } from '../../user/entities/user.entity';
 import { Game } from './game.entity';
 
 @Entity({ name: 'comments' })

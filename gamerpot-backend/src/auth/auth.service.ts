@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
-import { User } from 'src/user/user.entity';
-import { UserService } from 'src/user/user.service';
+import { User } from 'src/user/entities/user.entity';
+import { UserService } from 'src/user/services/user.service';
 import { InvalidPasswordException } from './exceptions/invalid-password.exception';
 
 @Injectable()
@@ -28,6 +28,7 @@ export class AuthService {
     const { userId, name, email } = user;
 
     return {
+      userId,
       name,
       email,
       token: this.jwtService.sign({ userId, name, email }),

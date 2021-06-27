@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from 'src/app/_services/auth.service';
+import { WishlistService } from 'src/app/_services/wishlist.service';
 import { GameDetails } from '../../_models/game-details';
 import { DealsService } from '../../_services/deals-service.service';
 import { GameDatailsService } from '../../_services/game-details.service';
@@ -12,35 +14,41 @@ import { GameDatailsService } from '../../_services/game-details.service';
 export class GamePageComponent implements OnInit {
   gameDetails: GameDetails = {} as GameDetails;
   commentaries: Array<any> = [];
-  fetching: boolean = true;
+
+  fetchingGame = true;
+  togglingFromWishlist = false;
+
   gameDeals: any = [];
 
   constructor(
     private gameDetailsService: GameDatailsService,
+    private authService: AuthService,
+    private wishlist: WishlistService,
+    private dealsService: DealsService,
     private route: ActivatedRoute,
-    private dealsService: DealsService
+    private router: Router
   ) {}
 
   ngOnInit() {
-    this.fetching = true;
+    this.fetchingGame = true;
     const id = this.route.snapshot.params.id;
     this.fetchGameDetails(id).then(() => {
-      this.fetching = false;
+      this.fetchingGame = false;
     });
   }
 
-  fetchGameDetails = async (id: number) => {
+  async fetchGameDetails(id: number) {
     this.gameDetails = await this.gameDetailsService.fetchGameDetails(id);
     this.fetchGameDeals();
-  };
+  }
 
-  fetchGameDeals = async () => {
+  async fetchGameDeals() {
     this.gameDeals = await this.dealsService
       .buildUrl({ title: this.gameDetails.name, maxResults: 10 })
       .fetchDealsByGameName();
-  };
+  }
 
-  displayMore(): void {
+  displayMore() {
     const more = document.getElementById('more');
     const moreBtn = document.getElementById('more-btn');
     const dots = document.getElementById('dots');
@@ -58,7 +66,7 @@ export class GamePageComponent implements OnInit {
     }
   }
 
-  setMetacriticState(): any {
+  setMetacriticState() {
     const metacritic = this.gameDetails.metacritic;
 
     const nm = metacritic == null;
@@ -76,7 +84,13 @@ export class GamePageComponent implements OnInit {
     return classes;
   }
 
-  addToWishlist(): void {
-    console.log('game added');
+  addToWishlist() {
+    this.authService.checkIfUserIsLogged();
+
+    this.togglingFromWishlist = true;
+
+    this.wishlist.toggleSave(this.gameDetails).finally(() => {
+      this.togglingFromWishlist = false;
+    });
   }
 }

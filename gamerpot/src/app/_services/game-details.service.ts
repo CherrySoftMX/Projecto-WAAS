@@ -1,16 +1,22 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { API_KEY, API_URL } from '../shared/apis/rawg-api';
+import { environment } from 'src/environments/environment';
 import { GameDetails } from '../_models/game-details';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class GameDatailsService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private authService: AuthService) {}
 
-  fetchGameDetails = (id: number): Promise<GameDetails> => {
-    const url = `${API_URL}games/${id}?key=${API_KEY}`;
-    return this.http.get<GameDetails>(url).toPromise();
+  fetchGameDetails = (gameId: number): Promise<GameDetails> => {
+    let fetchUrl = `${environment.apiUrl}/games/${gameId}`;
+
+    const loggedUser = this.authService.currentUserValue;
+
+    if (loggedUser) fetchUrl = `${fetchUrl}?userId=${loggedUser.userId}`;
+
+    return this.http.get<GameDetails>(fetchUrl).toPromise();
   };
 }

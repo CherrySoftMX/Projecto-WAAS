@@ -1,17 +1,14 @@
 import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
 import * as bcrypt from 'bcrypt';
-import { Repository } from 'typeorm';
-import { EmailInUseException } from '../auth/exceptions/email-in-use.exception';
-import { UserNotFoundException } from './exceptions/user-not-found.exception';
-import { UserRole } from './user-role';
-import { User } from './user.entity';
+import { EmailInUseException } from '../../auth/exceptions/email-in-use.exception';
+import { UserRole } from '../entities/user-role';
+import { User } from '../entities/user.entity';
+import { UserNotFoundException } from '../exceptions/user-not-found.exception';
+import { UserRepository } from '../repositories/user.repository';
 
 @Injectable()
 export class UserService {
-  constructor(
-    @InjectRepository(User) private userRepository: Repository<User>,
-  ) {}
+  constructor(private userRepository: UserRepository) {}
 
   async getUserByEmail(email: string) {
     const user = await this.userRepository.findOne({ email });
@@ -33,15 +30,6 @@ export class UserService {
       );
 
     return user;
-  }
-
-  async getWishlist(userId: number) {
-    const user = await this.userRepository.findOne({
-      relations: ['wishlist'],
-      where: { userId },
-    });
-
-    return user.wishlist;
   }
 
   async createUser(user: User) {

@@ -10,7 +10,7 @@
     <!--Information game-->
     <div class="col-xl-6 mx-1 mx-lg-3 mx-xl-4 scrollable-column">
       <app-loading-spinner
-        *ngIf="fetching; else gameContent"
+        *ngIf="fetchingGame; else gameContent"
       ></app-loading-spinner>
 
       <ng-template #gameContent>
@@ -33,9 +33,19 @@
         </app-carousel>
 
         <!--Button whishlist-->
-        <div class="wishlist-btn p-2 mt-2 rounded" (click)="addToWishlist()">
-          <i class="bi bi-bookmark-plus"></i>
-          <span> Add to my whislist</span>
+        <div
+          class="wishlist-btn p-2 mt-2 rounded"
+          [ngClass]="{ 'disabled-wishlist-btn': togglingFromWishlist }"
+          (click)="addToWishlist()"
+        >
+          <div *ngIf="!gameDetails.savedByLoggedUser; else removeFromWishlist">
+            <i class="bi bi-bookmark-plus"></i>
+            <span> Add to my wishlist</span>
+          </div>
+          <ng-template #removeFromWishlist>
+            <i class="bi bi-bookmark-star-fill"></i>
+            <span> Remove from wishlist</span>
+          </ng-template>
         </div>
 
         <!--About-->
@@ -111,7 +121,7 @@
 
     <!--Metracritic and comments-->
     <div class="col-lg-4 col-xl-3 scrollable-column">
-       <h3 class="text-center">Metacritic</h3>
+      <h3 class="text-center">Metacritic</h3>
       <div class="metacritic-square my-3" [ngClass]="setMetacriticState()">
         <h1 class="metacritic-score">
           {{ gameDetails.metacritic ? gameDetails.metacritic : "-" }}

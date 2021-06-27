@@ -1,5 +1,5 @@
 import { IsEnum } from 'class-validator';
-import { UserRole } from '../user-role';
+import { UserRole } from '../entities/user-role';
 
 export class UpdateRoleRequest {
   @IsEnum(UserRole, {

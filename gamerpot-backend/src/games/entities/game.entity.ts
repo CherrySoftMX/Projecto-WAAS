@@ -1,5 +1,5 @@
-import { User } from 'src/user/user.entity';
 import { Column, Entity, ManyToMany, OneToMany, PrimaryColumn } from 'typeorm';
+import { User } from '../../user/entities/user.entity';
 import { Comment } from './comment.entity';
 
 @Entity({ name: 'games' })
@@ -7,17 +7,17 @@ export class Game {
   @PrimaryColumn()
   gameId: number;
 
-  @Column()
-  title: string;
+  @Column({ default: '' })
+  name: string;
 
-  @Column()
-  date: string;
+  @Column({ default: '' })
+  released: string;
 
-  @Column()
+  @Column({ default: -1 })
   metacritic: number;
 
-  @Column()
-  imageUrl: string;
+  @Column({ default: '' })
+  background_image: string;
 
   @OneToMany((type) => Comment, (comment) => comment.game, {
     cascade: true,

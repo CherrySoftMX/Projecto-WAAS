@@ -4,14 +4,12 @@ export class SaveGameRequest {
   @IsNotEmpty({
     message: 'Pasa el título del del juego que estás guardando.',
   })
-  title: string;
+  name: string;
 
   @IsNotEmpty({ message: 'Pasa la fecha del juego.' })
-  date: string;
+  released: string;
 
-  @IsNotEmpty({ message: 'Olvidaste el metacritic.' })
-  metacritic: number;
+  metacritic = -1;
 
-  @IsNotEmpty({ message: 'No olvides la imagen del juego.' })
-  imageUrl: string;
+  background_image = '';
 }

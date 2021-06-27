@@ -7,7 +7,7 @@ import { GameDetails } from 'src/app/_models/game-details';
   styleUrls: ['./game-cards-container.component.css'],
 })
 export class GameCardsContainerComponent implements OnInit {
-  @Input() games: Array<GameDetails> = [];
+  @Input() games: GameDetails[] = [];
 
   @Input() page: number = 1;
   @Input() pageSize?: number;
@@ -16,6 +16,7 @@ export class GameCardsContainerComponent implements OnInit {
   @Input() fetchingGames: boolean = true;
 
   @Output() nextPage = new EventEmitter<number>();
+  @Output() onRemovedFromWishlist = new EventEmitter<GameDetails>();
 
   constructor() {}
 
@@ -23,5 +24,9 @@ export class GameCardsContainerComponent implements OnInit {
 
   loadPage(page: number) {
     this.nextPage.emit(page);
+  }
+
+  onGameRemoved(game: GameDetails) {
+    this.onRemovedFromWishlist.emit(game);
   }
 }

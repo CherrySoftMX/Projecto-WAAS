@@ -16,13 +16,13 @@ export class HomePageComponent implements OnInit {
   readonly INVALID_FIELD: string = 'All';
   readonly MAX_COUNT: number = 2000;
 
-  games: Array<GameDetails> = [];
-  deals: Array<Deal> = [];
+  games: GameDetails[] = [];
+  deals: Deal[] = [];
 
-  platforms: Array<GamePlatform> = [];
+  platforms: GamePlatform[] = [];
   currentPlatform: GamePlatform = {} as GamePlatform;
 
-  orders: Array<string> = [
+  orders: string[] = [
     'released',
     'rating',
     'added',
@@ -50,10 +50,9 @@ export class HomePageComponent implements OnInit {
     this.getPathParams();
     this.fetchPlatforms();
     this.setCurrentOrder();
-    // localStorage.clear();
   }
 
-  navigate = () => {
+  navigate() {
     this.router.navigate([], {
       relativeTo: this.activeRoute,
       queryParams: {
@@ -63,9 +62,9 @@ export class HomePageComponent implements OnInit {
         search: this.currentSearch,
       },
     });
-  };
+  }
 
-  getPathParams = () => {
+  getPathParams() {
     this.activeRoute.queryParams.subscribe((params) => {
       this.currentPage = params['page'] || 1;
       this.currentPlatform.id = params['platform'] || this.CLEAR_FIELD;
@@ -73,9 +72,9 @@ export class HomePageComponent implements OnInit {
       this.currentSearch = params['search'] || this.CLEAR_FIELD;
       this.refreshGames();
     });
-  };
+  }
 
-  refreshGames = async () => {
+  async refreshGames() {
     this.fetchingGames = true;
 
     const response = await this.bestGameService
@@ -92,38 +91,39 @@ export class HomePageComponent implements OnInit {
     if (response) {
       const { results, count } = response;
       this.games = results;
-      this.collectionSize = count > this.MAX_COUNT ? this.MAX_COUNT : count;
+      this.collectionSize = Math.min(this.MAX_COUNT, count);
     }
 
     this.fetchingGames = false;
-  };
+  }
 
-  fetchPlatforms = async () => {
+  async fetchPlatforms() {
     const response = await this.platformsService.getPlatforms();
+
     if (response) {
       this.platforms = response.results;
       this.setCurrentPlatform();
     }
-  };
+  }
 
-  setCurrentPlatform = () => {
+  setCurrentPlatform() {
     const platform = this.platforms.find(
       (p) => p.id == this.currentPlatform.id
     );
     if (platform) this.currentPlatform = platform;
-  };
+  }
 
-  setCurrentOrder = () => {
+  setCurrentOrder() {
     const order = this.orders.find((o) => o == this.currentOrder);
     if (order) this.currentOrder = order;
-  };
+  }
 
-  changePage(page: number): void {
+  changePage(page: number) {
     this.currentPage = page;
     this.navigate();
   }
 
-  filterByOrder(order: string): void {
+  filterByOrder(order: string) {
     this.currentPage = 1;
     this.currentOrder = order;
     if (this.currentOrder == this.INVALID_FIELD)
@@ -131,16 +131,16 @@ export class HomePageComponent implements OnInit {
     this.navigate();
   }
 
-  filterByPlatform = (platform: string) => {
+  filterByPlatform(platform: string) {
     this.currentPage = 1;
     let plat = this.platforms.find((p) => p.name == platform);
     this.currentPlatform.id = plat?.id || this.CLEAR_FIELD;
     this.navigate();
-  };
+  }
 
-  searchGame = (name: string) => {
+  searchGame(name: string) {
     this.currentPage = 1;
     this.currentSearch = name;
     this.navigate();
-  };
+  }
 }
