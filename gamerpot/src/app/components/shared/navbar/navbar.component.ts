@@ -23,6 +23,10 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {}
 
+  onLogin() {
+    this.authService.checkIfUserIsLogged();
+  }
+
   onLogout() {
     this.authService.logout();
   }

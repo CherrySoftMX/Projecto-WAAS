@@ -11,6 +11,7 @@ export class SearchBoxComponent implements OnInit {
   @Input() value: string = '';
 
   @Output() searchEvent = new EventEmitter<string>();
+  @Output() onValueChange = new EventEmitter<string>();
 
   constructor() {}
 
@@ -18,5 +19,9 @@ export class SearchBoxComponent implements OnInit {
 
   search(text: string) {
     this.searchEvent.emit(text);
+  }
+
+  onValueChanged(value: string) {
+    this.onValueChange.emit(value);
   }
 }

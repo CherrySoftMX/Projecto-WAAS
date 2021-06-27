@@ -128,10 +128,17 @@
         </h1>
       </div>
 
-      <app-subtitle subtitle="commentaries"></app-subtitle>
-      <app-leave-comment></app-leave-comment>
-      <ng-container *ngFor="let i of commentaries">
-        <app-review-comment></app-review-comment>
+      <app-subtitle subtitle="Comments"></app-subtitle>
+      <app-leave-comment
+        (onPublishComment)="publishComment($event)"
+      ></app-leave-comment>
+      <ng-container *ngFor="let comment of comments">
+        <app-review-comment
+          [loggedUser]="authService.currentUserValue"
+          [comment]="comment"
+          (onDeleteComment)="deleteComment($event)"
+          (onUpdateComment)="updateComment($event)"
+        ></app-review-comment>
       </ng-container>
     </div>
   </div>

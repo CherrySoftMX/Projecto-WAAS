@@ -19,7 +19,7 @@ export class Comment {
   @ManyToOne((type) => Game, (game) => game.comments)
   game: Game;
 
-  @Column()
+  @Column({ length: 200 })
   content: string;
 
   @CreateDateColumn()

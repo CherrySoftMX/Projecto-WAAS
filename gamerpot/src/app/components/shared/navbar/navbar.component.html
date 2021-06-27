@@ -43,21 +43,23 @@
               role="button"
               href="#"
             >
-              <app-profile-img [label]="user.name"></app-profile-img>
+              <app-profile-img
+                [label]="user.name"
+                [imgUrl]="user.profilePictureUrl"
+              ></app-profile-img>
             </a>
             <div
-              class="dropdown-menu text-center"
+              class="dropdown-menu text-left"
               aria-labelledby="profile-item"
               style="background-color: var(--background-secondary)"
             >
-              <a class="dropdown-item styled-dropdown-item" style="color: white"
-                ><i class="bi bi-person-circle mr-1"></i>Profile
+              <a class="dropdown-item styled-dropdown-item"
+                ><i class="bi bi-person-circle mr-1"></i>
+                Profile
               </a>
-              <a
-                class="dropdown-item styled-dropdown-item"
-                style="color: white"
-                (click)="onLogout()"
-                ><i class="bi bi-box-arrow-left mr-1"></i>Log out
+              <a class="dropdown-item styled-dropdown-item" (click)="onLogout()"
+                ><i class="bi bi-box-arrow-left mr-1"></i>
+                Log out
               </a>
             </div>
           </li>
@@ -65,9 +67,11 @@
       </div>
 
       <ng-template #login>
-        <app-navbar-item-wrapper [routerLink]="[routes.LOGIN.PATH]">
-          <i class="bi bi-box-arrow-in-right mr-1"></i>Login
-        </app-navbar-item-wrapper>
+        <div (click)="onLogin()">
+          <app-navbar-item-wrapper>
+            <i class="bi bi-box-arrow-in-right mr-1"></i>Login
+          </app-navbar-item-wrapper>
+        </div>
       </ng-template>
     </div>
   </div>

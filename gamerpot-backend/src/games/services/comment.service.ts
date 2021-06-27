@@ -17,6 +17,7 @@ export class CommentService {
   async getComments(gameId: number) {
     return await this.commentRepository.find({
       where: { game: { gameId } },
+      order: { createdAt: 'DESC' },
     });
   }
 
@@ -55,7 +56,7 @@ export class CommentService {
   }
 
   async deleteComment(gameId: number, commentId: number) {
-    const comment = this.getComment(gameId, commentId);
+    const comment = await this.getComment(gameId, commentId);
 
     await this.commentRepository.delete({ commentId });
 
