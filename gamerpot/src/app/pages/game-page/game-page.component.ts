@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ModalQRCodeComponent } from 'src/app/components/shared/modal-qr-code/modal-qr-code.component';
 import { MAX_COMMENT_LENGTH } from 'src/app/components/game-review/comments/leave-comment/leave-comment.component';
 import { AuthService } from 'src/app/_services/auth.service';
 import { CommentService } from 'src/app/_services/comment.service';
@@ -26,10 +28,11 @@ export class GamePageComponent implements OnInit {
   constructor(
     public authService: AuthService,
     private gameDetailsService: GameDatailsService,
+    private route: ActivatedRoute,
+    private dealsService: DealsService,
+    public modalService: NgbModal,
     private commentService: CommentService,
     private wishlist: WishlistService,
-    private dealsService: DealsService,
-    private route: ActivatedRoute
   ) {}
 
   async ngOnInit() {
@@ -122,4 +125,15 @@ export class GamePageComponent implements OnInit {
       }
     }
   }
+
+  showQRCode() {
+    const activeModal = this.modalService.open(ModalQRCodeComponent, {
+      centered: true,
+      windowClass: 'modal-rounded',
+      size: 'lg',
+    });
+    activeModal.componentInstance.title = 'Codigo QR';
+    activeModal.componentInstance.url = location.href;
+  }
+
 }

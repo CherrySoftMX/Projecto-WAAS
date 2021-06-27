@@ -45,6 +45,7 @@ import { BestGamesService } from './_services/best-games.service';
 import { CurrencyConverterService } from './_services/currency-converter.service';
 import { DealsService } from './_services/deals-service.service';
 import { StoresService } from './_services/stores-service.service';
+import { ModalQRCodeComponent } from './components/shared/modal-qr-code/modal-qr-code.component';
 
 @NgModule({
   declarations: [
@@ -83,6 +84,7 @@ import { StoresService } from './_services/stores-service.service';
     ContactFormComponent,
     ForgotPasswordFormComponent,
     NavbarItemWrapperComponent,
+    ModalQRCodeComponent,
   ],
   imports: [
     BrowserModule,
