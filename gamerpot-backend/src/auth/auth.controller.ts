@@ -11,8 +11,8 @@ import {
   UseInterceptors,
 } from '@nestjs/common';
 import { Request } from 'express';
-import { User } from 'src/user/user.entity';
-import { UserService } from 'src/user/user.service';
+import { User } from 'src/user/entities/user.entity';
+import { UserService } from 'src/user/services/user.service';
 import { AuthService } from './auth.service';
 import { LocalAuthGuard } from './local-auth.guard';
 import { RegisterRequest } from './request/register.request';

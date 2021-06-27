@@ -2,6 +2,7 @@
 @import "~bootstrap-icons/font/bootstrap-icons.css";
 
 @import "./app/shared/styles/form-controls.css";
+@import "./app/shared/styles/dropdown.css";
 @import "./app/shared/styles/titles.css";
 @import "./app/shared/styles/scrollbar.css";
 @import "./app/shared/styles/layout.css";

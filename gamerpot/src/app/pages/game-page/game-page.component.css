@@ -59,3 +59,7 @@
   background: #535353;
   cursor: pointer;
 }
+
+.disabled-wishlist-btn {
+  pointer-events: none;
+}

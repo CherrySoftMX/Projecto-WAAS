@@ -25,3 +25,7 @@
   font-size: 20px;
   font-weight: 400;
 }
+
+.disabled-wishlist-btn {
+  pointer-events: none;
+}

@@ -11,6 +11,7 @@ import {
   Req,
 } from '@nestjs/common';
 import { Request } from 'express';
+import { Public } from 'src/auth/utils/public-endpoint.decorator';
 import { Comment } from '../entities/comment.entity';
 import { CommentRequest } from '../request/comment.request';
 import { CommentService } from '../services/comment.service';
@@ -21,6 +22,7 @@ export class CommentController {
 
   @Get()
   @HttpCode(HttpStatus.OK)
+  @Public()
   getComments(@Param() params) {
     return this.commentService.getComments(params.gameId);
   }

@@ -10,14 +10,27 @@
       <div class="mr-auto date text-light">
         {{ gameDetails.released | date }}
       </div>
-      <div class="metacritic border border-success text-success rounded">
+      <div
+        *ngIf="gameDetails.metacritic && gameDetails.metacritic > 0"
+        class="metacritic border border-success text-success rounded"
+      >
         {{ gameDetails.metacritic }}
       </div>
     </div>
     <h3 class="game-card-title my-4 text-truncate">{{ gameDetails.name }}</h3>
-    <a (click)="onSaveGame($event)" class="badge badge-secondary save-badge">
-      <i class="bi bi-heart"> </i>
-      <span class="ml-1">8888</span>
+    <a
+      (click)="addToWishlist($event)"
+      class="badge badge-secondary save-badge"
+      [ngClass]="{ 'disabled-wishlist-btn': loading }"
+    >
+      <i
+        *ngIf="gameDetails.savedByLoggedUser; else notSaved"
+        class="bi bi-heart-fill"
+      ></i>
+      <ng-template #notSaved>
+        <i class="bi bi-heart"> </i>
+      </ng-template>
+      <span class="ml-1">{{ gameDetails.savedBy }}</span>
     </a>
   </div>
 </div>

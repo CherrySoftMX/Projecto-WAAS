@@ -15,10 +15,10 @@ import { JwtAuthGuard } from './auth/jwt/jwt-auth.guard';
 import { RolesGuard } from './auth/roles/roles.guard';
 import { GamesModule } from './games/games.module';
 import { LoggerMiddleware } from './middleware/logger.middleware';
-import { UserRole } from './user/user-role';
-import { User } from './user/user.entity';
+import { UserRole } from './user/entities/user-role';
+import { User } from './user/entities/user.entity';
+import { UserService } from './user/services/user.service';
 import { UserModule } from './user/user.module';
-import { UserService } from './user/user.service';
 
 @Module({
   imports: [
@@ -60,6 +60,8 @@ export class AppModule implements NestModule, OnApplicationBootstrap {
           role: UserRole.ADMIN,
         }),
       )
-      .catch((e) => {});
+      .catch((e) => {
+        console.log('');
+      });
   }
 }

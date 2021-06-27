@@ -1,0 +1,9 @@
+.styled-dropdown-item {
+  color: white;
+}
+
+.styled-dropdown-item:hover {
+  background-color: var(--background-primary);
+  cursor: pointer;
+  color: white;
+}

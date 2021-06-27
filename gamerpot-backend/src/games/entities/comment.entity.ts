@@ -1,4 +1,3 @@
-import { User } from 'src/user/user.entity';
 import {
   Column,
   CreateDateColumn,
@@ -6,6 +5,7 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+import { User } from '../../user/entities/user.entity';
 import { Game } from './game.entity';
 
 @Entity({ name: 'comments' })
@@ -19,7 +19,7 @@ export class Comment {
   @ManyToOne((type) => Game, (game) => game.comments)
   game: Game;
 
-  @Column()
+  @Column({ length: 200 })
   content: string;
 
   @CreateDateColumn()

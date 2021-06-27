@@ -1,4 +1,4 @@
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -21,6 +21,7 @@ import { GameCardComponent } from './components/shared/game-card/game-card.compo
 import { GameCardsContainerComponent } from './components/shared/game-cards-container/game-cards-container.component';
 import { InputFieldComponent } from './components/shared/input-field/input-field.component';
 import { LoadingSpinnerComponent } from './components/shared/loading-spinner/loading-spinner.component';
+import { NavbarItemWrapperComponent } from './components/shared/navbar/navbar-item-wrapper/navbar-item-wrapper.component';
 import { NavbarComponent } from './components/shared/navbar/navbar.component';
 import { PaginationComponent } from './components/shared/pagination/pagination.component';
 import { ProfileImgComponent } from './components/shared/profile-img/profile-img.component';
@@ -37,12 +38,13 @@ import { HomePageComponent } from './pages/home-page/home-page.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
 import { WishlistPageComponent } from './pages/wishlist-page/wishlist-page.component';
+import { ErrorInterceptor } from './_helpers/error.interceptor';
+import { JwtInterceptor } from './_helpers/jwt.interceptor';
 import { PluckPipe } from './_pipes/pluck.pipe';
 import { BestGamesService } from './_services/best-games.service';
 import { CurrencyConverterService } from './_services/currency-converter.service';
 import { DealsService } from './_services/deals-service.service';
 import { StoresService } from './_services/stores-service.service';
-import { NavbarItemWrapperComponent } from './components/shared/navbar/navbar-item-wrapper/navbar-item-wrapper.component';
 import { ModalQRCodeComponent } from './components/shared/modal-qr-code/modal-qr-code.component';
 
 @NgModule({
@@ -93,6 +95,8 @@ import { ModalQRCodeComponent } from './components/shared/modal-qr-code/modal-qr
     FormsModule,
   ],
   providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     DealsService,
     StoresService,
     CurrencyConverterService,

@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { User } from 'src/user/user.entity';
+import { User } from 'src/user/entities/user.entity';
 import { Repository } from 'typeorm';
 import { Comment } from '../entities/comment.entity';
 import { CommentNotFoundException } from '../exceptions/comment-not-found.exception';
@@ -17,6 +17,7 @@ export class CommentService {
   async getComments(gameId: number) {
     return await this.commentRepository.find({
       where: { game: { gameId } },
+      order: { createdAt: 'DESC' },
     });
   }
 
@@ -55,7 +56,7 @@ export class CommentService {
   }
 
   async deleteComment(gameId: number, commentId: number) {
-    const comment = this.getComment(gameId, commentId);
+    const comment = await this.getComment(gameId, commentId);
 
     await this.commentRepository.delete({ commentId });
 

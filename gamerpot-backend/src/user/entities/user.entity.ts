@@ -26,6 +26,9 @@ export class User {
   @Exclude({ toPlainOnly: true })
   password: string;
 
+  @Column({ default: 'assets/profile_picture.png' })
+  profilePictureUrl: string;
+
   @Column({
     type: 'enum',
     enum: UserRole,

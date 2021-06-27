@@ -4,5 +4,5 @@ export interface GameResponse {
   count: number;
   next: string;
   previous: string;
-  results: Array<GameDetails>;
+  results: GameDetails[];
 }

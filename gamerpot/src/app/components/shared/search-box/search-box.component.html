@@ -5,12 +5,13 @@
   <input
     #searchBox
     type="text"
-    [placeholder]="placeholder"
     class="search-box__input rounded-pill"
-    [value]="value"
+    [placeholder]="placeholder"
+    [(ngModel)]="value"
+    (ngModelChange)="onValueChanged($event)"
     (keyup.enter)="search(searchBox.value)"
   />
-  <div #ref>
+  <div #ref (click)="search(searchBox.value)">
     <ng-content select="i"></ng-content>
   </div>
 

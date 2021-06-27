@@ -1,18 +1,18 @@
 import { HttpService, Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
+import { map } from 'rxjs/operators';
 import { API_KEY, API_URL } from 'src/shared/apis/rawg-api';
-import { UserService } from 'src/user/user.service';
-import { Repository } from 'typeorm';
+import { UserService } from 'src/user/services/user.service';
 import { Game } from '../entities/game.entity';
-import { GameDetails } from '../interfaces/game-details';
-import { GameResponse } from '../interfaces/game-response';
+import { GameDetails } from '../models/game-details';
+import { GameResponse } from '../models/game-response';
+import { GameRepository } from '../repositories/game.repository';
 
 const DEFAULT_URL = `${API_URL}games?key=${API_KEY}`;
 
 @Injectable()
 export class GameService {
   constructor(
-    @InjectRepository(Game) private gameRepository: Repository<Game>,
+    private gameRepository: GameRepository,
     private userService: UserService,
     private httpService: HttpService,
   ) {}
@@ -23,17 +23,38 @@ export class GameService {
    * @param query El query que se usará para la petición a la API RAWG.
    * @returns La lista de juegos que con el campo "savedBy" mapeado.
    */
-  async getGames(query: string) {
-    const { data: page } = await this.httpService
+  async fetchGames(userId: number, query: string) {
+    return await this.httpService
       .get<GameResponse>(`${DEFAULT_URL}&${query}`)
+      .pipe(
+        map(async (result) => {
+          const { data: page } = result;
+
+          page.results = await this.gameRepository.addSavedByProperty(
+            userId,
+            'id',
+            page.results,
+          );
+
+          return page;
+        }),
+      )
       .toPromise();
+  }
 
-    page.results = (await this.addSavedByProperty(
-      'id',
-      page.results,
-    )) as GameDetails[];
+  async fetchGame(userId: number, gameId: number, query: string) {
+    return await this.httpService
+      .get<GameDetails>(`${API_URL}games/${gameId}?key=${API_KEY}&${query}`)
+      .pipe(
+        map(async (result) => {
+          const { data: game } = result;
 
-    return page;
+          return (
+            await this.gameRepository.addSavedByProperty(userId, 'id', [game])
+          )[0];
+        }),
+      )
+      .toPromise();
   }
 
   /**
@@ -42,27 +63,12 @@ export class GameService {
    *
    * @see {@link getSavedBy}
    */
-  async getUserWishlist(userId: number) {
-    const wishlist = await this.userService.getWishlist(userId);
-    return (await this.addSavedByProperty('gameId', wishlist)) as Game[];
+  async getUserWishlist(userId: number, page: number, pageSize: number) {
+    return await this.gameRepository.getWishlist(userId, page, pageSize);
   }
 
   async getGame(gameId: number) {
     return await this.gameRepository.findOne({ gameId });
-  }
-
-  /**
-   *
-   * @returns Retorna cuántas veces ha sido añadido al wishlist el juego asociado con el @arg(gameId)
-   */
-  async getSavedBy(gameId: number) {
-    const game = await this.gameRepository
-      .createQueryBuilder('game')
-      .leftJoinAndSelect('game.savedBy', 'user')
-      .where('game.gameId = :gameId', { gameId })
-      .getOne();
-
-    return game ? game.savedBy : [];
   }
 
   async getOrCreateGame(gameId: number) {
@@ -80,10 +86,10 @@ export class GameService {
   async updateGame(gameId: number, newGame: Game) {
     const game = await this.getOrCreateGame(gameId);
 
-    game.title = newGame.title;
-    game.date = newGame.date;
-    game.metacritic = newGame.metacritic;
-    game.imageUrl = newGame.imageUrl;
+    game.name = newGame.name;
+    game.released = newGame.released;
+    game.metacritic = newGame.metacritic || -1;
+    game.background_image = newGame.background_image || '';
 
     return await this.saveGame(game);
   }
@@ -105,20 +111,6 @@ export class GameService {
     }
 
     return this.userService.saveUser(user);
-  }
-
-  /**
-   * Añade la @property {savedBy} a la lista de objetos pasados por parámetro.
-   *
-   * @see {getSavedBy}
-   */
-  private async addSavedByProperty(idProperty: string, items: any[]) {
-    return await Promise.all(
-      items.map(async (item) => {
-        item.savedBy = (await this.getSavedBy(item[idProperty])).length;
-        return item;
-      }),
-    );
   }
 
   filterGameFromWishlist(game: Game, wishlist: Game[]) {

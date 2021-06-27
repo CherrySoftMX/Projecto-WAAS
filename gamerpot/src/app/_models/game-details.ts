@@ -12,6 +12,8 @@ export interface GameDetails {
   background_image: string;
   background_image_additional: string;
   website: string;
+  savedBy: number;
+  savedByLoggedUser: boolean;
   platforms: Array<{
     platform: {
       id: number;
