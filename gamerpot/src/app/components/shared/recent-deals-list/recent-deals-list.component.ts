@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { IndividualDealInterface } from 'src/app/interfaces/individual-deal';
-import { DealsService } from '../../../services/deals-service.service';
+import { Deal } from 'src/app/_models/deal';
+import { DealsService } from '../../../_services/deals-service.service';
 
 @Component({
   selector: 'app-recent-deals-list',
@@ -8,7 +8,7 @@ import { DealsService } from '../../../services/deals-service.service';
   styleUrls: ['./recent-deals-list.component.css'],
 })
 export class RecentDealsListComponent implements OnInit {
-  @Input() deals: Array<IndividualDealInterface> = [];
+  @Input() deals: Array<Deal> = [];
   @Input() showRandomDeals: boolean = false;
 
   constructor(private dealsService: DealsService) {}

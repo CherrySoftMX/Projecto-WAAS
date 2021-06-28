@@ -1,11 +1,83 @@
-<div class=" m-2 p-2 rounded wrapper">
-  <div>
-    <app-profile-img label="Nicolás" imgUrl="http://unsplash.it/50/50"></app-profile-img>
+<div class="m-2 p-2 rounded wrapper">
+  <div class="d-flex justify-content-between">
+    <div>
+      <app-profile-img
+        [label]="comment.user.name"
+        [imgUrl]="comment.user.profilePictureUrl"
+        [fullName]="true"
+      ></app-profile-img>
+      <small class="text-muted">{{ comment.createdAt | date }}</small>
+    </div>
+    <div
+      *ngIf="
+        !editingComment &&
+        loggedUser &&
+        loggedUser.userId === comment.user.userId
+      "
+      class="dropdown"
+    >
+      <a
+        class="nav-link p-0 m-0"
+        id="comment-options"
+        data-toggle="dropdown"
+        aria-haspopup="true"
+        aria-expanded="true"
+        role="button"
+        href="#"
+      >
+        <i class="bi bi-three-dots-vertical text-white"></i>
+      </a>
+      <div
+        class="dropdown-menu text-left"
+        aria-labelledby="profile-item"
+        style="background-color: var(--background-secondary)"
+      >
+        <a class="dropdown-item styled-dropdown-item" (click)="editComment()"
+          ><i class="bi bi-pencil-square"></i>
+          Edit comment
+        </a>
+        <a class="dropdown-item styled-dropdown-item" (click)="deleteComment()"
+          ><i class="bi bi-trash"></i>
+          Delete comment
+        </a>
+      </div>
+    </div>
   </div>
-  <div class="mt-2 comment-content">
-    Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia sapiente
-    excepturi rerum cumque autem, illum minus tempore quasi laudantium earum.
-    Excepturi saepe amet voluptatum laborum dicta nihil quas animi porro magni
-    tenetur?
+  <div *ngIf="editingComment; else commentContent" class="form-group">
+    <textarea
+      #updateCommentContent
+      [(ngModel)]="comment.content"
+      class="form-control"
+      rows="3"
+    ></textarea>
+    <div
+      *ngIf="comment.content"
+      class="text-secondary py-1 pl-2"
+      [ngClass]="{
+        'text-danger': comment.content.length > maxCommentLength
+      }"
+    >
+      {{ comment.content.length + " / " + maxCommentLength }}
+    </div>
+    <div class="my-2">
+      <input
+        type="button"
+        class="btn btn-dark"
+        value="Update comment"
+        [disabled]="!isValidComment(comment.content)"
+        (click)="updateComment(updateCommentContent.value)"
+      />
+      <input
+        type="button"
+        class="btn btn-outline-danger ml-3"
+        value="Cancel"
+        (click)="cancelUpdateComment()"
+      />
+    </div>
   </div>
+  <ng-template #commentContent>
+    <div class="mt-2 comment-content text-break">
+      {{ comment.content }}
+    </div>
+  </ng-template>
 </div>

@@ -1,15 +1,23 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-contact-form',
   templateUrl: './contact-form.component.html',
-  styleUrls: ['./contact-form.component.css']
+  styleUrls: ['./contact-form.component.css'],
 })
 export class ContactFormComponent implements OnInit {
+  to: string = '';
+  body: string = '';
 
-  constructor() { }
+  @Output() onSendEmail = new EventEmitter<any>();
 
-  ngOnInit(): void {
+  constructor() {}
+
+  ngOnInit(): void {}
+
+  sendEmail() {
+    this.onSendEmail.emit({ to: this.to, body: this.body });
+    this.to = '';
+    this.body = '';
   }
-
 }

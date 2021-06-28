@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { GameDetails } from 'src/app/interfaces/game-details';
-import { Genre } from 'src/app/interfaces/genre-response';
-import { GamePlatform } from 'src/app/interfaces/platform-response';
-import { BestGamesService } from 'src/app/services/best-games.service';
-import { GenreGamesService } from 'src/app/services/genres-games.service';
-import { PlatformsGamesService } from 'src/app/services/platforms-games.service';
+import { GameDetails } from 'src/app/_models/game-details';
+import { Genre } from 'src/app/_models/genre-response';
+import { GamePlatform } from 'src/app/_models/platform-response';
+import { BestGamesService } from 'src/app/_services/best-games.service';
+import { GenreGamesService } from 'src/app/_services/genres-games.service';
+import { PlatformsGamesService } from 'src/app/_services/platforms-games.service';
 
 @Component({
   selector: 'app-best-games-page',

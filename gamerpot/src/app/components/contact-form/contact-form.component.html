@@ -1,9 +1,8 @@
 <div class="contact-form">
-  <div class="text-left mb-2">
-    Contact us
-  </div>
+  <div class="text-left mb-2">Contact us</div>
   <div class="form-group">
     <input
+      [(ngModel)]="to"
       type="email"
       class="form-control"
       aria-describedby="emailHelp"
@@ -12,12 +11,13 @@
   </div>
   <div class="form-group">
     <textarea
+      [(ngModel)]="body"
       class="form-control"
       rows="3"
       placeholder="Message"
     ></textarea>
   </div>
-  <button type="submit" class="btn btn-primary send-btn">
+  <button (click)="sendEmail()" type="submit" class="btn btn-primary send-btn">
     Send message
   </button>
 </div>

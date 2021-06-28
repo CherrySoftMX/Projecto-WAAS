@@ -1,6 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { GameDetails } from 'src/app/interfaces/game-details';
+import { Router } from '@angular/router';
 import { DomainRoutes } from 'src/app/shared/routes';
+import { GameDetails } from 'src/app/_models/game-details';
+import { AuthService } from 'src/app/_services/auth.service';
+import { WishlistService } from 'src/app/_services/wishlist.service';
 
 @Component({
   selector: 'app-game-card',
@@ -9,17 +12,35 @@ import { DomainRoutes } from 'src/app/shared/routes';
 })
 export class GameCardComponent implements OnInit {
   routes = DomainRoutes;
+  loading = false;
 
   @Input() gameDetails: GameDetails = {} as GameDetails;
 
-  @Output() saveGame = new EventEmitter<any>();
+  @Output() onRemovedFromWishlist = new EventEmitter<GameDetails>();
 
-  constructor() {}
+  constructor(
+    private router: Router,
+    private authService: AuthService,
+    private wishlistService: WishlistService
+  ) {}
 
   ngOnInit = () => {};
 
-  onSaveGame = (event: MouseEvent) => {
+  addToWishlist = (event: MouseEvent) => {
     event.stopPropagation();
-    this.saveGame.emit();
+
+    this.authService.checkIfUserIsLogged();
+
+    this.loading = true;
+
+    this.wishlistService
+      .toggleSave(this.gameDetails)
+      .then((result) => {
+        if (!this.gameDetails.savedByLoggedUser)
+          this.onRemovedFromWishlist.emit(this.gameDetails);
+      })
+      .finally(() => {
+        this.loading = false;
+      });
   };
 }

@@ -1,17 +1,1 @@
-@media screen and (max-width: 1400px) {
-  .styled-nav-item {
-    font-size: 18px;
-  }
-}
 
-@media screen and (max-width: 1350px) {
-  .styled-nav-item {
-    font-size: 18px;
-  }
-}
-
-@media screen and (max-width: 767px) {
-  .styled-nav-item {
-    font-size: 24px;
-  }
-}

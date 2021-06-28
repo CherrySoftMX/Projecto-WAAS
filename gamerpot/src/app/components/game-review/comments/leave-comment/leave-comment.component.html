@@ -1,10 +1,36 @@
 <div class="m-2 p-2 rounded wrapper">
-  <div>
-    <app-profile-img label="Emmanuel" imgUrl="http://unsplash.it/50/50"></app-profile-img>
+  <div *ngIf="user; else loginToComment">
+    <div>
+      <app-profile-img
+        [label]="user.name"
+        [imgUrl]="user.profilePictureUrl"
+        [fullName]="true"
+      ></app-profile-img>
+    </div>
+    <div class="mt-2">
+      <app-search-box
+        placeholder="Type a comment"
+        [value]="currentValue"
+        (onValueChange)="onValueChanged($event)"
+        (searchEvent)="publishComment()"
+      >
+        <i
+          class="bi bi-arrow-right-circle search-box__icon"
+          style="font-size: 28px; color: white"
+        ></i>
+      </app-search-box>
+    </div>
+    <div
+      *ngIf="currentValue"
+      class="text-secondary py-1 pl-2"
+      [ngClass]="{ 'text-danger': currentValue.length > maxCommentLength }"
+    >
+      {{ currentValue.length + " / " + maxCommentLength }}
+    </div>
   </div>
-  <div class="mt-2">
-    <app-search-box placeholder="Type a comment">
-      <i class="bi bi-arrow-right-circle search-box__icon" style="font-size: 28px; color: white"></i>
-    </app-search-box>
-  </div>
+  <ng-template #loginToComment>
+    <div style="cursor: pointer" (click)="loginToLeaveComment()">
+      Login to leave a comment
+    </div>
+  </ng-template>
 </div>
