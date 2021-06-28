@@ -10,6 +10,10 @@ import { UserRepository } from '../repositories/user.repository';
 export class UserService {
   constructor(private userRepository: UserRepository) {}
 
+  async getAllUsers() {
+    return await this.userRepository.find();
+  }
+
   async getUserByEmail(email: string) {
     const user = await this.userRepository.findOne({ email });
 

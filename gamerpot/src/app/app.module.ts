@@ -46,6 +46,7 @@ import { CurrencyConverterService } from './_services/currency-converter.service
 import { DealsService } from './_services/deals-service.service';
 import { StoresService } from './_services/stores-service.service';
 import { ModalQRCodeComponent } from './components/shared/modal-qr-code/modal-qr-code.component';
+import { AdminPanelComponent } from './pages/admin-panel/admin-panel.component';
 
 @NgModule({
   declarations: [
@@ -85,6 +86,7 @@ import { ModalQRCodeComponent } from './components/shared/modal-qr-code/modal-qr
     ForgotPasswordFormComponent,
     NavbarItemWrapperComponent,
     ModalQRCodeComponent,
+    AdminPanelComponent,
   ],
   imports: [
     BrowserModule,

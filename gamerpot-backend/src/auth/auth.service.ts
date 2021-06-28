@@ -36,14 +36,15 @@ export class AuthService {
    * @returns Un objeto que contiene la información del usuario y el JWT.
    */
   async login(user: User) {
-    const { userId, name, email, profilePictureUrl } = user;
+    const { userId, name, email, profilePictureUrl, role } = user;
 
     return {
       userId,
       name,
       email,
+      role,
       profilePictureUrl,
-      token: this.jwtService.sign({ userId, name, email, profilePictureUrl }),
+      token: this.jwtService.sign({ userId, name, email }),
     };
   }
 }

@@ -1,0 +1,21 @@
+<app-navbar></app-navbar>
+
+<div class="p-3 text-capitalize">
+  <app-subtitle subtitle="Download reports"></app-subtitle>
+
+  <div class="display-5">
+    Visualize all comments made by all users through the platform
+  </div>
+  <button
+    (click)="downloadAllComments()"
+    type="button"
+    class="btn btn-info my-1"
+  >
+    Download report
+  </button>
+
+  <div class="display-5 mt-4">Visualize all registered users</div>
+  <button (click)="downloadAllUsers()" type="button" class="btn btn-info my-1">
+    Download report
+  </button>
+</div>

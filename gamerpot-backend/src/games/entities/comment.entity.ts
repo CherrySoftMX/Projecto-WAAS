@@ -16,7 +16,7 @@ export class Comment {
   @ManyToOne((type) => User, (user) => user.comments, { eager: true })
   user: User;
 
-  @ManyToOne((type) => Game, (game) => game.comments)
+  @ManyToOne((type) => Game, (game) => game.comments, { eager: true })
   game: Game;
 
   @Column({ length: 200 })

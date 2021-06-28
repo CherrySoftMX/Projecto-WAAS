@@ -53,6 +53,14 @@
               aria-labelledby="profile-item"
               style="background-color: var(--background-secondary)"
             >
+              <div *ngIf="user.role === 1">
+                <a
+                  [routerLink]="[routes.ADMIN_PANEL.PATH]"
+                  class="dropdown-item styled-dropdown-item"
+                  ><i class="bi bi-shield-fill-exclamation"></i>
+                  Admin panel
+                </a>
+              </div>
               <a class="dropdown-item styled-dropdown-item" (click)="onLogout()"
                 ><i class="bi bi-box-arrow-left mr-1"></i>
                 Log out

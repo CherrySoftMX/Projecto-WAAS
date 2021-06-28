@@ -20,6 +20,7 @@ import { UserRole } from './user/entities/user-role';
 import { User } from './user/entities/user.entity';
 import { UserService } from './user/services/user.service';
 import { UserModule } from './user/user.module';
+import { ReportModule } from './report/report.module';
 
 @Module({
   imports: [
@@ -29,6 +30,7 @@ import { UserModule } from './user/user.module';
     AuthModule,
     GamesModule,
     EmailModule,
+    ReportModule,
   ],
   controllers: [AppController],
   providers: [

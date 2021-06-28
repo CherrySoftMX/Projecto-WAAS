@@ -14,6 +14,10 @@ export class CommentService {
     private gameService: GameService,
   ) {}
 
+  async getAllComments() {
+    return await this.commentRepository.find();
+  }
+
   async getComments(gameId: number) {
     return await this.commentRepository.find({
       where: { game: { gameId } },

@@ -51,14 +51,14 @@ export class AuthService {
   }
 
   checkIfUserIsLogged() {
-    if (!this.isUserLogged()) {
+    if (!this.isUserLoggedIn()) {
       this.router.navigate([DomainRoutes.LOGIN.PATH], {
         queryParams: { returnUrl: this.router.url },
       });
     }
   }
 
-  isUserLogged() {
+  isUserLoggedIn() {
     return !!this.currentUserValue;
   }
 

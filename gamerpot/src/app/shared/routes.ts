@@ -35,4 +35,9 @@ export const DomainRoutes: Route = {
     NG_PATH: 'login',
     PATH: '/login',
   },
+
+  ADMIN_PANEL: {
+    NG_PATH: 'admin/panel',
+    PATH: '/admin/panel',
+  },
 };

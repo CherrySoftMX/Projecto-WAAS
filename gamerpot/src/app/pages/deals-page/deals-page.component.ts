@@ -40,7 +40,7 @@ export class DealsPageComponent implements OnInit {
     private currencyConverter: CurrencyConverterService
   ) {}
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.route.queryParams.subscribe((params) => {
       this.currentPage = params['page'] || 1;
       this.search = params['title'];
@@ -62,7 +62,7 @@ export class DealsPageComponent implements OnInit {
     });
   }
 
-  fetchDeals = async () => {
+  async fetchDeals() {
     this.fetching = true;
 
     const { deals, totalPages } = await this.dealsService
@@ -82,21 +82,21 @@ export class DealsPageComponent implements OnInit {
       this.updateDealsCurrency();
 
     this.fetching = false;
-  };
+  }
 
-  updateDealsCurrency = async () => {
+  async updateDealsCurrency() {
     this.deals = await this.currencyConverter.calculateDealsNewCurrency({
       deals: this.deals,
       fromCurrency: this.oldCurrency,
       toCurrency: this.actualCurrency,
     });
-  };
+  }
 
   searchGame(query: string) {
     this.navigate({ title: query });
   }
 
-  filterGamesByPrice = async (args: string) => {
+  async filterGamesByPrice(args: string) {
     const lowerPriceUSD = await this.calculatePriceToUSD(this.inputLowerPrice);
     const upperPriceUSD = await this.calculatePriceToUSD(this.inputUpperPrice);
 
@@ -104,15 +104,15 @@ export class DealsPageComponent implements OnInit {
       lowerPrice: lowerPriceUSD,
       upperPrice: upperPriceUSD,
     });
-  };
+  }
 
-  setCurrency = async (cur: string) => {
+  async setCurrency(cur: string) {
     this.oldCurrency = this.actualCurrency;
     this.actualCurrency = cur;
     this.updateDealsCurrency();
-  };
+  }
 
-  calculatePriceToUSD = async (price: string) => {
+  async calculatePriceToUSD(price: string) {
     if (this.actualCurrency !== this.DEFAULT_CURRENCY) {
       if (!price) return price;
 
@@ -126,5 +126,5 @@ export class DealsPageComponent implements OnInit {
     }
 
     return price;
-  };
+  }
 }
