@@ -12,6 +12,9 @@ import { AuthService } from '../_services/auth.service';
 export class JwtInterceptor implements HttpInterceptor {
   constructor(private authService: AuthService) {}
 
+  /**
+   * Añade el JWT a cada petición que se le hace al servidor.
+   */
   intercept(
     request: HttpRequest<any>,
     next: HttpHandler

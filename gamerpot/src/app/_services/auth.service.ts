@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
+import { DomainRoutes } from '../shared/routes';
 import { User } from '../_models/user';
 
 @Injectable({
@@ -24,12 +25,12 @@ export class AuthService {
     return this.currentUserSubject.getValue();
   }
 
-  login(email: string, password: string) {
+  login(email: string, password: string, rememberMe?: boolean) {
     return this.httpClient
       .post<User>(`${environment.apiUrl}/login`, { email, password })
       .pipe(
         map((user) => {
-          localStorage.setItem('currentUser', JSON.stringify(user));
+          this.persistUser(user, rememberMe);
           this.currentUserSubject.next(user);
           return user;
         })
@@ -44,13 +45,14 @@ export class AuthService {
 
   logout() {
     localStorage.removeItem('currentUser');
+    sessionStorage.removeItem('currentUser');
     this.currentUserSubject.next(null);
     location.reload();
   }
 
   checkIfUserIsLogged() {
     if (!this.isUserLogged()) {
-      this.router.navigate(['login'], {
+      this.router.navigate([DomainRoutes.LOGIN.PATH], {
         queryParams: { returnUrl: this.router.url },
       });
     }
@@ -58,5 +60,13 @@ export class AuthService {
 
   isUserLogged() {
     return !!this.currentUserValue;
+  }
+
+  persistUser(user: User, rememberMe?: boolean) {
+    if (rememberMe === true) {
+      localStorage.setItem('currentUser', JSON.stringify(user));
+    } else {
+      sessionStorage.setItem('currentUser', JSON.stringify(user));
+    }
   }
 }

@@ -8,6 +8,9 @@ import { ROLES_KEY } from './role.decorator';
 export class RolesGuard implements CanActivate {
   constructor(private reflector: Reflector, private userService: UserService) {}
 
+  /**
+   * Únicamente deja la socitud del usuario que tenga el @enum{UserRole.ADMIN}.
+   */
   async canActivate(context: ExecutionContext) {
     const requiredRoles = this.reflector.getAllAndOverride<UserRole[]>(
       ROLES_KEY,

@@ -9,7 +9,7 @@ import { PlatformResponse } from '../_models/platform-response';
 export class PlatformsGamesService {
   constructor(private http: HttpClient) {}
 
-  getPlatforms(): Promise<PlatformResponse> {
+  getPlatforms() {
     const url = `${API_URL}platforms?key=${API_KEY}`;
     return this.http.get<PlatformResponse>(url).toPromise();
   }

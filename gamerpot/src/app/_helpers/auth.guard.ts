@@ -5,6 +5,7 @@ import {
   Router,
   RouterStateSnapshot,
 } from '@angular/router';
+import { DomainRoutes } from '../shared/routes';
 import { AuthService } from '../_services/auth.service';
 
 @Injectable({
@@ -18,7 +19,10 @@ export class AuthGuard implements CanActivate {
 
     if (currentUser) return true;
 
-    this.router.navigate(['login'], { queryParams: { returnUrl: state.url } });
+    this.router.navigate([DomainRoutes.LOGIN.PATH], {
+      queryParams: { returnUrl: state.url },
+    });
+
     return false;
   }
 }

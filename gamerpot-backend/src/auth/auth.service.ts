@@ -12,6 +12,11 @@ export class AuthService {
     private jwtService: JwtService,
   ) {}
 
+  /**
+   * Valida un usuario ya se ha registrado previamente.
+   *
+   * @returns Los datos del usuario que corresponde con las credenciales @param{email} y @param{pass}
+   */
   async validateUser(email: string, pass: string): Promise<any> {
     const user = await this.usersService.getUserByEmail(email);
 
@@ -24,6 +29,12 @@ export class AuthService {
     return result;
   }
 
+  /**
+   *
+   * @param user El usuario a serializar para el JWT.
+   *
+   * @returns Un objeto que contiene la información del usuario y el JWT.
+   */
   async login(user: User) {
     const { userId, name, email, profilePictureUrl } = user;
 

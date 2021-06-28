@@ -13,6 +13,7 @@ import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { JwtAuthGuard } from './auth/jwt/jwt-auth.guard';
 import { RolesGuard } from './auth/roles/roles.guard';
+import { EmailModule } from './email/email.module';
 import { GamesModule } from './games/games.module';
 import { LoggerMiddleware } from './middleware/logger.middleware';
 import { UserRole } from './user/entities/user-role';
@@ -27,6 +28,7 @@ import { UserModule } from './user/user.module';
     UserModule,
     AuthModule,
     GamesModule,
+    EmailModule,
   ],
   controllers: [AppController],
   providers: [
@@ -50,6 +52,9 @@ export class AppModule implements NestModule, OnApplicationBootstrap {
       .forRoutes({ path: '*', method: RequestMethod.ALL });
   }
 
+  /**
+   * Crea un usuario (en caso de que no exista) con privilegios de @enum{UserRole.ADMIN} cuando el server inicia.
+   */
   async onApplicationBootstrap() {
     this.userService
       .createUser(

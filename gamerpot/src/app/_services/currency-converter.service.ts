@@ -21,10 +21,10 @@ interface CurrencyConversion {
 export class CurrencyConverterService {
   constructor(private http: HttpClient) {}
 
-  fetchConvertionRate = async ({
+  async fetchConvertionRate({
     fromCurrency = 'USD',
     toCurrency = 'MXN',
-  }: CurrencyConversion) => {
+  }: CurrencyConversion) {
     const url = `${API_URL}?q=${fromCurrency}_${toCurrency}&compact=ultra&apiKey=${API_KEY}`;
 
     const response = (await this.http.get(url).toPromise()) as {
@@ -32,13 +32,13 @@ export class CurrencyConverterService {
     };
 
     return response[`${fromCurrency}_${toCurrency}`];
-  };
+  }
 
-  calculateDealsNewCurrency = async ({
+  async calculateDealsNewCurrency({
     deals,
     fromCurrency,
     toCurrency,
-  }: DealsCurrencyConvertion) => {
+  }: DealsCurrencyConvertion) {
     if (fromCurrency === toCurrency) return deals;
 
     const conversionRate = await this.fetchConvertionRate({
@@ -51,18 +51,18 @@ export class CurrencyConverterService {
       const normalPrice = deal.normalPrice * conversionRate;
       return { ...deal, salePrice, normalPrice };
     });
-  };
+  }
 
-  convertCurrency = async ({
+  async convertCurrency({
     fromCurrency = 'USD',
     toCurrency = 'MXN',
     amount = '10',
-  }: CurrencyConversion) => {
+  }: CurrencyConversion) {
     const conversionRate = await this.fetchConvertionRate({
       fromCurrency,
       toCurrency,
     });
 
     return Number(amount) * conversionRate;
-  };
+  }
 }

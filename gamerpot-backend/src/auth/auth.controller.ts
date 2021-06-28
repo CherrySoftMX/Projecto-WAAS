@@ -33,6 +33,14 @@ export class AuthController {
     return this.authService.login(new User({ ...request.user }));
   }
 
+  /**
+   * Crea y guarda (en caso de no existir) a un usuario.
+   *
+   * @param registerRequest Los datos del nuevo usuario.
+   *
+   * @returns El id y los datos del nuevo usuario.
+   *
+   */
   @Post('/register')
   @Public()
   @HttpCode(HttpStatus.CREATED)
@@ -46,7 +54,7 @@ export class AuthController {
   }
 
   /**
-   * Retorna la información del usuario que está "loggeado" actualmente.
+   * Retorna la información del usuario que está "loggeado".
    */
   @Get('/self')
   @HttpCode(HttpStatus.ACCEPTED)

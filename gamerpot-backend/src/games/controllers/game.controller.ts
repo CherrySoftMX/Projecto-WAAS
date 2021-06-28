@@ -33,6 +33,9 @@ export class GameController {
     );
   }
 
+  /**
+   * @returns La wishlist del usuario que está "loggeado".
+   */
   @Get('/wishlist/self')
   async getSelfWishlist(@Req() request: Request, @Query() queryParams) {
     const { userId } = request.user as any;
@@ -44,6 +47,12 @@ export class GameController {
     );
   }
 
+  /**
+   * Si el juego no se encuentra añadido al wishlist, lo añade;
+   * en caso contrario, elimina el juego del wishlist.
+   *
+   * @returns El usuario que ha solicitado esta operación.
+   */
   @Post('/:gameId/toggle-save')
   saveGame(
     @Param() params,

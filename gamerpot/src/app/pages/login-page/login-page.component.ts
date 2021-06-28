@@ -31,12 +31,12 @@ export class LoginPageComponent implements OnInit {
   }
 
   onLogin(credentials: any) {
-    const { email, password } = credentials;
+    const { email, password, rememberMe } = credentials;
 
     this.loading = true;
 
     this.authService
-      .login(email, password)
+      .login(email, password, rememberMe)
       .pipe(first())
       .subscribe(
         (data) => {

@@ -9,7 +9,7 @@ import { GenreResponse } from '../_models/genre-response';
 export class GenreGamesService {
   constructor(private http: HttpClient) {}
 
-  fetchGenres(): Promise<GenreResponse> {
+  fetchGenres() {
     const url = `${API_URL}genres?key=${API_KEY}`;
     return this.http.get<GenreResponse>(url).toPromise();
   }

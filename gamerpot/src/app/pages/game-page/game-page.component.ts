@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ModalQRCodeComponent } from 'src/app/components/shared/modal-qr-code/modal-qr-code.component';
 import { MAX_COMMENT_LENGTH } from 'src/app/components/game-review/comments/leave-comment/leave-comment.component';
+import { ModalQRCodeComponent } from 'src/app/components/shared/modal-qr-code/modal-qr-code.component';
+import { Deal } from 'src/app/_models/deal';
 import { AuthService } from 'src/app/_services/auth.service';
 import { CommentService } from 'src/app/_services/comment.service';
 import { WishlistService } from 'src/app/_services/wishlist.service';
@@ -23,7 +24,7 @@ export class GamePageComponent implements OnInit {
   fetchingGame = true;
   togglingFromWishlist = false;
 
-  gameDeals: any = [];
+  gameDeals: Deal[] = [];
 
   constructor(
     public authService: AuthService,
@@ -32,7 +33,7 @@ export class GamePageComponent implements OnInit {
     private dealsService: DealsService,
     public modalService: NgbModal,
     private commentService: CommentService,
-    private wishlist: WishlistService,
+    private wishlist: WishlistService
   ) {}
 
   async ngOnInit() {
@@ -116,12 +117,12 @@ export class GamePageComponent implements OnInit {
     if (more && moreBtn && dots) {
       if (document.getElementById('more')?.style.display == 'none') {
         more.style.display = 'inline';
-        moreBtn.innerHTML = 'Show less';
         dots.style.display = 'none';
+        moreBtn.innerHTML = 'Show less';
       } else {
         more.style.display = 'none';
-        moreBtn.innerHTML = 'See more';
         dots.style.display = 'inline';
+        moreBtn.innerHTML = 'See more';
       }
     }
   }
@@ -132,8 +133,7 @@ export class GamePageComponent implements OnInit {
       windowClass: 'modal-rounded',
       size: 'lg',
     });
-    activeModal.componentInstance.title = 'Codigo QR';
+    activeModal.componentInstance.title = 'QR Code';
     activeModal.componentInstance.url = location.href;
   }
-
 }

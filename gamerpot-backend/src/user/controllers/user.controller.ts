@@ -11,6 +11,11 @@ import { UserService } from '../services/user.service';
 export class UserController {
   constructor(private userService: UserService) {}
 
+  /**
+   * Actualiza la información del usuario que está "loggeado".
+   *
+   * @returns El usuario con su nueva información.
+   */
   @Put()
   async updateLoggedUserInfo(
     @Req() request: Request,
@@ -20,6 +25,12 @@ export class UserController {
     return this.userService.updateUser(userId, new User({ ...body }));
   }
 
+  /**
+   * Actualiza el rol de un usuaurio. Nótese que este método solamente puede ser
+   * solicitado por un usuario con el rol @enum{UserRole.ADMIN}
+   *
+   * @returns El usuario con su nuevo rol.
+   */
   @Put('/:userId/roles')
   @Roles(UserRole.ADMIN)
   async updateUserRole(@Param() params, @Body() body: UpdateRoleRequest) {

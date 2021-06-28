@@ -36,12 +36,12 @@ export class BestGamesService extends UrlBuilder<UrlParams> {
     super(DEFAULT_URL, DEFAULT_URL_PARAMS);
   }
 
-  fetchGames = (url?: string): Promise<GameResponse> => {
+  fetchGames(url?: string) {
     let fetchUrl = url || this.url;
     const loggedUser = this.authService.currentUserValue;
 
     if (loggedUser) fetchUrl = `${fetchUrl}&userId=${loggedUser.userId}`;
 
     return this.http.get<GameResponse>(fetchUrl).toPromise();
-  };
+  }
 }

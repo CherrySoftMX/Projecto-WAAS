@@ -10,7 +10,7 @@ import { AuthService } from './auth.service';
 export class GameDatailsService {
   constructor(private http: HttpClient, private authService: AuthService) {}
 
-  fetchGameDetails = (gameId: number): Promise<GameDetails> => {
+  fetchGameDetails(gameId: number) {
     let fetchUrl = `${environment.apiUrl}/games/${gameId}`;
 
     const loggedUser = this.authService.currentUserValue;
@@ -18,5 +18,5 @@ export class GameDatailsService {
     if (loggedUser) fetchUrl = `${fetchUrl}?userId=${loggedUser.userId}`;
 
     return this.http.get<GameDetails>(fetchUrl).toPromise();
-  };
+  }
 }

@@ -35,7 +35,7 @@ export class DealsService extends UrlBuilder<DealsSearchParams> {
     super(DEALS_END_POINT, DEFAULT_URL_PARAMS);
   }
 
-  fetchDeals = async (url?: string) => {
+  async fetchDeals(url?: string) {
     const fetchUrl = url || this.url;
 
     const response = await this.http
@@ -51,10 +51,10 @@ export class DealsService extends UrlBuilder<DealsSearchParams> {
 
     const totalPages = Number(response.headers.get('x-total-page-count')!);
     return { deals, totalPages };
-  };
+  }
 
-  fetchDealsByGameName = (url?: string): Promise<Deal> => {
+  fetchDealsByGameName(url?: string) {
     const fetchUrl = url || this.url;
-    return this.http.get<Deal>(fetchUrl).toPromise();
-  };
+    return this.http.get<Deal[]>(fetchUrl).toPromise();
+  }
 }

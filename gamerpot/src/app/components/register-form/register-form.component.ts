@@ -19,10 +19,9 @@ export class RegisterFormComponent implements OnInit {
 
   constructor(
     public activeModal: NgbActiveModal,
-    private fromBuilder: FormBuilder,
     private authService: AuthService
   ) {
-    this.registerForm = this.fromBuilder.group(
+    this.registerForm = new FormBuilder().group(
       {
         name: new FormControl('', [
           Validators.required,
@@ -73,12 +72,10 @@ export class RegisterFormComponent implements OnInit {
     const touched = this.fields[inputName].touched;
     const validInput = this.fields[inputName].valid;
 
-    let classes = {
+    return {
       'is-valid': validInput && touched,
       'is-invalid': !validInput && touched,
     };
-
-    return classes;
   }
 
   private passwordsShouldMatch(fGroup: FormGroup) {
@@ -96,11 +93,9 @@ export class RegisterFormComponent implements OnInit {
 
     const mismatch = this.passwordsShouldMatch(this.registerForm);
 
-    let classes = {
+    return {
       'is-valid': !mismatch && touched,
       'is-invalid': mismatch && touched,
     };
-
-    return classes;
   }
 }

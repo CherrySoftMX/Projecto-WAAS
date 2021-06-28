@@ -9,10 +9,12 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 export class ModalQRCodeComponent implements OnInit {
   public title: string;
   public url: string;
+
   constructor(private activeModal: NgbActiveModal) {
     this.title = '';
     this.url = '';
   }
+
   ngOnInit(): void {}
 
   closeModal(): void {

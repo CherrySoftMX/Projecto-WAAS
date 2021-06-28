@@ -9,6 +9,9 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
     super();
   }
 
+  /**
+   * Únicamente deja pasar todas las peticiones que tenga un JWT válido.
+   */
   canActivate(context: ExecutionContext) {
     const isPublic = this.reflector.getAllAndOverride<boolean>(IS_PUBLIC_KEY, [
       context.getHandler(),

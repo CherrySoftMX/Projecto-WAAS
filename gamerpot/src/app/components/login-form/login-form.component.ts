@@ -17,7 +17,7 @@ export class LoginFormComponent implements OnInit {
       Validators.pattern(passwordRegex),
       Validators.required,
     ]),
-    remember: new FormControl(false),
+    remember: new FormControl(true),
   });
 
   @Output() onSignUp = new EventEmitter<any>();
@@ -36,6 +36,7 @@ export class LoginFormComponent implements OnInit {
     this.onLogin.emit({
       email: this.fields.email.value,
       password: this.fields.password.value,
+      rememberMe: this.fields.remember.value,
     });
   }
 
@@ -48,12 +49,10 @@ export class LoginFormComponent implements OnInit {
   }
 
   validate(inputName: string) {
-    let classes = {
+    return {
       'is-valid': this.fields[inputName].valid,
       'is-invalid':
         this.fields[inputName].invalid && this.fields[inputName].touched,
     };
-
-    return classes;
   }
 }

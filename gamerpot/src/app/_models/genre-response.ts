@@ -7,5 +7,5 @@ export interface GenreResponse {
   count: number;
   next: string;
   previous: string;
-  results: Array<Genre>;
+  results: Genre[];
 }

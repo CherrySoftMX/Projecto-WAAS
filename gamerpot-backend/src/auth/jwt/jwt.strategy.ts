@@ -17,6 +17,11 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     });
   }
 
+  /**
+   * Valida que el usuario sealizado en el JWT exista.
+   *
+   * @param payload Los datos deserealizados del JWT
+   */
   async validate(payload: any) {
     await this.userService.getUserById(payload.userId);
     return { ...payload };
