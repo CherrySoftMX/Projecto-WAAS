@@ -56,7 +56,7 @@ export class RegisterFormComponent implements OnInit {
       .then((result) => {
         this.closeModal({ email: result.email, password: password.value });
       })
-      .catch((err) => window.alert(err.error.message));
+      .catch((err) => window.alert(err));
   }
 
   closeModal(result?: any) {

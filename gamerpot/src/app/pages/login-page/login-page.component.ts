@@ -43,7 +43,7 @@ export class LoginPageComponent implements OnInit {
           this.router.navigateByUrl(this.returnUrl);
         },
         (error) => {
-          window.alert(error.error.message);
+          window.alert(error);
           this.loading = false;
         }
       );

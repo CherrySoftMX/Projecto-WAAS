@@ -126,8 +126,10 @@ export class HomePageComponent implements OnInit {
   filterByOrder(order: string) {
     this.currentPage = 1;
     this.currentOrder = order;
+
     if (this.currentOrder == this.INVALID_FIELD)
       this.currentOrder = this.CLEAR_FIELD;
+
     this.navigate();
   }
 
