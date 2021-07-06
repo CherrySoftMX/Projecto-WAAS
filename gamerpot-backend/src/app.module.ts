@@ -8,24 +8,33 @@ import {
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { APP_GUARD } from '@nestjs/core';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { getConnectionOptions } from 'typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { JwtAuthGuard } from './auth/jwt/jwt-auth.guard';
 import { RolesGuard } from './auth/roles/roles.guard';
 import { EmailModule } from './email/email.module';
+import { Comment } from './games/entities/comment.entity';
+import { Game } from './games/entities/game.entity';
 import { GamesModule } from './games/games.module';
 import { LoggerMiddleware } from './middleware/logger.middleware';
+import { ReportModule } from './report/report.module';
 import { UserRole } from './user/entities/user-role';
 import { User } from './user/entities/user.entity';
 import { UserService } from './user/services/user.service';
 import { UserModule } from './user/user.module';
-import { ReportModule } from './report/report.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
-    TypeOrmModule.forRoot(),
+    TypeOrmModule.forRootAsync({
+      useFactory: async () =>
+        Object.assign(await getConnectionOptions(), {
+          entities: [User, Comment, Game],
+          autoLoadEntities: true,
+        }),
+    }),
     UserModule,
     AuthModule,
     GamesModule,
